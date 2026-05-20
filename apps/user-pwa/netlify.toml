@@ -1,0 +1,29 @@
+# Netlify build config for the user-pwa monorepo package.
+# Site: mistr-waan.netlify.app
+
+[build]
+  command = "pnpm --filter user-pwa run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  # Skip prompting when multiple workspace Next.js apps are detected.
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+
+# Explicit plugin declaration — same fix as the ops app. Without this,
+# Netlify auto-detection leaves framework="unknown" / plugin_state="none"
+# and deploys every SSR route as a 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+  from = "/ops"
+  to = "https://waan-ops.netlify.app"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ops/*"
+  to = "https://waan-ops.netlify.app/:splat"
+  status = 200
+  force = true

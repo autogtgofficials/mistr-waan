@@ -1,0 +1,14 @@
+# Netlify build config for the ops monorepo package.
+
+[build]
+  command = "pnpm --filter ops run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+
+# Explicit plugin declaration — auto-detection wasn't fully wiring the SSR
+# handler for this project (deploys came back with framework="unknown",
+# plugin_state="none", and "No functions deployed"), so every route 404'd.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

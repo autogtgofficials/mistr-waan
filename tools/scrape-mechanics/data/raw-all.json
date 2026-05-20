@@ -1,0 +1,5719 @@
+{
+  "osm": [
+    {
+      "id": "osm-node-3675000810",
+      "source": "overpass",
+      "sourceId": "node/3675000810",
+      "osmType": "node",
+      "name": "Royal Enfield workshop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.079792,
+      "lng": 74.8076401,
+      "rawTags": {
+        "name": "Royal Enfield workshop",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-4152545589",
+      "source": "overpass",
+      "sourceId": "node/4152545589",
+      "osmType": "node",
+      "name": "BHAT AUTO CRAFT",
+      "phones": [],
+      "website": null,
+      "address": "BATAPORA HAZRATBAL, SRINAGAR",
+      "lat": 34.1615155,
+      "lng": 74.8496346,
+      "rawTags": {
+        "addr:city": "SRINAGAR",
+        "addr:postcode": "190006",
+        "addr:street": "BATAPORA HAZRATBAL",
+        "name": "BHAT AUTO CRAFT"
+      }
+    },
+    {
+      "id": "osm-node-5719657821",
+      "source": "overpass",
+      "sourceId": "node/5719657821",
+      "osmType": "node",
+      "name": "Royal Enfield",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0391491,
+      "lng": 74.8744127,
+      "rawTags": {
+        "name": "Royal Enfield",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-5848948163",
+      "source": "overpass",
+      "sourceId": "node/5848948163",
+      "osmType": "node",
+      "name": "Mark Automations & Networks",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0815678,
+      "lng": 74.7978938,
+      "rawTags": {
+        "description": "Automation Solutions ",
+        "name": "Mark Automations & Networks"
+      }
+    },
+    {
+      "id": "osm-node-5984427589",
+      "source": "overpass",
+      "sourceId": "node/5984427589",
+      "osmType": "node",
+      "name": "Hyundai",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0436084,
+      "lng": 74.7890022,
+      "rawTags": {
+        "name": "Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-6231499423",
+      "source": "overpass",
+      "sourceId": "node/6231499423",
+      "osmType": "node",
+      "name": "Arise Automotive Hyndai",
+      "phones": [
+        "01942473033",
+        "2475033"
+      ],
+      "website": null,
+      "address": null,
+      "lat": 34.0665209,
+      "lng": 74.7747205,
+      "rawTags": {
+        "name": "Arise Automotive Hyndai",
+        "phone": "01942473033,2475033",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-6592841085",
+      "source": "overpass",
+      "sourceId": "node/6592841085",
+      "osmType": "node",
+      "name": "Kohinoor Classic motors",
+      "phones": [
+        "+91700189480"
+      ],
+      "website": null,
+      "address": null,
+      "lat": 34.0777242,
+      "lng": 74.80133,
+      "rawTags": {
+        "name": "Kohinoor Classic motors",
+        "phone": "+91700189480",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-7139576658",
+      "source": "overpass",
+      "sourceId": "node/7139576658",
+      "osmType": "node",
+      "name": "Kashmir Bikers",
+      "phones": [
+        "+91 9796 188199"
+      ],
+      "website": "http://www.kashmirbikers.com",
+      "address": "Srinagar",
+      "lat": 34.0915433,
+      "lng": 74.8192954,
+      "rawTags": {
+        "addr:city": "Srinagar",
+        "brand": "Royal Enfield",
+        "email": "info@kashmirbikers.com",
+        "guide": "motorcycle",
+        "name": "Kashmir Bikers",
+        "opening_hours": "Mo-Su 09:00-20:00",
+        "phone": "+91 9796 188199",
+        "rental": "motorcycle",
+        "repair": "motorcycle",
+        "shop": "motorcycle",
+        "website": "http://www.kashmirbikers.com"
+      }
+    },
+    {
+      "id": "osm-node-7170041888",
+      "source": "overpass",
+      "sourceId": "node/7170041888",
+      "osmType": "node",
+      "name": "Maruti Suzuki Arena Peaks Automobiles",
+      "phones": [],
+      "website": null,
+      "address": "Qasim Bagh",
+      "lat": 34.035561,
+      "lng": 74.8615061,
+      "rawTags": {
+        "addr:street": "Qasim Bagh",
+        "name": "Maruti Suzuki Arena Peaks Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-8997528297",
+      "source": "overpass",
+      "sourceId": "node/8997528297",
+      "osmType": "node",
+      "name": "Ayna Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.077047,
+      "lng": 74.7778173,
+      "rawTags": {
+        "name": "Ayna Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-8997529045",
+      "source": "overpass",
+      "sourceId": "node/8997529045",
+      "osmType": "node",
+      "name": "Hero Electric",
+      "phones": [],
+      "website": null,
+      "address": "Bemina Main Road",
+      "lat": 34.0781074,
+      "lng": 74.7795416,
+      "rawTags": {
+        "addr:street": "Bemina Main Road",
+        "name": "Hero Electric",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9050388809",
+      "source": "overpass",
+      "sourceId": "node/9050388809",
+      "osmType": "node",
+      "name": "The Tyre Hub Ikhwan Corporation",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0799432,
+      "lng": 74.8207004,
+      "rawTags": {
+        "name": "The Tyre Hub Ikhwan Corporation",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9050390673",
+      "source": "overpass",
+      "sourceId": "node/9050390673",
+      "osmType": "node",
+      "name": "Raja Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0822199,
+      "lng": 74.8195016,
+      "rawTags": {
+        "name": "Raja Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9050393775",
+      "source": "overpass",
+      "sourceId": "node/9050393775",
+      "osmType": "node",
+      "name": "Car Cafe",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0816917,
+      "lng": 74.8273452,
+      "rawTags": {
+        "name": "Car Cafe",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9050396839",
+      "source": "overpass",
+      "sourceId": "node/9050396839",
+      "osmType": "node",
+      "name": "Kinetic Green",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0835034,
+      "lng": 74.8197076,
+      "rawTags": {
+        "name": "Kinetic Green",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9050401260",
+      "source": "overpass",
+      "sourceId": "node/9050401260",
+      "osmType": "node",
+      "name": "Paris Bajaj Munawarabad",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0815982,
+      "lng": 74.8193274,
+      "rawTags": {
+        "name": "Paris Bajaj Munawarabad",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9050402608",
+      "source": "overpass",
+      "sourceId": "node/9050402608",
+      "osmType": "node",
+      "name": "Cars 24",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0840252,
+      "lng": 74.8196467,
+      "rawTags": {
+        "name": "Cars 24",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9052806109",
+      "source": "overpass",
+      "sourceId": "node/9052806109",
+      "osmType": "node",
+      "name": "Bhat Enterprises Car Repairs",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.073099,
+      "lng": 74.8122699,
+      "rawTags": {
+        "name": "Bhat Enterprises Car Repairs",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9052807645",
+      "source": "overpass",
+      "sourceId": "node/9052807645",
+      "osmType": "node",
+      "name": "JK Tyre Steel Wheels",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0721161,
+      "lng": 74.8221724,
+      "rawTags": {
+        "name": "JK Tyre Steel Wheels",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9052818049",
+      "source": "overpass",
+      "sourceId": "node/9052818049",
+      "osmType": "node",
+      "name": "Shuhul Hyundai",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0735155,
+      "lng": 74.816777,
+      "rawTags": {
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9052828318",
+      "source": "overpass",
+      "sourceId": "node/9052828318",
+      "osmType": "node",
+      "name": "Hanief Motors Yamaha",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0733027,
+      "lng": 74.8159495,
+      "rawTags": {
+        "name": "Hanief Motors Yamaha",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9070820643",
+      "source": "overpass",
+      "sourceId": "node/9070820643",
+      "osmType": "node",
+      "name": "Rahim Motors",
+      "phones": [],
+      "website": null,
+      "address": "78, SIDCO Industrial Estate, Rangreth, Budgam",
+      "lat": 33.9989374,
+      "lng": 74.7924007,
+      "rawTags": {
+        "addr:city": "Rangreth, Budgam",
+        "addr:housenumber": "78",
+        "addr:postcode": "191132",
+        "addr:street": "SIDCO Industrial Estate",
+        "man_made": "works",
+        "name": "Rahim Motors",
+        "product": "diesel_power_generators"
+      }
+    },
+    {
+      "id": "osm-node-9073505985",
+      "source": "overpass",
+      "sourceId": "node/9073505985",
+      "osmType": "node",
+      "name": "Sharma Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0667276,
+      "lng": 74.8029649,
+      "rawTags": {
+        "name": "Sharma Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9073521096",
+      "source": "overpass",
+      "sourceId": "node/9073521096",
+      "osmType": "node",
+      "name": "Maruti Suzuki Highland Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0737223,
+      "lng": 74.8319124,
+      "rawTags": {
+        "brand": "Maruti Suzuki",
+        "brand:wikidata": "Q963718",
+        "name": "Maruti Suzuki Highland Automobiles",
+        "second_hand": "no",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9073522824",
+      "source": "overpass",
+      "sourceId": "node/9073522824",
+      "osmType": "node",
+      "name": "Auto Stand Jehangir Chowk",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.071686,
+      "lng": 74.8044949,
+      "rawTags": {
+        "name": "Auto Stand Jehangir Chowk",
+        "public_transport": "platform"
+      }
+    },
+    {
+      "id": "osm-node-9073522927",
+      "source": "overpass",
+      "sourceId": "node/9073522927",
+      "osmType": "node",
+      "name": "Jhelum Tyre House",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0736742,
+      "lng": 74.7987323,
+      "rawTags": {
+        "name": "Jhelum Tyre House",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9073522928",
+      "source": "overpass",
+      "sourceId": "node/9073522928",
+      "osmType": "node",
+      "name": "Jk Tyres Wheels Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0661978,
+      "lng": 74.8459118,
+      "rawTags": {
+        "name": "Jk Tyres Wheels Automobiles",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9073523458",
+      "source": "overpass",
+      "sourceId": "node/9073523458",
+      "osmType": "node",
+      "name": "Loud Engine Work Shop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0708985,
+      "lng": 74.8400195,
+      "rawTags": {
+        "name": "Loud Engine Work Shop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9073523592",
+      "source": "overpass",
+      "sourceId": "node/9073523592",
+      "osmType": "node",
+      "name": "Tvs Kashmir Motors Pvt.Ltd",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0681752,
+      "lng": 74.826666,
+      "rawTags": {
+        "name": "Tvs Kashmir Motors Pvt.Ltd",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9073525193",
+      "source": "overpass",
+      "sourceId": "node/9073525193",
+      "osmType": "node",
+      "name": "Kinetic Green Electro Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0698672,
+      "lng": 74.8423012,
+      "rawTags": {
+        "name": "Kinetic Green Electro Automobiles",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9073526243",
+      "source": "overpass",
+      "sourceId": "node/9073526243",
+      "osmType": "node",
+      "name": "Makeoo Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0693613,
+      "lng": 74.8037709,
+      "rawTags": {
+        "name": "Makeoo Automobiles",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9073526417",
+      "source": "overpass",
+      "sourceId": "node/9073526417",
+      "osmType": "node",
+      "name": "Arise Hyundai",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0751091,
+      "lng": 74.7962621,
+      "rawTags": {
+        "name": "Arise Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9073527437",
+      "source": "overpass",
+      "sourceId": "node/9073527437",
+      "osmType": "node",
+      "name": "Mahindra Shuhul Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0725016,
+      "lng": 74.8375551,
+      "rawTags": {
+        "name": "Mahindra Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9073529518",
+      "source": "overpass",
+      "sourceId": "node/9073529518",
+      "osmType": "node",
+      "name": "Wani Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0551467,
+      "lng": 74.8040413,
+      "rawTags": {
+        "name": "Wani Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9078511604",
+      "source": "overpass",
+      "sourceId": "node/9078511604",
+      "osmType": "node",
+      "name": "Jeep Showro",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0306182,
+      "lng": 74.7940431,
+      "rawTags": {
+        "name": "Jeep Showro",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9078527859",
+      "source": "overpass",
+      "sourceId": "node/9078527859",
+      "osmType": "node",
+      "name": "Morris Garages",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0353318,
+      "lng": 74.7910285,
+      "rawTags": {
+        "name": "Morris Garages",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9078528925",
+      "source": "overpass",
+      "sourceId": "node/9078528925",
+      "osmType": "node",
+      "name": "Car Choice",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0293453,
+      "lng": 74.7966802,
+      "rawTags": {
+        "name": "Car Choice",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9078530919",
+      "source": "overpass",
+      "sourceId": "node/9078530919",
+      "osmType": "node",
+      "name": "Ford Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0320477,
+      "lng": 74.79277,
+      "rawTags": {
+        "name": "Ford Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087683042",
+      "source": "overpass",
+      "sourceId": "node/9087683042",
+      "osmType": "node",
+      "name": "Jk Tyre World",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0660616,
+      "lng": 74.7800629,
+      "rawTags": {
+        "name": "Jk Tyre World",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087687494",
+      "source": "overpass",
+      "sourceId": "node/9087687494",
+      "osmType": "node",
+      "name": "Kashmir Valley Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0429288,
+      "lng": 74.7894884,
+      "rawTags": {
+        "name": "Kashmir Valley Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087687497",
+      "source": "overpass",
+      "sourceId": "node/9087687497",
+      "osmType": "node",
+      "name": "Best Engineering Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1047403,
+      "lng": 74.7562351,
+      "rawTags": {
+        "name": "Best Engineering Works",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9087687641",
+      "source": "overpass",
+      "sourceId": "node/9087687641",
+      "osmType": "node",
+      "name": "Goodyear Prince Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0636578,
+      "lng": 74.782583,
+      "rawTags": {
+        "name": "Goodyear Prince Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087687642",
+      "source": "overpass",
+      "sourceId": "node/9087687642",
+      "osmType": "node",
+      "name": "Jamkash Suzuki",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0434128,
+      "lng": 74.7888714,
+      "rawTags": {
+        "name": "Jamkash Suzuki",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087687643",
+      "source": "overpass",
+      "sourceId": "node/9087687643",
+      "osmType": "node",
+      "name": "Mahindra Car Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0614967,
+      "lng": 74.7846827,
+      "rawTags": {
+        "name": "Mahindra Car Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087689059",
+      "source": "overpass",
+      "sourceId": "node/9087689059",
+      "osmType": "node",
+      "name": "Mahindra First Choice",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1025825,
+      "lng": 74.757093,
+      "rawTags": {
+        "name": "Mahindra First Choice",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087690983",
+      "source": "overpass",
+      "sourceId": "node/9087690983",
+      "osmType": "node",
+      "name": "Jk Tyre Shop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0792507,
+      "lng": 74.79412,
+      "rawTags": {
+        "name": "Jk Tyre Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087690984",
+      "source": "overpass",
+      "sourceId": "node/9087690984",
+      "osmType": "node",
+      "name": "Bridgestone Pacific",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0797864,
+      "lng": 74.7938018,
+      "rawTags": {
+        "name": "Bridgestone Pacific",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087690986",
+      "source": "overpass",
+      "sourceId": "node/9087690986",
+      "osmType": "node",
+      "name": "Bhat Motors Car Wash And Repair",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0538606,
+      "lng": 74.7875252,
+      "rawTags": {
+        "name": "Bhat Motors Car Wash And Repair",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9087690992",
+      "source": "overpass",
+      "sourceId": "node/9087690992",
+      "osmType": "node",
+      "name": "Government State Motor Garages",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0926331,
+      "lng": 74.7621399,
+      "rawTags": {
+        "name": "Government State Motor Garages",
+        "office": "government"
+      }
+    },
+    {
+      "id": "osm-node-9087691053",
+      "source": "overpass",
+      "sourceId": "node/9087691053",
+      "osmType": "node",
+      "name": "J&k Motors Authorised Dealer Sale and Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0487536,
+      "lng": 74.7886008,
+      "rawTags": {
+        "name": "J&k Motors Authorised Dealer Sale and Service",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9087691054",
+      "source": "overpass",
+      "sourceId": "node/9087691054",
+      "osmType": "node",
+      "name": "Auto Hub Car Dealership",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0703539,
+      "lng": 74.7854684,
+      "rawTags": {
+        "name": "Auto Hub Car Dealership",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087695968",
+      "source": "overpass",
+      "sourceId": "node/9087695968",
+      "osmType": "node",
+      "name": "MQ Pollution Checking Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0673908,
+      "lng": 74.7750529,
+      "rawTags": {
+        "name": "MQ Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9087695969",
+      "source": "overpass",
+      "sourceId": "node/9087695969",
+      "osmType": "node",
+      "name": "Arise Honda Sales",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0474279,
+      "lng": 74.7887091,
+      "rawTags": {
+        "name": "Arise Honda Sales",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9087698939",
+      "source": "overpass",
+      "sourceId": "node/9087698939",
+      "osmType": "node",
+      "name": "Jk Tyre Steel Wheels",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0748947,
+      "lng": 74.7878258,
+      "rawTags": {
+        "name": "Jk Tyre Steel Wheels",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087701038",
+      "source": "overpass",
+      "sourceId": "node/9087701038",
+      "osmType": "node",
+      "name": "Hero Electric Global Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0780142,
+      "lng": 74.7797568,
+      "rawTags": {
+        "name": "Hero Electric Global Motors",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9087706157",
+      "source": "overpass",
+      "sourceId": "node/9087706157",
+      "osmType": "node",
+      "name": "Maruti Suzuki Nexa",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.043842,
+      "lng": 74.7887735,
+      "rawTags": {
+        "name": "Maruti Suzuki Nexa",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087707455",
+      "source": "overpass",
+      "sourceId": "node/9087707455",
+      "osmType": "node",
+      "name": "Crystal Car Wash",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0447243,
+      "lng": 74.7886042,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Crystal Car Wash"
+      }
+    },
+    {
+      "id": "osm-node-9087707456",
+      "source": "overpass",
+      "sourceId": "node/9087707456",
+      "osmType": "node",
+      "name": "Valley Cars",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0923552,
+      "lng": 74.7768263,
+      "rawTags": {
+        "name": "Valley Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087708543",
+      "source": "overpass",
+      "sourceId": "node/9087708543",
+      "osmType": "node",
+      "name": "Yokohama Tyres M.Y Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0752099,
+      "lng": 74.7884413,
+      "rawTags": {
+        "name": "Yokohama Tyres M.Y Motors",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087709862",
+      "source": "overpass",
+      "sourceId": "node/9087709862",
+      "osmType": "node",
+      "name": "FairDeal Tata Motors Sale and Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1058962,
+      "lng": 74.7543081,
+      "rawTags": {
+        "name": "FairDeal Tata Motors Sale and Service",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087709865",
+      "source": "overpass",
+      "sourceId": "node/9087709865",
+      "osmType": "node",
+      "name": "Ansari Toyota",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1015954,
+      "lng": 74.7561435,
+      "rawTags": {
+        "name": "Ansari Toyota",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087714441",
+      "source": "overpass",
+      "sourceId": "node/9087714441",
+      "osmType": "node",
+      "name": "K.C Hyundai Sales",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0435666,
+      "lng": 74.7893663,
+      "rawTags": {
+        "name": "K.C Hyundai Sales",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9087714444",
+      "source": "overpass",
+      "sourceId": "node/9087714444",
+      "osmType": "node",
+      "name": "Royal Tyre Repair Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1055594,
+      "lng": 74.756582,
+      "rawTags": {
+        "name": "Royal Tyre Repair Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9087714445",
+      "source": "overpass",
+      "sourceId": "node/9087714445",
+      "osmType": "node",
+      "name": "AEON Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1007169,
+      "lng": 74.7571981,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "AEON Service Station"
+      }
+    },
+    {
+      "id": "osm-node-9087716550",
+      "source": "overpass",
+      "sourceId": "node/9087716550",
+      "osmType": "node",
+      "name": "Ktm Duke Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.062232,
+      "lng": 74.7850421,
+      "rawTags": {
+        "name": "Ktm Duke Showroom",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9087716736",
+      "source": "overpass",
+      "sourceId": "node/9087716736",
+      "osmType": "node",
+      "name": "Royal Enfield Xtream",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0469689,
+      "lng": 74.7887641,
+      "rawTags": {
+        "name": "Royal Enfield Xtream",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9087716737",
+      "source": "overpass",
+      "sourceId": "node/9087716737",
+      "osmType": "node",
+      "name": "Bhat Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0669557,
+      "lng": 74.7808455,
+      "rawTags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Bhat Service Station",
+        "self_service": "no"
+      }
+    },
+    {
+      "id": "osm-node-9087717217",
+      "source": "overpass",
+      "sourceId": "node/9087717217",
+      "osmType": "node",
+      "name": "K.C Hyundai Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0495237,
+      "lng": 74.7883462,
+      "rawTags": {
+        "name": "K.C Hyundai Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9087718082",
+      "source": "overpass",
+      "sourceId": "node/9087718082",
+      "osmType": "node",
+      "name": "Etihaad Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0977892,
+      "lng": 74.7717514,
+      "rawTags": {
+        "name": "Etihaad Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9094151507",
+      "source": "overpass",
+      "sourceId": "node/9094151507",
+      "osmType": "node",
+      "name": "Kashmir Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0218998,
+      "lng": 74.809512,
+      "rawTags": {
+        "name": "Kashmir Motors",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9094197010",
+      "source": "overpass",
+      "sourceId": "node/9094197010",
+      "osmType": "node",
+      "name": "Maruti Suzuki True Value",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0368673,
+      "lng": 74.7861544,
+      "rawTags": {
+        "name": "Maruti Suzuki True Value",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9094197012",
+      "source": "overpass",
+      "sourceId": "node/9094197012",
+      "osmType": "node",
+      "name": "Maqbool Motors Sale Service Spares",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0240546,
+      "lng": 74.7737761,
+      "rawTags": {
+        "name": "Maqbool Motors Sale Service Spares",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9094210500",
+      "source": "overpass",
+      "sourceId": "node/9094210500",
+      "osmType": "node",
+      "name": "The Detox Lab",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0218258,
+      "lng": 74.8093653,
+      "rawTags": {
+        "name": "The Detox Lab",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9094210722",
+      "source": "overpass",
+      "sourceId": "node/9094210722",
+      "osmType": "node",
+      "name": "Sofi Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0174664,
+      "lng": 74.7984115,
+      "rawTags": {
+        "name": "Sofi Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9094213061",
+      "source": "overpass",
+      "sourceId": "node/9094213061",
+      "osmType": "node",
+      "name": "Sahara Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0232153,
+      "lng": 74.7749123,
+      "rawTags": {
+        "name": "Sahara Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9094213490",
+      "source": "overpass",
+      "sourceId": "node/9094213490",
+      "osmType": "node",
+      "name": "2M Auto Fresh Car Detailing Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0084861,
+      "lng": 74.811374,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "2M Auto Fresh Car Detailing Centre"
+      }
+    },
+    {
+      "id": "osm-node-9094214993",
+      "source": "overpass",
+      "sourceId": "node/9094214993",
+      "osmType": "node",
+      "name": "Ms I.S Motors and Car Washing",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0051306,
+      "lng": 74.795015,
+      "rawTags": {
+        "name": "Ms I.S Motors and Car Washing",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9094222520",
+      "source": "overpass",
+      "sourceId": "node/9094222520",
+      "osmType": "node",
+      "name": "S.A Motors Repair and Wash Service Station  Chanpora",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0255698,
+      "lng": 74.8086992,
+      "rawTags": {
+        "name": "S.A Motors Repair and Wash Service Station  Chanpora",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9098633102",
+      "source": "overpass",
+      "sourceId": "node/9098633102",
+      "osmType": "node",
+      "name": "Shuhul Hyundai",
+      "phones": [],
+      "website": null,
+      "address": "Nowgam Byepass, NH44",
+      "lat": 34.0281469,
+      "lng": 74.8326606,
+      "rawTags": {
+        "addr:street": "Nowgam Byepass, NH44",
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100754410",
+      "source": "overpass",
+      "sourceId": "node/9100754410",
+      "osmType": "node",
+      "name": "New Kohinoor Tyre House Appolo Tyres",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0390712,
+      "lng": 74.8806933,
+      "rawTags": {
+        "name": "New Kohinoor Tyre House Appolo Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9100766688",
+      "source": "overpass",
+      "sourceId": "node/9100766688",
+      "osmType": "node",
+      "name": "HK Auto World",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0410411,
+      "lng": 74.8749888,
+      "rawTags": {
+        "name": "HK Auto World",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100779898",
+      "source": "overpass",
+      "sourceId": "node/9100779898",
+      "osmType": "node",
+      "name": "Maruti Suzuki NEXA",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0357914,
+      "lng": 74.8617411,
+      "rawTags": {
+        "name": "Maruti Suzuki NEXA",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100781346",
+      "source": "overpass",
+      "sourceId": "node/9100781346",
+      "osmType": "node",
+      "name": "Nuwabi Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0911433,
+      "lng": 74.8145755,
+      "rawTags": {
+        "name": "Nuwabi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100788415",
+      "source": "overpass",
+      "sourceId": "node/9100788415",
+      "osmType": "node",
+      "name": "Bhat Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0213952,
+      "lng": 74.8298648,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Bhat Service Station",
+        "name:en": "Bhat Service Station"
+      }
+    },
+    {
+      "id": "osm-node-9100801457",
+      "source": "overpass",
+      "sourceId": "node/9100801457",
+      "osmType": "node",
+      "name": "Bhat Washing Point",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0194878,
+      "lng": 74.8297046,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Bhat Washing Point",
+        "name:en": "Bhat Washing Point"
+      }
+    },
+    {
+      "id": "osm-node-9100855973",
+      "source": "overpass",
+      "sourceId": "node/9100855973",
+      "osmType": "node",
+      "name": "Royal Enfield Bullet Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0381932,
+      "lng": 74.8692446,
+      "rawTags": {
+        "name": "Royal Enfield Bullet Showroom",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9100896747",
+      "source": "overpass",
+      "sourceId": "node/9100896747",
+      "osmType": "node",
+      "name": "Appolo Tyres",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0367018,
+      "lng": 74.8944216,
+      "rawTags": {
+        "name": "Appolo Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9100902211",
+      "source": "overpass",
+      "sourceId": "node/9100902211",
+      "osmType": "node",
+      "name": "Atul Hanief Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0479318,
+      "lng": 74.8665984,
+      "rawTags": {
+        "name": "Atul Hanief Motors",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9100957500",
+      "source": "overpass",
+      "sourceId": "node/9100957500",
+      "osmType": "node",
+      "name": "Jet Wheels Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0033964,
+      "lng": 74.8354078,
+      "rawTags": {
+        "name": "Jet Wheels Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9100957501",
+      "source": "overpass",
+      "sourceId": "node/9100957501",
+      "osmType": "node",
+      "name": "Mahindra Shuhul Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.028537,
+      "lng": 74.8321272,
+      "rawTags": {
+        "name": "Mahindra Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100974856",
+      "source": "overpass",
+      "sourceId": "node/9100974856",
+      "osmType": "node",
+      "name": "Tata Motors Warsi Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0284309,
+      "lng": 74.8295336,
+      "rawTags": {
+        "name": "Tata Motors Warsi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100974859",
+      "source": "overpass",
+      "sourceId": "node/9100974859",
+      "osmType": "node",
+      "name": "Renault Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0371851,
+      "lng": 74.8922168,
+      "rawTags": {
+        "name": "Renault Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9100974862",
+      "source": "overpass",
+      "sourceId": "node/9100974862",
+      "osmType": "node",
+      "name": "Cars 24",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0388834,
+      "lng": 74.881184,
+      "rawTags": {
+        "name": "Cars 24",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9100992538",
+      "source": "overpass",
+      "sourceId": "node/9100992538",
+      "osmType": "node",
+      "name": "Car4u Car Dealer",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0930043,
+      "lng": 74.812696,
+      "rawTags": {
+        "name": "Car4u Car Dealer",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101014086",
+      "source": "overpass",
+      "sourceId": "node/9101014086",
+      "osmType": "node",
+      "name": "Kong Posh Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0263991,
+      "lng": 74.9102346,
+      "rawTags": {
+        "name": "Kong Posh Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9101014089",
+      "source": "overpass",
+      "sourceId": "node/9101014089",
+      "osmType": "node",
+      "name": "Hyundai Construction Equipment Fuel Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.049728,
+      "lng": 74.8647439,
+      "rawTags": {
+        "building": "yes",
+        "name": "Hyundai Construction Equipment Fuel Automobiles"
+      }
+    },
+    {
+      "id": "osm-node-9101022963",
+      "source": "overpass",
+      "sourceId": "node/9101022963",
+      "osmType": "node",
+      "name": "Force Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0338257,
+      "lng": 74.8508875,
+      "rawTags": {
+        "name": "Force Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101034622",
+      "source": "overpass",
+      "sourceId": "node/9101034622",
+      "osmType": "node",
+      "name": "Hyundia Shuhul Sale and Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.028648,
+      "lng": 74.8327407,
+      "rawTags": {
+        "name": "Hyundia Shuhul Sale and Service",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101034623",
+      "source": "overpass",
+      "sourceId": "node/9101034623",
+      "osmType": "node",
+      "name": "Honda Shuhul Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0371774,
+      "lng": 74.8934671,
+      "rawTags": {
+        "name": "Honda Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101104636",
+      "source": "overpass",
+      "sourceId": "node/9101104636",
+      "osmType": "node",
+      "name": "Renault Srinagar",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0364529,
+      "lng": 74.8644658,
+      "rawTags": {
+        "name": "Renault Srinagar",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101106017",
+      "source": "overpass",
+      "sourceId": "node/9101106017",
+      "osmType": "node",
+      "name": "Shuhul Hyundai",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0282625,
+      "lng": 74.8290923,
+      "rawTags": {
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9101116066",
+      "source": "overpass",
+      "sourceId": "node/9101116066",
+      "osmType": "node",
+      "name": "Homda Sale and Service Hawal",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1045576,
+      "lng": 74.8087069,
+      "rawTags": {
+        "name": "Homda Sale and Service Hawal",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9101116069",
+      "source": "overpass",
+      "sourceId": "node/9101116069",
+      "osmType": "node",
+      "name": "Hyundai Service Arise",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1115096,
+      "lng": 74.8095557,
+      "rawTags": {
+        "name": "Hyundai Service Arise",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9107515816",
+      "source": "overpass",
+      "sourceId": "node/9107515816",
+      "osmType": "node",
+      "name": "Sholla Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0875438,
+      "lng": 74.808853,
+      "rawTags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Sholla Service Station",
+        "self_service": "no"
+      }
+    },
+    {
+      "id": "osm-node-9107526535",
+      "source": "overpass",
+      "sourceId": "node/9107526535",
+      "osmType": "node",
+      "name": "Khan Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0961889,
+      "lng": 74.7865897,
+      "rawTags": {
+        "name": "Khan Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9107532588",
+      "source": "overpass",
+      "sourceId": "node/9107532588",
+      "osmType": "node",
+      "name": "Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0877575,
+      "lng": 74.8036502,
+      "rawTags": {
+        "name": "Noor Motors",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9107540927",
+      "source": "overpass",
+      "sourceId": "node/9107540927",
+      "osmType": "node",
+      "name": "S.S Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0907703,
+      "lng": 74.8128788,
+      "rawTags": {
+        "name": "S.S Automobiles",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9107542620",
+      "source": "overpass",
+      "sourceId": "node/9107542620",
+      "osmType": "node",
+      "name": "Honda Genset Authorised Service Station Faisal Enterprises",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.087087,
+      "lng": 74.811036,
+      "rawTags": {
+        "highway": "services",
+        "name": "Honda Genset Authorised Service Station Faisal Enterprises"
+      }
+    },
+    {
+      "id": "osm-node-9107542949",
+      "source": "overpass",
+      "sourceId": "node/9107542949",
+      "osmType": "node",
+      "name": "Auto Stand",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0959986,
+      "lng": 74.7984482,
+      "rawTags": {
+        "name": "Auto Stand",
+        "public_transport": "platform"
+      }
+    },
+    {
+      "id": "osm-node-9107547246",
+      "source": "overpass",
+      "sourceId": "node/9107547246",
+      "osmType": "node",
+      "name": "Rover A Car Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0989814,
+      "lng": 74.8057717,
+      "rawTags": {
+        "name": "Rover A Car Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9107547342",
+      "source": "overpass",
+      "sourceId": "node/9107547342",
+      "osmType": "node",
+      "name": "Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0924239,
+      "lng": 74.8003563,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Service Station"
+      }
+    },
+    {
+      "id": "osm-node-9107552436",
+      "source": "overpass",
+      "sourceId": "node/9107552436",
+      "osmType": "node",
+      "name": "Bajaj Auto Repairing and Spare Parts",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0877047,
+      "lng": 74.8041286,
+      "rawTags": {
+        "name": "Bajaj Auto Repairing and Spare Parts",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9107554158",
+      "source": "overpass",
+      "sourceId": "node/9107554158",
+      "osmType": "node",
+      "name": "Paris Bajaj Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.091995,
+      "lng": 74.8002454,
+      "rawTags": {
+        "name": "Paris Bajaj Service",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9107557678",
+      "source": "overpass",
+      "sourceId": "node/9107557678",
+      "osmType": "node",
+      "name": "Hero Authorised Service Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.091141,
+      "lng": 74.8004039,
+      "rawTags": {
+        "name": "Hero Authorised Service Centre",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9113478732",
+      "source": "overpass",
+      "sourceId": "node/9113478732",
+      "osmType": "node",
+      "name": "Car Hub",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0798294,
+      "lng": 74.8001678,
+      "rawTags": {
+        "name": "Car Hub",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113478733",
+      "source": "overpass",
+      "sourceId": "node/9113478733",
+      "osmType": "node",
+      "name": "Evergreen Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0776636,
+      "lng": 74.7987309,
+      "rawTags": {
+        "building": "yes",
+        "name": "Evergreen Motors"
+      }
+    },
+    {
+      "id": "osm-node-9113492040",
+      "source": "overpass",
+      "sourceId": "node/9113492040",
+      "osmType": "node",
+      "name": "Royal Enfield PCS Auto",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0795544,
+      "lng": 74.8077182,
+      "rawTags": {
+        "name": "Royal Enfield PCS Auto",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9113492044",
+      "source": "overpass",
+      "sourceId": "node/9113492044",
+      "osmType": "node",
+      "name": "Car Land",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0843407,
+      "lng": 74.7966474,
+      "rawTags": {
+        "name": "Car Land",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113492503",
+      "source": "overpass",
+      "sourceId": "node/9113492503",
+      "osmType": "node",
+      "name": "Benison Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0810896,
+      "lng": 74.7986045,
+      "rawTags": {
+        "name": "Benison Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113492504",
+      "source": "overpass",
+      "sourceId": "node/9113492504",
+      "osmType": "node",
+      "name": "New Asian Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0837385,
+      "lng": 74.79742,
+      "rawTags": {
+        "name": "New Asian Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113498014",
+      "source": "overpass",
+      "sourceId": "node/9113498014",
+      "osmType": "node",
+      "name": "Vehicle Corner Point",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0819147,
+      "lng": 74.7985136,
+      "rawTags": {
+        "name": "Vehicle Corner Point",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9113500891",
+      "source": "overpass",
+      "sourceId": "node/9113500891",
+      "osmType": "node",
+      "name": "Car Point",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0860252,
+      "lng": 74.8014743,
+      "rawTags": {
+        "name": "Car Point",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113501353",
+      "source": "overpass",
+      "sourceId": "node/9113501353",
+      "osmType": "node",
+      "name": "Lucky Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0782999,
+      "lng": 74.8093817,
+      "rawTags": {
+        "name": "Lucky Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9113502327",
+      "source": "overpass",
+      "sourceId": "node/9113502327",
+      "osmType": "node",
+      "name": "MJ Auto Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0825149,
+      "lng": 74.8012967,
+      "rawTags": {
+        "name": "MJ Auto Centre",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9113502530",
+      "source": "overpass",
+      "sourceId": "node/9113502530",
+      "osmType": "node",
+      "name": "Gousia Auto Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0838365,
+      "lng": 74.7972894,
+      "rawTags": {
+        "name": "Gousia Auto Centre",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9113504588",
+      "source": "overpass",
+      "sourceId": "node/9113504588",
+      "osmType": "node",
+      "name": "Service Station",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0812588,
+      "lng": 74.7984584,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Service Station"
+      }
+    },
+    {
+      "id": "osm-node-9113507812",
+      "source": "overpass",
+      "sourceId": "node/9113507812",
+      "osmType": "node",
+      "name": "Bashir Engineering Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0837516,
+      "lng": 74.7999403,
+      "rawTags": {
+        "name": "Bashir Engineering Works",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9113507823",
+      "source": "overpass",
+      "sourceId": "node/9113507823",
+      "osmType": "node",
+      "name": "Neway Car Wash",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0787178,
+      "lng": 74.8096155,
+      "rawTags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Neway Car Wash",
+        "self_service": "no"
+      }
+    },
+    {
+      "id": "osm-node-9113507829",
+      "source": "overpass",
+      "sourceId": "node/9113507829",
+      "osmType": "node",
+      "name": "Asian Cars",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0848204,
+      "lng": 74.7967051,
+      "rawTags": {
+        "name": "Asian Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113514240",
+      "source": "overpass",
+      "sourceId": "node/9113514240",
+      "osmType": "node",
+      "name": "Car City",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0826593,
+      "lng": 74.7980326,
+      "rawTags": {
+        "name": "Car City",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113514241",
+      "source": "overpass",
+      "sourceId": "node/9113514241",
+      "osmType": "node",
+      "name": "Pamposh Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0839605,
+      "lng": 74.7965688,
+      "rawTags": {
+        "name": "Pamposh Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113515276",
+      "source": "overpass",
+      "sourceId": "node/9113515276",
+      "osmType": "node",
+      "name": "Srinagar Auto Deal",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0805553,
+      "lng": 74.7989876,
+      "rawTags": {
+        "name": "Srinagar Auto Deal",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9113515466",
+      "source": "overpass",
+      "sourceId": "node/9113515466",
+      "osmType": "node",
+      "name": "New Vehicle Point",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0808747,
+      "lng": 74.7991004,
+      "rawTags": {
+        "name": "New Vehicle Point",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9113515617",
+      "source": "overpass",
+      "sourceId": "node/9113515617",
+      "osmType": "node",
+      "name": "Car n Care Car Gallery",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.082441,
+      "lng": 74.7981883,
+      "rawTags": {
+        "name": "Car n Care Car Gallery",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9116794511",
+      "source": "overpass",
+      "sourceId": "node/9116794511",
+      "osmType": "node",
+      "name": "Aftab Automobiles and Repairs",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1292737,
+      "lng": 74.7982698,
+      "rawTags": {
+        "name": "Aftab Automobiles and Repairs",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9116860051",
+      "source": "overpass",
+      "sourceId": "node/9116860051",
+      "osmType": "node",
+      "name": "Gousia Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1340031,
+      "lng": 74.8038981,
+      "rawTags": {
+        "name": "Gousia Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9116867783",
+      "source": "overpass",
+      "sourceId": "node/9116867783",
+      "osmType": "node",
+      "name": "Tyre Care Mrf Tyres",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1136957,
+      "lng": 74.7944778,
+      "rawTags": {
+        "name": "Tyre Care Mrf Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9116873279",
+      "source": "overpass",
+      "sourceId": "node/9116873279",
+      "osmType": "node",
+      "name": "Tyre Repair Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1337861,
+      "lng": 74.804064,
+      "rawTags": {
+        "name": "Tyre Repair Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9116878966",
+      "source": "overpass",
+      "sourceId": "node/9116878966",
+      "osmType": "node",
+      "name": "Mojo Mahindra Alfa Commerce",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1246761,
+      "lng": 74.7955138,
+      "rawTags": {
+        "name": "Mojo Mahindra Alfa Commerce",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9116883176",
+      "source": "overpass",
+      "sourceId": "node/9116883176",
+      "osmType": "node",
+      "name": "Car-20 Car Gallery",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1190842,
+      "lng": 74.7955574,
+      "rawTags": {
+        "name": "Car-20 Car Gallery",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9116883861",
+      "source": "overpass",
+      "sourceId": "node/9116883861",
+      "osmType": "node",
+      "name": "Friends Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1105317,
+      "lng": 74.7942693,
+      "rawTags": {
+        "name": "Friends Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116884467",
+      "source": "overpass",
+      "sourceId": "node/9116884467",
+      "osmType": "node",
+      "name": "M.J Auto Centre Transport Company",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1269594,
+      "lng": 74.796547,
+      "rawTags": {
+        "name": "M.J Auto Centre Transport Company",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9116884468",
+      "source": "overpass",
+      "sourceId": "node/9116884468",
+      "osmType": "node",
+      "name": "Khan Car Club Scrap Car Dealer",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1276996,
+      "lng": 74.7965155,
+      "rawTags": {
+        "name": "Khan Car Club Scrap Car Dealer",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9116885185",
+      "source": "overpass",
+      "sourceId": "node/9116885185",
+      "osmType": "node",
+      "name": "Peaks Auto Private Limited",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1280369,
+      "lng": 74.7973535,
+      "rawTags": {
+        "name": "Peaks Auto Private Limited",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9116885673",
+      "source": "overpass",
+      "sourceId": "node/9116885673",
+      "osmType": "node",
+      "name": "Gudoo Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1300034,
+      "lng": 74.7981061,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Gudoo Automobiles"
+      }
+    },
+    {
+      "id": "osm-node-9116888684",
+      "source": "overpass",
+      "sourceId": "node/9116888684",
+      "osmType": "node",
+      "name": "Haadis Car Lobby",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1132286,
+      "lng": 74.7943688,
+      "rawTags": {
+        "name": "Haadis Car Lobby",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9116888685",
+      "source": "overpass",
+      "sourceId": "node/9116888685",
+      "osmType": "node",
+      "name": "Labroo Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.12548,
+      "lng": 74.795317,
+      "rawTags": {
+        "name": "Labroo Motors",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9116891335",
+      "source": "overpass",
+      "sourceId": "node/9116891335",
+      "osmType": "node",
+      "name": "Zufair Automobiles Tvs and Honda",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1076116,
+      "lng": 74.7945404,
+      "rawTags": {
+        "name": "Zufair Automobiles Tvs and Honda",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9116895455",
+      "source": "overpass",
+      "sourceId": "node/9116895455",
+      "osmType": "node",
+      "name": "Al-Hamzah Automobiles Workshop and Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1279756,
+      "lng": 74.7967299,
+      "rawTags": {
+        "name": "Al-Hamzah Automobiles Workshop and Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116895559",
+      "source": "overpass",
+      "sourceId": "node/9116895559",
+      "osmType": "node",
+      "name": "Kashmir Motors Honda and Tvs",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1257818,
+      "lng": 74.7959894,
+      "rawTags": {
+        "name": "Kashmir Motors Honda and Tvs",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9116895767",
+      "source": "overpass",
+      "sourceId": "node/9116895767",
+      "osmType": "node",
+      "name": "Makhdoomi Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1193609,
+      "lng": 74.7955486,
+      "rawTags": {
+        "name": "Makhdoomi Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116895768",
+      "source": "overpass",
+      "sourceId": "node/9116895768",
+      "osmType": "node",
+      "name": "Suleman Pollution Checking Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1274666,
+      "lng": 74.7969885,
+      "rawTags": {
+        "name": "Suleman Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116895838",
+      "source": "overpass",
+      "sourceId": "node/9116895838",
+      "osmType": "node",
+      "name": "Teeka Khan Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1110887,
+      "lng": 74.7945869,
+      "rawTags": {
+        "name": "Teeka Khan Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116897659",
+      "source": "overpass",
+      "sourceId": "node/9116897659",
+      "osmType": "node",
+      "name": "Tyre Works Repair",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1102497,
+      "lng": 74.7943216,
+      "rawTags": {
+        "name": "Tyre Works Repair",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9116898048",
+      "source": "overpass",
+      "sourceId": "node/9116898048",
+      "osmType": "node",
+      "name": "Dale Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1281828,
+      "lng": 74.7974203,
+      "rawTags": {
+        "name": "Dale Automobiles",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9116898050",
+      "source": "overpass",
+      "sourceId": "node/9116898050",
+      "osmType": "node",
+      "name": "M.S Sheikh Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1329189,
+      "lng": 74.8041971,
+      "rawTags": {
+        "name": "M.S Sheikh Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9116898242",
+      "source": "overpass",
+      "sourceId": "node/9116898242",
+      "osmType": "node",
+      "name": "Afaan Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1081509,
+      "lng": 74.7945083,
+      "rawTags": {
+        "name": "Afaan Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9116899633",
+      "source": "overpass",
+      "sourceId": "node/9116899633",
+      "osmType": "node",
+      "name": "Wani Automobiles and Detailing Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1274892,
+      "lng": 74.7963828,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Wani Automobiles and Detailing Centre"
+      }
+    },
+    {
+      "id": "osm-node-9131796893",
+      "source": "overpass",
+      "sourceId": "node/9131796893",
+      "osmType": "node",
+      "name": "Crown Car Wash",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1441123,
+      "lng": 74.8023726,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Crown Car Wash"
+      }
+    },
+    {
+      "id": "osm-node-9131796901",
+      "source": "overpass",
+      "sourceId": "node/9131796901",
+      "osmType": "node",
+      "name": "Kinetic Green Bagdadi Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1922994,
+      "lng": 74.807275,
+      "rawTags": {
+        "name": "Kinetic Green Bagdadi Automobiles",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9131814976",
+      "source": "overpass",
+      "sourceId": "node/9131814976",
+      "osmType": "node",
+      "name": "S.Y Automobiles Pollution Checking Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1616692,
+      "lng": 74.8084505,
+      "rawTags": {
+        "name": "S.Y Automobiles Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131819089",
+      "source": "overpass",
+      "sourceId": "node/9131819089",
+      "osmType": "node",
+      "name": "All Good Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1160884,
+      "lng": 74.8061534,
+      "rawTags": {
+        "name": "All Good Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131819110",
+      "source": "overpass",
+      "sourceId": "node/9131819110",
+      "osmType": "node",
+      "name": "Bio Safe Pollution Checking Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1267715,
+      "lng": 74.8061656,
+      "rawTags": {
+        "name": "Bio Safe Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131819346",
+      "source": "overpass",
+      "sourceId": "node/9131819346",
+      "osmType": "node",
+      "name": "Al-Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1866516,
+      "lng": 74.8078001,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Al-Noor Motors"
+      }
+    },
+    {
+      "id": "osm-node-9131848395",
+      "source": "overpass",
+      "sourceId": "node/9131848395",
+      "osmType": "node",
+      "name": "Tyres and Batteries",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1254502,
+      "lng": 74.8059944,
+      "rawTags": {
+        "name": "Tyres and Batteries",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9131856031",
+      "source": "overpass",
+      "sourceId": "node/9131856031",
+      "osmType": "node",
+      "name": "Tyres Auto Shop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1127158,
+      "lng": 74.808334,
+      "rawTags": {
+        "name": "Tyres Auto Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9131862465",
+      "source": "overpass",
+      "sourceId": "node/9131862465",
+      "osmType": "node",
+      "name": "Haadi Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1428642,
+      "lng": 74.8082643,
+      "rawTags": {
+        "name": "Haadi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131863811",
+      "source": "overpass",
+      "sourceId": "node/9131863811",
+      "osmType": "node",
+      "name": "Vip Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1908056,
+      "lng": 74.8074365,
+      "rawTags": {
+        "name": "Vip Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131864601",
+      "source": "overpass",
+      "sourceId": "node/9131864601",
+      "osmType": "node",
+      "name": "Shah Car Bazaar",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1825486,
+      "lng": 74.8072207,
+      "rawTags": {
+        "name": "Shah Car Bazaar",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131866879",
+      "source": "overpass",
+      "sourceId": "node/9131866879",
+      "osmType": "node",
+      "name": "Usman Car Gallery",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1911065,
+      "lng": 74.8079705,
+      "rawTags": {
+        "name": "Usman Car Gallery",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131866884",
+      "source": "overpass",
+      "sourceId": "node/9131866884",
+      "osmType": "node",
+      "name": "Petro Star Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1964771,
+      "lng": 74.8070378,
+      "rawTags": {
+        "name": "Petro Star Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131868089",
+      "source": "overpass",
+      "sourceId": "node/9131868089",
+      "osmType": "node",
+      "name": "Car Port",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1502781,
+      "lng": 74.8084507,
+      "rawTags": {
+        "name": "Car Port",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131868095",
+      "source": "overpass",
+      "sourceId": "node/9131868095",
+      "osmType": "node",
+      "name": "Hubbi Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1616482,
+      "lng": 74.8085158,
+      "rawTags": {
+        "name": "Hubbi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131871668",
+      "source": "overpass",
+      "sourceId": "node/9131871668",
+      "osmType": "node",
+      "name": "Zahoor Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1463345,
+      "lng": 74.802631,
+      "rawTags": {
+        "name": "Zahoor Automobiles",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131871673",
+      "source": "overpass",
+      "sourceId": "node/9131871673",
+      "osmType": "node",
+      "name": "True Cars",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1599706,
+      "lng": 74.8084475,
+      "rawTags": {
+        "name": "True Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131872779",
+      "source": "overpass",
+      "sourceId": "node/9131872779",
+      "osmType": "node",
+      "name": "Lulu Service Station and Detailing Centre",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1923526,
+      "lng": 74.8077779,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Lulu Service Station and Detailing Centre"
+      }
+    },
+    {
+      "id": "osm-node-9131873890",
+      "source": "overpass",
+      "sourceId": "node/9131873890",
+      "osmType": "node",
+      "name": "Car King",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1243182,
+      "lng": 74.8061916,
+      "rawTags": {
+        "name": "Car King",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131876491",
+      "source": "overpass",
+      "sourceId": "node/9131876491",
+      "osmType": "node",
+      "name": "Hamzah Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1420442,
+      "lng": 74.8083512,
+      "rawTags": {
+        "name": "Hamzah Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131876632",
+      "source": "overpass",
+      "sourceId": "node/9131876632",
+      "osmType": "node",
+      "name": "Auto Stand 90 Feet Road",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1367365,
+      "lng": 74.8087896,
+      "rawTags": {
+        "name": "Auto Stand 90 Feet Road",
+        "public_transport": "station"
+      }
+    },
+    {
+      "id": "osm-node-9131876634",
+      "source": "overpass",
+      "sourceId": "node/9131876634",
+      "osmType": "node",
+      "name": "True Cars",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1393486,
+      "lng": 74.8084149,
+      "rawTags": {
+        "name": "True Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131876641",
+      "source": "overpass",
+      "sourceId": "node/9131876641",
+      "osmType": "node",
+      "name": "Al-Khaleej Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.195551,
+      "lng": 74.8071903,
+      "rawTags": {
+        "name": "Al-Khaleej Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131877675",
+      "source": "overpass",
+      "sourceId": "node/9131877675",
+      "osmType": "node",
+      "name": "Komaki Electric Vehicles Division",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1479115,
+      "lng": 74.8026918,
+      "rawTags": {
+        "name": "Komaki Electric Vehicles Division",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9131877783",
+      "source": "overpass",
+      "sourceId": "node/9131877783",
+      "osmType": "node",
+      "name": "Future Gen Autos Electric Vehicles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1947019,
+      "lng": 74.8069116,
+      "rawTags": {
+        "name": "Future Gen Autos Electric Vehicles",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9131877828",
+      "source": "overpass",
+      "sourceId": "node/9131877828",
+      "osmType": "node",
+      "name": "Tariq Bike Point",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1368164,
+      "lng": 74.807906,
+      "rawTags": {
+        "name": "Tariq Bike Point",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9131878371",
+      "source": "overpass",
+      "sourceId": "node/9131878371",
+      "osmType": "node",
+      "name": "Iqbal Auto Stand",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1388892,
+      "lng": 74.8022189,
+      "rawTags": {
+        "name": "Iqbal Auto Stand",
+        "public_transport": "station"
+      }
+    },
+    {
+      "id": "osm-node-9131878374",
+      "source": "overpass",
+      "sourceId": "node/9131878374",
+      "osmType": "node",
+      "name": "Shah Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1447477,
+      "lng": 74.8082882,
+      "rawTags": {
+        "name": "Shah Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9131879048",
+      "source": "overpass",
+      "sourceId": "node/9131879048",
+      "osmType": "node",
+      "name": "Al-Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1901653,
+      "lng": 74.8079705,
+      "rawTags": {
+        "name": "Al-Noor Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9131879125",
+      "source": "overpass",
+      "sourceId": "node/9131879125",
+      "osmType": "node",
+      "name": "Parray Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1910903,
+      "lng": 74.8072533,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Parray Motors"
+      }
+    },
+    {
+      "id": "osm-node-9144956577",
+      "source": "overpass",
+      "sourceId": "node/9144956577",
+      "osmType": "node",
+      "name": "Naseem Tyre Shop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1406614,
+      "lng": 74.8390689,
+      "rawTags": {
+        "name": "Naseem Tyre Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9144961306",
+      "source": "overpass",
+      "sourceId": "node/9144961306",
+      "osmType": "node",
+      "name": "Abid Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1056817,
+      "lng": 74.8325789,
+      "rawTags": {
+        "name": "Abid Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9144990566",
+      "source": "overpass",
+      "sourceId": "node/9144990566",
+      "osmType": "node",
+      "name": "Auto Stand Rainawari Hospital",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0969935,
+      "lng": 74.8219258,
+      "rawTags": {
+        "name": "Auto Stand Rainawari Hospital",
+        "public_transport": "station"
+      }
+    },
+    {
+      "id": "osm-node-9144994313",
+      "source": "overpass",
+      "sourceId": "node/9144994313",
+      "osmType": "node",
+      "name": "Arhan Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1115195,
+      "lng": 74.8370055,
+      "rawTags": {
+        "name": "Arhan Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9144994489",
+      "source": "overpass",
+      "sourceId": "node/9144994489",
+      "osmType": "node",
+      "name": "Welcome Auto Stand",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1230202,
+      "lng": 74.8165976,
+      "rawTags": {
+        "name": "Welcome Auto Stand",
+        "public_transport": "station"
+      }
+    },
+    {
+      "id": "osm-node-9145001341",
+      "source": "overpass",
+      "sourceId": "node/9145001341",
+      "osmType": "node",
+      "name": "Auto Masters",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1489234,
+      "lng": 74.8371922,
+      "rawTags": {
+        "name": "Auto Masters",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-9145001895",
+      "source": "overpass",
+      "sourceId": "node/9145001895",
+      "osmType": "node",
+      "name": "MD Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1543131,
+      "lng": 74.8397326,
+      "rawTags": {
+        "name": "MD Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145009993",
+      "source": "overpass",
+      "sourceId": "node/9145009993",
+      "osmType": "node",
+      "name": "Aijaz Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1496036,
+      "lng": 74.8366707,
+      "rawTags": {
+        "name": "Aijaz Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145011516",
+      "source": "overpass",
+      "sourceId": "node/9145011516",
+      "osmType": "node",
+      "name": "Bismillah Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.124014,
+      "lng": 74.8367951,
+      "rawTags": {
+        "name": "Bismillah Motors",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145020690",
+      "source": "overpass",
+      "sourceId": "node/9145020690",
+      "osmType": "node",
+      "name": "Car Space Complete Workshop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1305487,
+      "lng": 74.8211045,
+      "rawTags": {
+        "name": "Car Space Complete Workshop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145020697",
+      "source": "overpass",
+      "sourceId": "node/9145020697",
+      "osmType": "node",
+      "name": "Bajaj Repairing Shop Delhi Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1042992,
+      "lng": 74.8305428,
+      "rawTags": {
+        "name": "Bajaj Repairing Shop Delhi Motors",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145020714",
+      "source": "overpass",
+      "sourceId": "node/9145020714",
+      "osmType": "node",
+      "name": "Auto Stand Shalimar",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1476319,
+      "lng": 74.8701543,
+      "rawTags": {
+        "name": "Auto Stand Shalimar",
+        "public_transport": "platform"
+      }
+    },
+    {
+      "id": "osm-node-9145029114",
+      "source": "overpass",
+      "sourceId": "node/9145029114",
+      "osmType": "node",
+      "name": "Sultan Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0998146,
+      "lng": 74.8225639,
+      "rawTags": {
+        "name": "Sultan Automobiles",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145029918",
+      "source": "overpass",
+      "sourceId": "node/9145029918",
+      "osmType": "node",
+      "name": "Manzoor Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.133162,
+      "lng": 74.8235545,
+      "rawTags": {
+        "name": "Manzoor Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-9145029919",
+      "source": "overpass",
+      "sourceId": "node/9145029919",
+      "osmType": "node",
+      "name": "Naseem Motors Service",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1481557,
+      "lng": 74.8372593,
+      "rawTags": {
+        "name": "Naseem Motors Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145038061",
+      "source": "overpass",
+      "sourceId": "node/9145038061",
+      "osmType": "node",
+      "name": "Lhasa Lane Auto Stand",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.085306,
+      "lng": 74.8380882,
+      "rawTags": {
+        "name": "Lhasa Lane Auto Stand",
+        "public_transport": "station"
+      }
+    },
+    {
+      "id": "osm-node-9145039325",
+      "source": "overpass",
+      "sourceId": "node/9145039325",
+      "osmType": "node",
+      "name": "Four Wheels Car Accessories",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1112805,
+      "lng": 74.8369832,
+      "rawTags": {
+        "name": "Four Wheels Car Accessories",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9145039537",
+      "source": "overpass",
+      "sourceId": "node/9145039537",
+      "osmType": "node",
+      "name": "Dastgeeri Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0957142,
+      "lng": 74.8210516,
+      "rawTags": {
+        "name": "Dastgeeri Automobiles",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145042825",
+      "source": "overpass",
+      "sourceId": "node/9145042825",
+      "osmType": "node",
+      "name": "I.A Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1249363,
+      "lng": 74.8373368,
+      "rawTags": {
+        "name": "I.A Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9145042827",
+      "source": "overpass",
+      "sourceId": "node/9145042827",
+      "osmType": "node",
+      "name": "Sultan Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1134722,
+      "lng": 74.8367768,
+      "rawTags": {
+        "name": "Sultan Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9150679242",
+      "source": "overpass",
+      "sourceId": "node/9150679242",
+      "osmType": "node",
+      "name": "M.A Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1313659,
+      "lng": 74.8308106,
+      "rawTags": {
+        "name": "M.A Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9150689023",
+      "source": "overpass",
+      "sourceId": "node/9150689023",
+      "osmType": "node",
+      "name": "Pure Future Eco Autotech",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0989602,
+      "lng": 74.8129909,
+      "rawTags": {
+        "name": "Pure Future Eco Autotech",
+        "shop": "motorcycle"
+      }
+    },
+    {
+      "id": "osm-node-9150689878",
+      "source": "overpass",
+      "sourceId": "node/9150689878",
+      "osmType": "node",
+      "name": "Javed Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1322861,
+      "lng": 74.8304253,
+      "rawTags": {
+        "name": "Javed Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9580791015",
+      "source": "overpass",
+      "sourceId": "node/9580791015",
+      "osmType": "node",
+      "name": "Škoda",
+      "phones": [],
+      "website": null,
+      "address": "SIDCO Industrial Area, Rangreth, Budgam",
+      "lat": 34.0017115,
+      "lng": 74.7959672,
+      "rawTags": {
+        "addr:city": "Budgam",
+        "addr:district": "Budgam",
+        "addr:postcode": "191132",
+        "addr:street": "SIDCO Industrial Area, Rangreth",
+        "brand": "Škoda",
+        "brand:wikidata": "Q29637",
+        "name": "Škoda",
+        "operator": "Elysian Automobile Pvt Ltd",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-9669254017",
+      "source": "overpass",
+      "sourceId": "node/9669254017",
+      "osmType": "node",
+      "name": "Ali Jan Motors",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 33.9368878,
+      "lng": 74.9974143,
+      "rawTags": {
+        "name": "Ali Jan Motors",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "id": "osm-node-9704706482",
+      "source": "overpass",
+      "sourceId": "node/9704706482",
+      "osmType": "node",
+      "name": "Rahim Engineers",
+      "phones": [],
+      "website": null,
+      "address": "76, SIDCO Industrial Estate, Rangreth, Budgam",
+      "lat": 33.9983903,
+      "lng": 74.7919096,
+      "rawTags": {
+        "addr:city": "Rangreth, Budgam",
+        "addr:housenumber": "76",
+        "addr:postcode": "191132",
+        "addr:street": "SIDCO Industrial Estate",
+        "name": "Rahim Engineers",
+        "opening_hours": "Mo-Sa 09:00-18:00",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-10091321078",
+      "source": "overpass",
+      "sourceId": "node/10091321078",
+      "osmType": "node",
+      "name": "Altaf Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1323112,
+      "lng": 74.8045909,
+      "rawTags": {
+        "name": "Altaf Automobiles",
+        "shop": "motorcycle_repair"
+      }
+    },
+    {
+      "id": "osm-node-10934178511",
+      "source": "overpass",
+      "sourceId": "node/10934178511",
+      "osmType": "node",
+      "name": "Himalaya Motors (Tata cars)",
+      "phones": [],
+      "website": null,
+      "address": "Tengpora, NH-44, Srinagar",
+      "lat": 34.0609384,
+      "lng": 74.7849801,
+      "rawTags": {
+        "addr:street": "Tengpora, NH-44, Srinagar",
+        "name": "Himalaya Motors (Tata cars)",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-10934182420",
+      "source": "overpass",
+      "sourceId": "node/10934182420",
+      "osmType": "node",
+      "name": "New Highway Service Hub",
+      "phones": [],
+      "website": null,
+      "address": "Taingan, NH-44, Pampore",
+      "lat": 34.0122014,
+      "lng": 74.8942729,
+      "rawTags": {
+        "addr:street": "Taingan, NH-44, Pampore",
+        "name": "New Highway Service Hub",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-10965541217",
+      "source": "overpass",
+      "sourceId": "node/10965541217",
+      "osmType": "node",
+      "name": "Bosch Car service",
+      "phones": [],
+      "website": null,
+      "address": "NH-44, Lethpora, Pampore",
+      "lat": 33.9679316,
+      "lng": 74.957687,
+      "rawTags": {
+        "addr:street": "NH-44, Lethpora, Pampore",
+        "name": "Bosch Car service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-12041871442",
+      "source": "overpass",
+      "sourceId": "node/12041871442",
+      "osmType": "node",
+      "name": "JD Motors (Mahindra First Choice)",
+      "phones": [],
+      "website": null,
+      "address": "Nowgam Byepass, Srinagar",
+      "lat": 34.0266758,
+      "lng": 74.8228884,
+      "rawTags": {
+        "addr:street": "Nowgam Byepass, Srinagar",
+        "name": "JD Motors (Mahindra First Choice)",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-12064243431",
+      "source": "overpass",
+      "sourceId": "node/12064243431",
+      "osmType": "node",
+      "name": "MRF Tyres",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 33.9625401,
+      "lng": 74.9672583,
+      "rawTags": {
+        "name": "MRF Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-12064260159",
+      "source": "overpass",
+      "sourceId": "node/12064260159",
+      "osmType": "node",
+      "name": "Car wash",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0128782,
+      "lng": 74.8104996,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Car wash"
+      }
+    },
+    {
+      "id": "osm-node-12117303842",
+      "source": "overpass",
+      "sourceId": "node/12117303842",
+      "osmType": "node",
+      "name": "Aakash Tyre House",
+      "phones": [],
+      "website": null,
+      "address": "Gulmarg Road, Kawoosa Khalisa",
+      "lat": 34.1079007,
+      "lng": 74.6416821,
+      "rawTags": {
+        "addr:city": "Kawoosa Khalisa",
+        "addr:district": "Budgam",
+        "addr:postcode": "193401",
+        "addr:street": "Gulmarg Road",
+        "name": "Aakash Tyre House",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-12282035768",
+      "source": "overpass",
+      "sourceId": "node/12282035768",
+      "osmType": "node",
+      "name": "Suha's Automobile Workshop",
+      "phones": [],
+      "website": null,
+      "address": "Gulmarg Road, Kawoosa Khalisa",
+      "lat": 34.1051779,
+      "lng": 74.6331352,
+      "rawTags": {
+        "addr:city": "Kawoosa Khalisa",
+        "addr:postcode": "193401",
+        "addr:street": "Gulmarg Road",
+        "name": "Suha's Automobile Workshop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-12295974627",
+      "source": "overpass",
+      "sourceId": "node/12295974627",
+      "osmType": "node",
+      "name": "GulTaj Workshop",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1096667,
+      "lng": 74.6479324,
+      "rawTags": {
+        "name": "GulTaj Workshop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-12736350473",
+      "source": "overpass",
+      "sourceId": "node/12736350473",
+      "osmType": "node",
+      "name": "M S Motors",
+      "phones": [],
+      "website": null,
+      "address": "Gulmarg Road, Kawoosa Khalisa",
+      "lat": 34.1071814,
+      "lng": 74.639206,
+      "rawTags": {
+        "addr:city": "Kawoosa Khalisa",
+        "addr:district": "Budgam",
+        "addr:postcode": "193401",
+        "addr:street": "Gulmarg Road",
+        "name": "M S Motors",
+        "service:vehicle:body_repair": "yes",
+        "service:vehicle:car_repair": "yes",
+        "service:vehicle:diagnostics": "yes",
+        "service:vehicle:inspection": "yes",
+        "service:vehicle:oil_change": "yes",
+        "service:vehicle:painting": "yes",
+        "service:vehicle:tyres": "yes",
+        "service:vehicle:wheels": "yes",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "id": "osm-node-12738731761",
+      "source": "overpass",
+      "sourceId": "node/12738731761",
+      "osmType": "node",
+      "name": "Meer Automobiles",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1172153,
+      "lng": 74.6959212,
+      "rawTags": {
+        "amenity": "car_wash",
+        "name": "Meer Automobiles"
+      }
+    },
+    {
+      "id": "osm-node-12738826529",
+      "source": "overpass",
+      "sourceId": "node/12738826529",
+      "osmType": "node",
+      "name": "Mahindra Showroom",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.1172864,
+      "lng": 74.6956159,
+      "rawTags": {
+        "brand": "Mahindra",
+        "name": "Mahindra Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-node-12942096778",
+      "source": "overpass",
+      "sourceId": "node/12942096778",
+      "osmType": "node",
+      "name": "Rehman Tyre House",
+      "phones": [],
+      "website": null,
+      "address": "Dalal Mohalla, Nawabazar",
+      "lat": 34.0909194,
+      "lng": 74.8028646,
+      "rawTags": {
+        "addr:street": "Dalal Mohalla, Nawabazar",
+        "name": "Rehman Tyre House",
+        "shop": "tyres"
+      }
+    },
+    {
+      "id": "osm-node-13279980801",
+      "source": "overpass",
+      "sourceId": "node/13279980801",
+      "osmType": "node",
+      "name": "First choice cars",
+      "phones": [],
+      "website": null,
+      "address": "00045126",
+      "lat": 34.1393428,
+      "lng": 74.808638,
+      "rawTags": {
+        "addr:housenumber": "00045126",
+        "addr:postcode": "190011",
+        "name": "First choice cars",
+        "opening_hours": "Mo-Sa 00:00-24:00",
+        "shop": "car"
+      }
+    },
+    {
+      "id": "osm-way-680377459",
+      "source": "overpass",
+      "sourceId": "way/680377459",
+      "osmType": "way",
+      "name": "State Motor Garages",
+      "phones": [],
+      "website": null,
+      "address": null,
+      "lat": 34.0926164,
+      "lng": 74.7616914,
+      "rawTags": {
+        "landuse": "garages",
+        "name": "State Motor Garages"
+      }
+    }
+  ],
+  "nominatim": [
+    {
+      "id": "nom-212782554",
+      "source": "nominatim_search",
+      "sourceId": "place/212782554",
+      "name": "Bhat Motors Car Wash And Repair",
+      "phones": [],
+      "website": null,
+      "address": "Bhat Motors Car Wash And Repair, NH1, Hyderpora, Srinagar, Jammu and Kashmir, 190014, India",
+      "lat": 34.0538606,
+      "lng": 74.7875252,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Bhat Motors Car Wash And Repair",
+        "road": "NH1",
+        "suburb": "Hyderpora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190014",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "car repair Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213277803",
+      "source": "nominatim_search",
+      "sourceId": "place/213277803",
+      "name": "Car wash",
+      "phones": [],
+      "website": null,
+      "address": "Car wash, Canal Avenue Extension Road, Rawalpora, Rawalpora, Srinagar, Jammu and Kashmir, 190019, India",
+      "lat": 34.0128782,
+      "lng": 74.8104996,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "Car wash",
+        "road": "Canal Avenue Extension Road, Rawalpora",
+        "suburb": "Rawalpora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190019",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "car wash Srinagar",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-212782083",
+      "source": "nominatim_search",
+      "sourceId": "place/212782083",
+      "name": "Jk Tyre Shop",
+      "phones": [],
+      "website": null,
+      "address": "Jk Tyre Shop, Qamarwari-Batamalo Rd, Karan Nagar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0792507,
+      "lng": 74.79412,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Jk Tyre Shop",
+        "road": "Qamarwari-Batamalo Rd",
+        "suburb": "Karan Nagar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre shop Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-213138270",
+      "source": "nominatim_search",
+      "sourceId": "place/213138270",
+      "name": "Naseem Tyre Shop",
+      "phones": [],
+      "website": null,
+      "address": "Naseem Tyre Shop, Hazratbal Road, Zakura, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1406614,
+      "lng": 74.8390689,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Naseem Tyre Shop",
+        "road": "Hazratbal Road",
+        "suburb": "Zakura",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre shop Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212804325",
+      "source": "nominatim_search",
+      "sourceId": "place/212804325",
+      "name": "Manzoor Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": "Manzoor Tyre Works, Omer Colony Lane, Botshah Mohalla, Hafiz Bagh, Lal Bazar, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.133162,
+      "lng": 74.8235545,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Manzoor Tyre Works",
+        "road": "Omer Colony Lane",
+        "neighbourhood": "Botshah Mohalla",
+        "quarter": "Hafiz Bagh",
+        "suburb": "Lal Bazar",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212775997",
+      "source": "nominatim_search",
+      "sourceId": "place/212775997",
+      "name": "Royal Tyre Repair Works",
+      "phones": [],
+      "website": null,
+      "address": "Royal Tyre Repair Works, Qamarwari - Batamaloo Road, Qamarwari, Shalteng, Srinagar, Jammu and Kashmir, 190018, India",
+      "lat": 34.1055594,
+      "lng": 74.756582,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Royal Tyre Repair Works",
+        "road": "Qamarwari - Batamaloo Road",
+        "suburb": "Qamarwari",
+        "village": "Shalteng",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190018",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212787198",
+      "source": "nominatim_search",
+      "sourceId": "place/212787198",
+      "name": "Goodyear Prince Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": "Goodyear Prince Tyre Works, NH1, Tengpora, Bemina, Srinagar, Jammu and Kashmir, 190009, India",
+      "lat": 34.0636578,
+      "lng": 74.782583,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Goodyear Prince Tyre Works",
+        "road": "NH1",
+        "neighbourhood": "Tengpora",
+        "suburb": "Bemina",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190009",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212790679",
+      "source": "nominatim_search",
+      "sourceId": "place/212790679",
+      "name": "Tyre Works Repair",
+      "phones": [],
+      "website": null,
+      "address": "Tyre Works Repair, Dr. Ali Jan Road, Zoonimar, Said pora, Srinagar, Jammu and Kashmir, 190002, India",
+      "lat": 34.1102497,
+      "lng": 74.7943216,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Tyre Works Repair",
+        "road": "Dr. Ali Jan Road",
+        "suburb": "Zoonimar",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190002",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212871748",
+      "source": "nominatim_search",
+      "sourceId": "place/212871748",
+      "name": "Sharma Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": "Sharma Tyre Works, Rambagh Flyover, Magarmal bagh, Srinagar, Jammu and Kashmir, 190009, India",
+      "lat": 34.0667276,
+      "lng": 74.8029649,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Sharma Tyre Works",
+        "road": "Rambagh Flyover",
+        "suburb": "Magarmal bagh",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190009",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212982303",
+      "source": "nominatim_search",
+      "sourceId": "place/212982303",
+      "name": "Gousia Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": "Gousia Tyre Works, NH1, Nalabal, Baghe Ali Mardan Khan, Nowshera, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1340031,
+      "lng": 74.8038981,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Gousia Tyre Works",
+        "road": "NH1",
+        "neighbourhood": "Nalabal",
+        "quarter": "Baghe Ali Mardan Khan",
+        "suburb": "Nowshera",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-213095632",
+      "source": "nominatim_search",
+      "sourceId": "place/213095632",
+      "name": "Tyre Repair Works",
+      "phones": [],
+      "website": null,
+      "address": "Tyre Repair Works, NH1, Nalabal, Baghe Ali Mardan Khan, Nowshera, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1337861,
+      "lng": 74.804064,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Tyre Repair Works",
+        "road": "NH1",
+        "neighbourhood": "Nalabal",
+        "quarter": "Baghe Ali Mardan Khan",
+        "suburb": "Nowshera",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-213265771",
+      "source": "nominatim_search",
+      "sourceId": "place/213265771",
+      "name": "Raja Tyre Works",
+      "phones": [],
+      "website": null,
+      "address": "Raja Tyre Works, Munawar Link Road, Munawar Abad, Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0822199,
+      "lng": 74.8195016,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Raja Tyre Works",
+        "road": "Munawar Link Road",
+        "suburb": "Munawar Abad",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "tyre works Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-211801794",
+      "source": "nominatim_search",
+      "sourceId": "place/211801794",
+      "name": "Bajaj Auto Repairing and Spare Parts",
+      "phones": [],
+      "website": null,
+      "address": "Bajaj Auto Repairing and Spare Parts, Zaldagar Bridge, Nawa bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0877047,
+      "lng": 74.8041286,
+      "rawTags": {
+        "type": "motorcycle_repair",
+        "shop": "Bajaj Auto Repairing and Spare Parts",
+        "road": "Zaldagar Bridge",
+        "suburb": "Nawa bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "spare parts Srinagar",
+      "nominatimType": "undefined/motorcycle_repair"
+    },
+    {
+      "id": "nom-212989842",
+      "source": "nominatim_search",
+      "sourceId": "place/212989842",
+      "name": "FairDeal Tata Motors Sale and Service",
+      "phones": [],
+      "website": null,
+      "address": "FairDeal Tata Motors Sale and Service, NH1, Qamarwari, Shalteng, Srinagar, Jammu and Kashmir, 190017, India",
+      "lat": 34.1058962,
+      "lng": 74.7543081,
+      "rawTags": {
+        "type": "car",
+        "shop": "FairDeal Tata Motors Sale and Service",
+        "road": "NH1",
+        "suburb": "Qamarwari",
+        "village": "Shalteng",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190017",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-210829658",
+      "source": "nominatim_search",
+      "sourceId": "place/210829658",
+      "name": "Hanief Motors Yamaha",
+      "phones": [],
+      "website": null,
+      "address": "Hanief Motors Yamaha, Maulana Azad (MA) Road, Kothi Bagh, Hazuri bagh, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0733027,
+      "lng": 74.8159495,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Hanief Motors Yamaha",
+        "road": "Maulana Azad (MA) Road",
+        "neighbourhood": "Kothi Bagh",
+        "suburb": "Hazuri bagh",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-210835198",
+      "source": "nominatim_search",
+      "sourceId": "place/210835198",
+      "name": "Al-Khaleej Motors",
+      "phones": [],
+      "website": null,
+      "address": "Al-Khaleej Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.195551,
+      "lng": 74.8071903,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Al-Khaleej Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-210841363",
+      "source": "nominatim_search",
+      "sourceId": "place/210841363",
+      "name": "Kohinoor Classic motors",
+      "phones": [],
+      "website": null,
+      "address": "Kohinoor Classic motors, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0777242,
+      "lng": 74.80133,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Kohinoor Classic motors",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212066414",
+      "source": "nominatim_search",
+      "sourceId": "place/212066414",
+      "name": "Hamzah Motors",
+      "phones": [],
+      "website": null,
+      "address": "Hamzah Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1420442,
+      "lng": 74.8083512,
+      "rawTags": {
+        "type": "car",
+        "shop": "Hamzah Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-212308754",
+      "source": "nominatim_search",
+      "sourceId": "place/212308754",
+      "name": "Naseem Motors Service",
+      "phones": [],
+      "website": null,
+      "address": "Naseem Motors Service, Hazratbal Road, Zakura, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1481557,
+      "lng": 74.8372593,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Naseem Motors Service",
+        "road": "Hazratbal Road",
+        "suburb": "Zakura",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-212844779",
+      "source": "nominatim_search",
+      "sourceId": "place/212844779",
+      "name": "Labroo Motors",
+      "phones": [],
+      "website": null,
+      "address": "Labroo Motors, Dr. Ali Jan Road, Vicharnag, Wontabowan, Nowshera, Said pora, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.12548,
+      "lng": 74.795317,
+      "rawTags": {
+        "type": "car_parts",
+        "shop": "Labroo Motors",
+        "road": "Dr. Ali Jan Road",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Wontabowan",
+        "suburb": "Nowshera",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_parts"
+    },
+    {
+      "id": "nom-212893698",
+      "source": "nominatim_search",
+      "sourceId": "place/212893698",
+      "name": "Yokohama Tyres M.Y Motors",
+      "phones": [],
+      "website": null,
+      "address": "Yokohama Tyres M.Y Motors, Qamarwari-Batamalo Rd, Karan Nagar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0752099,
+      "lng": 74.7884413,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Yokohama Tyres M.Y Motors",
+        "road": "Qamarwari-Batamalo Rd",
+        "suburb": "Karan Nagar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-212893742",
+      "source": "nominatim_search",
+      "sourceId": "place/212893742",
+      "name": "Hero Electric Global Motors",
+      "phones": [],
+      "website": null,
+      "address": "Hero Electric Global Motors, Mughal Road, Bemina, Srinagar, Jammu and Kashmir, 190018, India",
+      "lat": 34.0780142,
+      "lng": 74.7797568,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Hero Electric Global Motors",
+        "road": "Mughal Road",
+        "suburb": "Bemina",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190018",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213003770",
+      "source": "nominatim_search",
+      "sourceId": "place/213003770",
+      "name": "Afaan Motors",
+      "phones": [],
+      "website": null,
+      "address": "Afaan Motors, Dr. Ali Jan Road, Zoonimar, Said pora, Srinagar, Jammu and Kashmir, 190002, India",
+      "lat": 34.1081509,
+      "lng": 74.7945083,
+      "rawTags": {
+        "type": "car",
+        "shop": "Afaan Motors",
+        "road": "Dr. Ali Jan Road",
+        "suburb": "Zoonimar",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190002",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213073730",
+      "source": "nominatim_search",
+      "sourceId": "place/213073730",
+      "name": "J&k Motors Authorised Dealer Sale and Service",
+      "phones": [],
+      "website": null,
+      "address": "J&k Motors Authorised Dealer Sale and Service, NH1, Hyderpora, Srinagar, Jammu and Kashmir, 190014, India",
+      "lat": 34.0487536,
+      "lng": 74.7886008,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "J&k Motors Authorised Dealer Sale and Service",
+        "road": "NH1",
+        "suburb": "Hyderpora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190014",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213127973",
+      "source": "nominatim_search",
+      "sourceId": "place/213127973",
+      "name": "Al-Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": "Al-Noor Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1901653,
+      "lng": 74.8079705,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Al-Noor Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213144150",
+      "source": "nominatim_search",
+      "sourceId": "place/213144150",
+      "name": "Kong Posh Motors",
+      "phones": [],
+      "website": null,
+      "address": "Kong Posh Motors, Pantha Chowk-Pampore Road, Pampore, Srinagar, Jammu and Kashmir, 191101, India",
+      "lat": 34.0263991,
+      "lng": 74.9102346,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Kong Posh Motors",
+        "road": "Pantha Chowk-Pampore Road",
+        "town": "Pampore",
+        "county": "Pampore",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "191101",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213154041",
+      "source": "nominatim_search",
+      "sourceId": "place/213154041",
+      "name": "Al-Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": "Al-Noor Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1866516,
+      "lng": 74.8078001,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "Al-Noor Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-213172025",
+      "source": "nominatim_search",
+      "sourceId": "place/213172025",
+      "name": "Arhan Motors",
+      "phones": [],
+      "website": null,
+      "address": "Arhan Motors, Hazratbal Road, Rainawari, Srinagar, Jammu and Kashmir, 190003, India",
+      "lat": 34.1115195,
+      "lng": 74.8370055,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Arhan Motors",
+        "road": "Hazratbal Road",
+        "suburb": "Rainawari",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190003",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213173224",
+      "source": "nominatim_search",
+      "sourceId": "place/213173224",
+      "name": "Tata Motors Warsi Motors",
+      "phones": [],
+      "website": null,
+      "address": "Tata Motors Warsi Motors, NH1, Nowgam, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0284309,
+      "lng": 74.8295336,
+      "rawTags": {
+        "type": "car",
+        "shop": "Tata Motors Warsi Motors",
+        "road": "NH1",
+        "suburb": "Nowgam",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213175038",
+      "source": "nominatim_search",
+      "sourceId": "place/213175038",
+      "name": "Shah Motors",
+      "phones": [],
+      "website": null,
+      "address": "Shah Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1447477,
+      "lng": 74.8082882,
+      "rawTags": {
+        "type": "car",
+        "shop": "Shah Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213185144",
+      "source": "nominatim_search",
+      "sourceId": "place/213185144",
+      "name": "Tvs Kashmir Motors Pvt.Ltd",
+      "phones": [],
+      "website": null,
+      "address": "Tvs Kashmir Motors Pvt.Ltd, Abdullah Bridge, Sonwar Bagh, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190008, India",
+      "lat": 34.0681752,
+      "lng": 74.826666,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Tvs Kashmir Motors Pvt.Ltd",
+        "road": "Abdullah Bridge",
+        "suburb": "Sonwar Bagh",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190008",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213189222",
+      "source": "nominatim_search",
+      "sourceId": "place/213189222",
+      "name": "Khan Motors",
+      "phones": [],
+      "website": null,
+      "address": "Khan Motors, Nalahmar Road, Gojwara, Nawa kadel, Srinagar, Jammu and Kashmir, 190002, India",
+      "lat": 34.0961889,
+      "lng": 74.7865897,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Khan Motors",
+        "road": "Nalahmar Road",
+        "quarter": "Gojwara",
+        "suburb": "Nawa kadel",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190002",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213195837",
+      "source": "nominatim_search",
+      "sourceId": "place/213195837",
+      "name": "Noor Motors",
+      "phones": [],
+      "website": null,
+      "address": "Noor Motors, Zaldagar Bridge, Nawa bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0877575,
+      "lng": 74.8036502,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Noor Motors",
+        "road": "Zaldagar Bridge",
+        "suburb": "Nawa bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213214525",
+      "source": "nominatim_search",
+      "sourceId": "place/213214525",
+      "name": "Sahara Motors",
+      "phones": [],
+      "website": null,
+      "address": "Sahara Motors, Rawalpora Bund Road, Peerbagh, Srinagar, Jammu and Kashmir, 190021, India",
+      "lat": 34.0232153,
+      "lng": 74.7749123,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Sahara Motors",
+        "road": "Rawalpora Bund Road",
+        "suburb": "Peerbagh",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190021",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213215612",
+      "source": "nominatim_search",
+      "sourceId": "place/213215612",
+      "name": "Wani Motors",
+      "phones": [],
+      "website": null,
+      "address": "Wani Motors, Rambagh Flyover, Magarmal bagh, Srinagar, Jammu and Kashmir, 190009, India",
+      "lat": 34.0551467,
+      "lng": 74.8040413,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Wani Motors",
+        "road": "Rambagh Flyover",
+        "suburb": "Magarmal bagh",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190009",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213228307",
+      "source": "nominatim_search",
+      "sourceId": "place/213228307",
+      "name": "Hubbi Motors",
+      "phones": [],
+      "website": null,
+      "address": "Hubbi Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1616482,
+      "lng": 74.8085158,
+      "rawTags": {
+        "type": "car",
+        "shop": "Hubbi Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213235756",
+      "source": "nominatim_search",
+      "sourceId": "place/213235756",
+      "name": "M.S Sheikh Motors",
+      "phones": [],
+      "website": null,
+      "address": "M.S Sheikh Motors, NH1, Nalabal, Baghe Ali Mardan Khan, Nowshera, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1329189,
+      "lng": 74.8041971,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "M.S Sheikh Motors",
+        "road": "NH1",
+        "neighbourhood": "Nalabal",
+        "quarter": "Baghe Ali Mardan Khan",
+        "suburb": "Nowshera",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213234687",
+      "source": "nominatim_search",
+      "sourceId": "place/213234687",
+      "name": "Maqbool Motors Sale Service Spares",
+      "phones": [],
+      "website": null,
+      "address": "Maqbool Motors Sale Service Spares, Rawalpora Bund Road, Peerbagh, Srinagar, Jammu and Kashmir, 190021, India",
+      "lat": 34.0240546,
+      "lng": 74.7737761,
+      "rawTags": {
+        "type": "car",
+        "shop": "Maqbool Motors Sale Service Spares",
+        "road": "Rawalpora Bund Road",
+        "suburb": "Peerbagh",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190021",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213240682",
+      "source": "nominatim_search",
+      "sourceId": "place/213240682",
+      "name": "Benison Motors",
+      "phones": [],
+      "website": null,
+      "address": "Benison Motors, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0810896,
+      "lng": 74.7986045,
+      "rawTags": {
+        "type": "car",
+        "shop": "Benison Motors",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213242898",
+      "source": "nominatim_search",
+      "sourceId": "place/213242898",
+      "name": "Nuwabi Motors",
+      "phones": [],
+      "website": null,
+      "address": "Nuwabi Motors, Munawar Link Road, Munawar Abad, Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0911433,
+      "lng": 74.8145755,
+      "rawTags": {
+        "type": "car",
+        "shop": "Nuwabi Motors",
+        "road": "Munawar Link Road",
+        "suburb": "Munawar Abad",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213242040",
+      "source": "nominatim_search",
+      "sourceId": "place/213242040",
+      "name": "Ayna Motors",
+      "phones": [],
+      "website": null,
+      "address": "Ayna Motors, Mughal Road, Bemina, Srinagar, Jammu and Kashmir, 190018, India",
+      "lat": 34.077047,
+      "lng": 74.7778173,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Ayna Motors",
+        "road": "Mughal Road",
+        "suburb": "Bemina",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190018",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213244109",
+      "source": "nominatim_search",
+      "sourceId": "place/213244109",
+      "name": "Kashmir Motors Honda and Tvs",
+      "phones": [],
+      "website": null,
+      "address": "Kashmir Motors Honda and Tvs, Dr. Ali Jan Road, Vicharnag, Wontabowan, Nowshera, Said pora, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1257818,
+      "lng": 74.7959894,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Kashmir Motors Honda and Tvs",
+        "road": "Dr. Ali Jan Road",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Wontabowan",
+        "suburb": "Nowshera",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213251368",
+      "source": "nominatim_search",
+      "sourceId": "place/213251368",
+      "name": "Force Motors",
+      "phones": [],
+      "website": null,
+      "address": "Force Motors, NH1, Nowgam, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0338257,
+      "lng": 74.8508875,
+      "rawTags": {
+        "type": "car",
+        "shop": "Force Motors",
+        "road": "NH1",
+        "suburb": "Nowgam",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213275935",
+      "source": "nominatim_search",
+      "sourceId": "place/213275935",
+      "name": "Bhat Motors Car Wash And Repair",
+      "phones": [],
+      "website": null,
+      "address": "Bhat Motors Car Wash And Repair, NH1, Hyderpora, Srinagar, Jammu and Kashmir, 190014, India",
+      "lat": 34.0538606,
+      "lng": 74.7875252,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "Bhat Motors Car Wash And Repair",
+        "road": "NH1",
+        "suburb": "Hyderpora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190014",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213281193",
+      "source": "nominatim_search",
+      "sourceId": "place/213281193",
+      "name": "Evergreen Motors",
+      "phones": [],
+      "website": null,
+      "address": "Evergreen Motors, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0776636,
+      "lng": 74.7987309,
+      "rawTags": {
+        "type": "yes",
+        "building": "Evergreen Motors",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/yes"
+    },
+    {
+      "id": "nom-213279786",
+      "source": "nominatim_search",
+      "sourceId": "place/213279786",
+      "name": "Kashmir Valley Motors",
+      "phones": [],
+      "website": null,
+      "address": "Kashmir Valley Motors, NH1, Hyderpora, Srinagar, Jammu and Kashmir, 190014, India",
+      "lat": 34.0429288,
+      "lng": 74.7894884,
+      "rawTags": {
+        "type": "car",
+        "shop": "Kashmir Valley Motors",
+        "road": "NH1",
+        "suburb": "Hyderpora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190014",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213294537",
+      "source": "nominatim_search",
+      "sourceId": "place/213294537",
+      "name": "Atul Hanief Motors",
+      "phones": [],
+      "website": null,
+      "address": "Atul Hanief Motors, Srinagar-Athwajan Road, Lasjan, Srinagar, Jammu and Kashmir, 190004, India",
+      "lat": 34.0479318,
+      "lng": 74.8665984,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Atul Hanief Motors",
+        "road": "Srinagar-Athwajan Road",
+        "suburb": "Lasjan",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190004",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213319625",
+      "source": "nominatim_search",
+      "sourceId": "place/213319625",
+      "name": "Kashmir Motors",
+      "phones": [],
+      "website": null,
+      "address": "Kashmir Motors, NH1, Gulshan Nagar, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0218998,
+      "lng": 74.809512,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Kashmir Motors",
+        "road": "NH1",
+        "suburb": "Gulshan Nagar",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213307259",
+      "source": "nominatim_search",
+      "sourceId": "place/213307259",
+      "name": "M.A Motors",
+      "phones": [],
+      "website": null,
+      "address": "M.A Motors, University Main Road, Sadrebal, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1313659,
+      "lng": 74.8308106,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "M.A Motors",
+        "road": "University Main Road",
+        "suburb": "Sadrebal",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213325223",
+      "source": "nominatim_search",
+      "sourceId": "place/213325223",
+      "name": "Himalaya Motors (Tata cars)",
+      "phones": [],
+      "website": null,
+      "address": "Himalaya Motors (Tata cars), NH1, Tengpora, Bemina, Srinagar, Jammu and Kashmir, 190009, India",
+      "lat": 34.0609384,
+      "lng": 74.7849801,
+      "rawTags": {
+        "type": "car",
+        "shop": "Himalaya Motors (Tata cars)",
+        "road": "NH1",
+        "neighbourhood": "Tengpora",
+        "suburb": "Bemina",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190009",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213357313",
+      "source": "nominatim_search",
+      "sourceId": "place/213357313",
+      "name": "JD Motors (Mahindra First Choice)",
+      "phones": [],
+      "website": null,
+      "address": "JD Motors (Mahindra First Choice), NH1, Nowgam, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0266758,
+      "lng": 74.8228884,
+      "rawTags": {
+        "type": "car",
+        "shop": "JD Motors (Mahindra First Choice)",
+        "road": "NH1",
+        "suburb": "Nowgam",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213398686",
+      "source": "nominatim_search",
+      "sourceId": "place/213398686",
+      "name": "Haadi Motors",
+      "phones": [],
+      "website": null,
+      "address": "Haadi Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1428642,
+      "lng": 74.8082643,
+      "rawTags": {
+        "type": "car",
+        "shop": "Haadi Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213395460",
+      "source": "nominatim_search",
+      "sourceId": "place/213395460",
+      "name": "Bismillah Motors",
+      "phones": [],
+      "website": null,
+      "address": "Bismillah Motors, Hazratbal Road, Hazratbal, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.124014,
+      "lng": 74.8367951,
+      "rawTags": {
+        "type": "motorcycle_repair",
+        "shop": "Bismillah Motors",
+        "road": "Hazratbal Road",
+        "suburb": "Hazratbal",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle_repair"
+    },
+    {
+      "id": "nom-213402867",
+      "source": "nominatim_search",
+      "sourceId": "place/213402867",
+      "name": "New Asian Motors",
+      "phones": [],
+      "website": null,
+      "address": "New Asian Motors, Medical College Road, Karan Nagar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0837385,
+      "lng": 74.79742,
+      "rawTags": {
+        "type": "car",
+        "shop": "New Asian Motors",
+        "road": "Medical College Road",
+        "suburb": "Karan Nagar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213424717",
+      "source": "nominatim_search",
+      "sourceId": "place/213424717",
+      "name": "S.A Motors Repair and Wash Service Station  Chanpora",
+      "phones": [],
+      "website": null,
+      "address": "S.A Motors Repair and Wash Service Station  Chanpora, NH1, Chanapora, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0255698,
+      "lng": 74.8086992,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "S.A Motors Repair and Wash Service Station  Chanpora",
+        "road": "NH1",
+        "suburb": "Chanapora",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-213429396",
+      "source": "nominatim_search",
+      "sourceId": "place/213429396",
+      "name": "I.A Motors",
+      "phones": [],
+      "website": null,
+      "address": "I.A Motors, Hazratbal Road, Hazratbal, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1249363,
+      "lng": 74.8373368,
+      "rawTags": {
+        "type": "car_repair",
+        "shop": "I.A Motors",
+        "road": "Hazratbal Road",
+        "suburb": "Hazratbal",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_repair"
+    },
+    {
+      "id": "nom-215941462",
+      "source": "nominatim_search",
+      "sourceId": "place/215941462",
+      "name": "Bajaj Repairing Shop Delhi Motors",
+      "phones": [],
+      "website": null,
+      "address": "Bajaj Repairing Shop Delhi Motors, Saida Kadal, Rainawari, Srinagar, Jammu and Kashmir, 190003, India",
+      "lat": 34.1042992,
+      "lng": 74.8305428,
+      "rawTags": {
+        "type": "motorcycle_repair",
+        "shop": "Bajaj Repairing Shop Delhi Motors",
+        "road": "Saida Kadal",
+        "suburb": "Rainawari",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190003",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/motorcycle_repair"
+    },
+    {
+      "id": "nom-215949623",
+      "source": "nominatim_search",
+      "sourceId": "place/215949623",
+      "name": "Parray Motors",
+      "phones": [],
+      "website": null,
+      "address": "Parray Motors, Srinagar-Leh Highway, Vicharnag, Rangpura, Zoonimar, Gulab bagh, Srinagar, Jammu and Kashmir, 190006, India",
+      "lat": 34.1910903,
+      "lng": 74.8072533,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "Parray Motors",
+        "road": "Srinagar-Leh Highway",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Rangpura",
+        "suburb": "Zoonimar",
+        "village": "Gulab bagh",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190006",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "motors Srinagar",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-212781543",
+      "source": "nominatim_search",
+      "sourceId": "place/212781543",
+      "name": "Service Station",
+      "phones": [],
+      "website": null,
+      "address": "Service Station, Nawa Kadal, Nawa kadel, Srinagar, Jammu and Kashmir, 190002, India",
+      "lat": 34.0924239,
+      "lng": 74.8003563,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "Service Station",
+        "road": "Nawa Kadal",
+        "suburb": "Nawa kadel",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190002",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "service station Srinagar",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-212820237",
+      "source": "nominatim_search",
+      "sourceId": "place/212820237",
+      "name": "Service Station",
+      "phones": [],
+      "website": null,
+      "address": "Service Station, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0812588,
+      "lng": 74.7984584,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "Service Station",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "service station Srinagar",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-199187537",
+      "source": "nominatim_search",
+      "sourceId": "place/199187537",
+      "name": "Kashmir Motors",
+      "phones": [],
+      "website": null,
+      "address": "Kashmir Motors, NH1, Gulshan Nagar, Srinagar, Jammu and Kashmir, 190015, India",
+      "lat": 34.0218998,
+      "lng": 74.809512,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Kashmir Motors",
+        "road": "NH1",
+        "suburb": "Gulshan Nagar",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190015",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "Kashmir motors",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-210830304",
+      "source": "nominatim_search",
+      "sourceId": "place/210830304",
+      "name": "Gousia Auto Centre",
+      "phones": [],
+      "website": null,
+      "address": "Gousia Auto Centre, Medical College Road, Karan Nagar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0838365,
+      "lng": 74.7972894,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Gousia Auto Centre",
+        "road": "Medical College Road",
+        "suburb": "Karan Nagar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-211548083",
+      "source": "nominatim_search",
+      "sourceId": "place/211548083",
+      "name": "Peaks Auto Private Limited",
+      "phones": [],
+      "website": null,
+      "address": "Peaks Auto Private Limited, Dr. Ali Jan Road, Vicharnag, Wontabowan, Nowshera, Said pora, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1280369,
+      "lng": 74.7973535,
+      "rawTags": {
+        "type": "car",
+        "shop": "Peaks Auto Private Limited",
+        "road": "Dr. Ali Jan Road",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Wontabowan",
+        "suburb": "Nowshera",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-211586140",
+      "source": "nominatim_search",
+      "sourceId": "place/211586140",
+      "name": "HK Auto World",
+      "phones": [],
+      "website": null,
+      "address": "HK Auto World, Srinagar-Athwajan Road, Lasjan, Srinagar, Jammu and Kashmir, 190004, India",
+      "lat": 34.0410411,
+      "lng": 74.8749888,
+      "rawTags": {
+        "type": "car",
+        "shop": "HK Auto World",
+        "road": "Srinagar-Athwajan Road",
+        "suburb": "Lasjan",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190004",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213148420",
+      "source": "nominatim_search",
+      "sourceId": "place/213148420",
+      "name": "MJ Auto Centre",
+      "phones": [],
+      "website": null,
+      "address": "MJ Auto Centre, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0825149,
+      "lng": 74.8012967,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "MJ Auto Centre",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213157597",
+      "source": "nominatim_search",
+      "sourceId": "place/213157597",
+      "name": "M.J Auto Centre Transport Company",
+      "phones": [],
+      "website": null,
+      "address": "M.J Auto Centre Transport Company, Dr. Ali Jan Road, Vicharnag, Wontabowan, Nowshera, Said pora, Srinagar, Jammu and Kashmir, 190011, India",
+      "lat": 34.1269594,
+      "lng": 74.796547,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "M.J Auto Centre Transport Company",
+        "road": "Dr. Ali Jan Road",
+        "neighbourhood": "Vicharnag",
+        "quarter": "Wontabowan",
+        "suburb": "Nowshera",
+        "village": "Said pora",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190011",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213203545",
+      "source": "nominatim_search",
+      "sourceId": "place/213203545",
+      "name": "2M Auto Fresh Car Detailing Centre",
+      "phones": [],
+      "website": null,
+      "address": "2M Auto Fresh Car Detailing Centre, Gulzarpora Rawalpora Road, Rangreth, Badgam tehsil, Budgam, Jammu and Kashmir, 190019, India",
+      "lat": 34.0084861,
+      "lng": 74.811374,
+      "rawTags": {
+        "type": "car_wash",
+        "amenity": "2M Auto Fresh Car Detailing Centre",
+        "road": "Gulzarpora Rawalpora Road",
+        "village": "Rangreth",
+        "county": "Badgam tehsil",
+        "state_district": "Budgam",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190019",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/car_wash"
+    },
+    {
+      "id": "nom-213201909",
+      "source": "nominatim_search",
+      "sourceId": "place/213201909",
+      "name": "Auto Hub Car Dealership",
+      "phones": [],
+      "website": null,
+      "address": "Auto Hub Car Dealership, NH1, Tengpora, Bemina, Srinagar, Jammu and Kashmir, 190009, India",
+      "lat": 34.0703539,
+      "lng": 74.7854684,
+      "rawTags": {
+        "type": "car",
+        "shop": "Auto Hub Car Dealership",
+        "road": "NH1",
+        "neighbourhood": "Tengpora",
+        "suburb": "Bemina",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190009",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/car"
+    },
+    {
+      "id": "nom-213242974",
+      "source": "nominatim_search",
+      "sourceId": "place/213242974",
+      "name": "Bajaj Auto Repairing and Spare Parts",
+      "phones": [],
+      "website": null,
+      "address": "Bajaj Auto Repairing and Spare Parts, Zaldagar Bridge, Nawa bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0877047,
+      "lng": 74.8041286,
+      "rawTags": {
+        "type": "motorcycle_repair",
+        "shop": "Bajaj Auto Repairing and Spare Parts",
+        "road": "Zaldagar Bridge",
+        "suburb": "Nawa bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle_repair"
+    },
+    {
+      "id": "nom-213246402",
+      "source": "nominatim_search",
+      "sourceId": "place/213246402",
+      "name": "Royal Enfield PCS Auto",
+      "phones": [],
+      "website": null,
+      "address": "Royal Enfield PCS Auto, Ganpatyaar Road, Chinkral Mohalla, Habba Kadal, Srinagar, Jammu and Kashmir, 190001, India",
+      "lat": 34.0795544,
+      "lng": 74.8077182,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Royal Enfield PCS Auto",
+        "road": "Ganpatyaar Road",
+        "neighbourhood": "Chinkral Mohalla",
+        "suburb": "Habba Kadal",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190001",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-213260739",
+      "source": "nominatim_search",
+      "sourceId": "place/213260739",
+      "name": "Tyres Auto Shop",
+      "phones": [],
+      "website": null,
+      "address": "Tyres Auto Shop, NH1, Alamgari Bazar, Baghe Ali Mardan Khan, Zadibal, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1127158,
+      "lng": 74.808334,
+      "rawTags": {
+        "type": "tyres",
+        "shop": "Tyres Auto Shop",
+        "road": "NH1",
+        "neighbourhood": "Alamgari Bazar",
+        "quarter": "Baghe Ali Mardan Khan",
+        "suburb": "Zadibal",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/tyres"
+    },
+    {
+      "id": "nom-213327856",
+      "source": "nominatim_search",
+      "sourceId": "place/213327856",
+      "name": "Srinagar Auto Deal",
+      "phones": [],
+      "website": null,
+      "address": "Srinagar Auto Deal, Medical College Road, Chotta Bazar, Srinagar, Srinagar (South), Srinagar, Jammu and Kashmir, 190010, India",
+      "lat": 34.0805553,
+      "lng": 74.7989876,
+      "rawTags": {
+        "type": "motorcycle",
+        "shop": "Srinagar Auto Deal",
+        "road": "Medical College Road",
+        "suburb": "Chotta Bazar",
+        "city": "Srinagar",
+        "county": "Srinagar (South)",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190010",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/motorcycle"
+    },
+    {
+      "id": "nom-215946260",
+      "source": "nominatim_search",
+      "sourceId": "place/215946260",
+      "name": "Auto Masters",
+      "phones": [],
+      "website": null,
+      "address": "Auto Masters, Hazratbal Road, Zakura, Srinagar, Jammu and Kashmir, 190023, India",
+      "lat": 34.1489234,
+      "lng": 74.8371922,
+      "rawTags": {
+        "type": "car",
+        "shop": "Auto Masters",
+        "road": "Hazratbal Road",
+        "suburb": "Zakura",
+        "city": "Srinagar",
+        "state_district": "Srinagar",
+        "state": "Jammu and Kashmir",
+        "ISO3166-2-lvl4": "IN-JK",
+        "postcode": "190023",
+        "country": "India",
+        "country_code": "in"
+      },
+      "nominatimQuery": "auto Kashmir",
+      "nominatimType": "undefined/car"
+    }
+  ],
+  "justdial": []
+}

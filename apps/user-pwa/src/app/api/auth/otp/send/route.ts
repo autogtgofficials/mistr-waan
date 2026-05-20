@@ -1,0 +1,91 @@
+import { NextResponse } from "next/server";
+import { normalizeIndianPhone } from "@/lib/whatsapp/phone";
+import { sendWhatsAppOtp } from "@/lib/whatsapp/client";
+import { WhatsAppError } from "@/lib/whatsapp/types";
+import { issueOtp } from "@/lib/otp/store";
+import { appendAuditEntry } from "@/lib/audit/log";
+
+export const runtime = "nodejs";
+
+interface SendBody {
+  phone?: string;
+  channel?: "whatsapp" | "sms";
+}
+
+export async function POST(request: Request) {
+  const actor = request.headers.get("x-actor") ?? "anonymous";
+  const body = (await request.json().catch(() => ({}))) as SendBody;
+  const channel = body.channel ?? "whatsapp";
+
+  const phone = body.phone ? normalizeIndianPhone(body.phone) : null;
+  if (!phone) {
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: body.phone ?? "unknown",
+      actor,
+      payload: { channel, phoneInput: body.phone },
+      outcome: "error",
+      error: "invalid_phone",
+    });
+    return NextResponse.json({ error: "invalid_phone" }, { status: 400 });
+  }
+
+  if (channel !== "whatsapp") {
+    // SMS provider is not wired yet — fail loud rather than silently dropping.
+    return NextResponse.json(
+      { error: "channel_not_supported", channel },
+      { status: 501 },
+    );
+  }
+
+  const issued = await issueOtp({ phone, channel });
+  if (!issued.ok) {
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      payload: { channel },
+      outcome: "error",
+      error: `cooldown:${issued.retryAfterMs}`,
+    });
+    return NextResponse.json(
+      { error: "cooldown", retryAfterMs: issued.retryAfterMs },
+      { status: 429 },
+    );
+  }
+
+  try {
+    const send = await sendWhatsAppOtp({ to: phone, code: issued.result.code });
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      payload: { channel, provider: send.provider, messageId: send.messageId },
+      outcome: "success",
+    });
+    return NextResponse.json({
+      sent: true,
+      channel,
+      expiresAt: issued.result.expiresAt,
+    });
+  } catch (err) {
+    const isWaErr = err instanceof WhatsAppError;
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      payload: { channel },
+      outcome: "error",
+      error: isWaErr ? `${err.code}:${err.message}` : (err as Error).message,
+    });
+    const status = isWaErr ? err.status : 502;
+    return NextResponse.json(
+      { error: "send_failed", detail: isWaErr ? err.code : "unknown" },
+      { status: status >= 400 && status < 600 ? status : 502 },
+    );
+  }
+}

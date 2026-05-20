@@ -1,0 +1,34 @@
+{
+  "name": "mister-waan",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Mister Waan monorepo — PWA + WhatsApp platform connecting Kashmir vehicle owners with vetted garages.",
+  "scripts": {
+    "dev": "pnpm --filter user-pwa dev",
+    "build": "pnpm --filter user-pwa build",
+    "lint": "pnpm --filter user-pwa lint",
+    "dev:user": "pnpm --filter user-pwa dev",
+    "dev:garage": "pnpm --filter garage-pwa dev",
+    "dev:all": "pnpm --parallel --filter ./apps/* dev",
+    "build:user": "pnpm --filter user-pwa build",
+    "build:garage": "pnpm --filter garage-pwa build",
+    "test": "pnpm --filter './apps/*' --parallel run test",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:coverage": "pnpm --filter './apps/*' --parallel run test:coverage"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@11.0.8",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/coverage-v8": "^4.1.6",
+    "jsdom": "^29.1.1",
+    "vitest": "^4.1.6"
+  }
+}

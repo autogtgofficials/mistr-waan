@@ -1,0 +1,13 @@
+packages:
+  - "apps/*"
+  - "packages/*"
+
+# Build scripts allowed to run during install (pnpm v10+).
+# sharp: image processing used by Next.js
+# unrs-resolver: rspack-style fast module resolver used by some toolchains
+allowBuilds:
+  sharp: true
+  unrs-resolver: true
+onlyBuiltDependencies:
+  - sharp
+  - unrs-resolver

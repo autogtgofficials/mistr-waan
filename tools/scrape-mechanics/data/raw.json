@@ -1,0 +1,1622 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-05-11T14:41:44Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+    {
+      "type": "node",
+      "id": 5719657821,
+      "lat": 34.0391491,
+      "lon": 74.8744127,
+      "tags": {
+        "name": "Royal Enfield",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5984427589,
+      "lat": 34.0436084,
+      "lon": 74.7890022,
+      "tags": {
+        "name": "Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5984437590,
+      "lat": 34.0736563,
+      "lon": 74.8104398,
+      "tags": {
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 5984439563,
+      "lat": 34.0506035,
+      "lon": 74.8017229,
+      "tags": {
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6029659730,
+      "lat": 34.0670981,
+      "lon": 74.7756696,
+      "tags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6231499423,
+      "lat": 34.0665209,
+      "lon": 74.7747205,
+      "tags": {
+        "name": "Arise Automotive Hyndai",
+        "phone": "01942473033,2475033",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 6592841085,
+      "lat": 34.0777242,
+      "lon": 74.80133,
+      "tags": {
+        "name": "Kohinoor Classic motors",
+        "phone": "+91700189480",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7170041888,
+      "lat": 34.035561,
+      "lon": 74.8615061,
+      "tags": {
+        "addr:street": "Qasim Bagh",
+        "name": "Maruti Suzuki Arena Peaks Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 7743110001,
+      "lat": 34.047882,
+      "lon": 74.8670578,
+      "tags": {
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 8997528297,
+      "lat": 34.077047,
+      "lon": 74.7778173,
+      "tags": {
+        "name": "Ayna Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9050388809,
+      "lat": 34.0799432,
+      "lon": 74.8207004,
+      "tags": {
+        "name": "The Tyre Hub Ikhwan Corporation",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9050390673,
+      "lat": 34.0822199,
+      "lon": 74.8195016,
+      "tags": {
+        "name": "Raja Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9050393775,
+      "lat": 34.0816917,
+      "lon": 74.8273452,
+      "tags": {
+        "name": "Car Cafe",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9050402608,
+      "lat": 34.0840252,
+      "lon": 74.8196467,
+      "tags": {
+        "name": "Cars 24",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9052806109,
+      "lat": 34.073099,
+      "lon": 74.8122699,
+      "tags": {
+        "name": "Bhat Enterprises Car Repairs",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9052807645,
+      "lat": 34.0721161,
+      "lon": 74.8221724,
+      "tags": {
+        "name": "JK Tyre Steel Wheels",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9052818049,
+      "lat": 34.0735155,
+      "lon": 74.816777,
+      "tags": {
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073505985,
+      "lat": 34.0667276,
+      "lon": 74.8029649,
+      "tags": {
+        "name": "Sharma Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073521096,
+      "lat": 34.0737223,
+      "lon": 74.8319124,
+      "tags": {
+        "brand": "Maruti Suzuki",
+        "brand:wikidata": "Q963718",
+        "name": "Maruti Suzuki Highland Automobiles",
+        "second_hand": "no",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073522927,
+      "lat": 34.0736742,
+      "lon": 74.7987323,
+      "tags": {
+        "name": "Jhelum Tyre House",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073522928,
+      "lat": 34.0661978,
+      "lon": 74.8459118,
+      "tags": {
+        "name": "Jk Tyres Wheels Automobiles",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073523458,
+      "lat": 34.0708985,
+      "lon": 74.8400195,
+      "tags": {
+        "name": "Loud Engine Work Shop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073526243,
+      "lat": 34.0693613,
+      "lon": 74.8037709,
+      "tags": {
+        "name": "Makeoo Automobiles",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073526417,
+      "lat": 34.0751091,
+      "lon": 74.7962621,
+      "tags": {
+        "name": "Arise Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073527437,
+      "lat": 34.0725016,
+      "lon": 74.8375551,
+      "tags": {
+        "name": "Mahindra Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9073529518,
+      "lat": 34.0551467,
+      "lon": 74.8040413,
+      "tags": {
+        "name": "Wani Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9078511604,
+      "lat": 34.0306182,
+      "lon": 74.7940431,
+      "tags": {
+        "name": "Jeep Showro",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9078527859,
+      "lat": 34.0353318,
+      "lon": 74.7910285,
+      "tags": {
+        "name": "Morris Garages",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9078528925,
+      "lat": 34.0293453,
+      "lon": 74.7966802,
+      "tags": {
+        "name": "Car Choice",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9078530919,
+      "lat": 34.0320477,
+      "lon": 74.79277,
+      "tags": {
+        "name": "Ford Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087683042,
+      "lat": 34.0660616,
+      "lon": 74.7800629,
+      "tags": {
+        "name": "Jk Tyre World",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087687494,
+      "lat": 34.0429288,
+      "lon": 74.7894884,
+      "tags": {
+        "name": "Kashmir Valley Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087687497,
+      "lat": 34.1047403,
+      "lon": 74.7562351,
+      "tags": {
+        "name": "Best Engineering Works",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087687641,
+      "lat": 34.0636578,
+      "lon": 74.782583,
+      "tags": {
+        "name": "Goodyear Prince Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087687642,
+      "lat": 34.0434128,
+      "lon": 74.7888714,
+      "tags": {
+        "name": "Jamkash Suzuki",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087687643,
+      "lat": 34.0614967,
+      "lon": 74.7846827,
+      "tags": {
+        "name": "Mahindra Car Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087689059,
+      "lat": 34.1025825,
+      "lon": 74.757093,
+      "tags": {
+        "name": "Mahindra First Choice",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087690983,
+      "lat": 34.0792507,
+      "lon": 74.79412,
+      "tags": {
+        "name": "Jk Tyre Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087690984,
+      "lat": 34.0797864,
+      "lon": 74.7938018,
+      "tags": {
+        "name": "Bridgestone Pacific",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087690986,
+      "lat": 34.0538606,
+      "lon": 74.7875252,
+      "tags": {
+        "name": "Bhat Motors Car Wash And Repair",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087691054,
+      "lat": 34.0703539,
+      "lon": 74.7854684,
+      "tags": {
+        "name": "Auto Hub Car Dealership",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087695968,
+      "lat": 34.0673908,
+      "lon": 74.7750529,
+      "tags": {
+        "name": "MQ Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087698939,
+      "lat": 34.0748947,
+      "lon": 74.7878258,
+      "tags": {
+        "name": "Jk Tyre Steel Wheels",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087706157,
+      "lat": 34.043842,
+      "lon": 74.7887735,
+      "tags": {
+        "name": "Maruti Suzuki Nexa",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087707455,
+      "lat": 34.0447243,
+      "lon": 74.7886042,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Crystal Car Wash"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087707456,
+      "lat": 34.0923552,
+      "lon": 74.7768263,
+      "tags": {
+        "name": "Valley Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087708543,
+      "lat": 34.0752099,
+      "lon": 74.7884413,
+      "tags": {
+        "name": "Yokohama Tyres M.Y Motors",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087709862,
+      "lat": 34.1058962,
+      "lon": 74.7543081,
+      "tags": {
+        "name": "FairDeal Tata Motors Sale and Service",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087709865,
+      "lat": 34.1015954,
+      "lon": 74.7561435,
+      "tags": {
+        "name": "Ansari Toyota",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087714441,
+      "lat": 34.0435666,
+      "lon": 74.7893663,
+      "tags": {
+        "name": "K.C Hyundai Sales",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087714444,
+      "lat": 34.1055594,
+      "lon": 74.756582,
+      "tags": {
+        "name": "Royal Tyre Repair Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087714445,
+      "lat": 34.1007169,
+      "lon": 74.7571981,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "AEON Service Station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087716737,
+      "lat": 34.0669557,
+      "lon": 74.7808455,
+      "tags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Bhat Service Station",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087717217,
+      "lat": 34.0495237,
+      "lon": 74.7883462,
+      "tags": {
+        "name": "K.C Hyundai Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9087718082,
+      "lat": 34.0977892,
+      "lon": 74.7717514,
+      "tags": {
+        "name": "Etihaad Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094197010,
+      "lat": 34.0368673,
+      "lon": 74.7861544,
+      "tags": {
+        "name": "Maruti Suzuki True Value",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094197012,
+      "lat": 34.0240546,
+      "lon": 74.7737761,
+      "tags": {
+        "name": "Maqbool Motors Sale Service Spares",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094210500,
+      "lat": 34.0218258,
+      "lon": 74.8093653,
+      "tags": {
+        "name": "The Detox Lab",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094210722,
+      "lat": 34.0174664,
+      "lon": 74.7984115,
+      "tags": {
+        "name": "Sofi Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094213061,
+      "lat": 34.0232153,
+      "lon": 74.7749123,
+      "tags": {
+        "name": "Sahara Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094213490,
+      "lat": 34.0084861,
+      "lon": 74.811374,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "2M Auto Fresh Car Detailing Centre"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094214993,
+      "lat": 34.0051306,
+      "lon": 74.795015,
+      "tags": {
+        "name": "Ms I.S Motors and Car Washing",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9094222520,
+      "lat": 34.0255698,
+      "lon": 74.8086992,
+      "tags": {
+        "name": "S.A Motors Repair and Wash Service Station  Chanpora",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9098633102,
+      "lat": 34.0281469,
+      "lon": 74.8326606,
+      "tags": {
+        "addr:street": "Nowgam Byepass, NH44",
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100754410,
+      "lat": 34.0390712,
+      "lon": 74.8806933,
+      "tags": {
+        "name": "New Kohinoor Tyre House Appolo Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100766688,
+      "lat": 34.0410411,
+      "lon": 74.8749888,
+      "tags": {
+        "name": "HK Auto World",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100779898,
+      "lat": 34.0357914,
+      "lon": 74.8617411,
+      "tags": {
+        "name": "Maruti Suzuki NEXA",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100781346,
+      "lat": 34.0911433,
+      "lon": 74.8145755,
+      "tags": {
+        "name": "Nuwabi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100788415,
+      "lat": 34.0213952,
+      "lon": 74.8298648,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Bhat Service Station",
+        "name:en": "Bhat Service Station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100801457,
+      "lat": 34.0194878,
+      "lon": 74.8297046,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Bhat Washing Point",
+        "name:en": "Bhat Washing Point"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100896747,
+      "lat": 34.0367018,
+      "lon": 74.8944216,
+      "tags": {
+        "name": "Appolo Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100957500,
+      "lat": 34.0033964,
+      "lon": 74.8354078,
+      "tags": {
+        "name": "Jet Wheels Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100957501,
+      "lat": 34.028537,
+      "lon": 74.8321272,
+      "tags": {
+        "name": "Mahindra Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100974856,
+      "lat": 34.0284309,
+      "lon": 74.8295336,
+      "tags": {
+        "name": "Tata Motors Warsi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100974859,
+      "lat": 34.0371851,
+      "lon": 74.8922168,
+      "tags": {
+        "name": "Renault Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100974862,
+      "lat": 34.0388834,
+      "lon": 74.881184,
+      "tags": {
+        "name": "Cars 24",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9100992538,
+      "lat": 34.0930043,
+      "lon": 74.812696,
+      "tags": {
+        "name": "Car4u Car Dealer",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101014086,
+      "lat": 34.0263991,
+      "lon": 74.9102346,
+      "tags": {
+        "name": "Kong Posh Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101022963,
+      "lat": 34.0338257,
+      "lon": 74.8508875,
+      "tags": {
+        "name": "Force Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101034622,
+      "lat": 34.028648,
+      "lon": 74.8327407,
+      "tags": {
+        "name": "Hyundia Shuhul Sale and Service",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101034623,
+      "lat": 34.0371774,
+      "lon": 74.8934671,
+      "tags": {
+        "name": "Honda Shuhul Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101104636,
+      "lat": 34.0364529,
+      "lon": 74.8644658,
+      "tags": {
+        "name": "Renault Srinagar",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101106017,
+      "lat": 34.0282625,
+      "lon": 74.8290923,
+      "tags": {
+        "name": "Shuhul Hyundai",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9101116069,
+      "lat": 34.1115096,
+      "lon": 74.8095557,
+      "tags": {
+        "name": "Hyundai Service Arise",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9107515816,
+      "lat": 34.0875438,
+      "lon": 74.808853,
+      "tags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Sholla Service Station",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9107526535,
+      "lat": 34.0961889,
+      "lon": 74.7865897,
+      "tags": {
+        "name": "Khan Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9107540927,
+      "lat": 34.0907703,
+      "lon": 74.8128788,
+      "tags": {
+        "name": "S.S Automobiles",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9107547246,
+      "lat": 34.0989814,
+      "lon": 74.8057717,
+      "tags": {
+        "name": "Rover A Car Showroom",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9107547342,
+      "lat": 34.0924239,
+      "lon": 74.8003563,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Service Station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113478732,
+      "lat": 34.0798294,
+      "lon": 74.8001678,
+      "tags": {
+        "name": "Car Hub",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113492044,
+      "lat": 34.0843407,
+      "lon": 74.7966474,
+      "tags": {
+        "name": "Car Land",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113492503,
+      "lat": 34.0810896,
+      "lon": 74.7986045,
+      "tags": {
+        "name": "Benison Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113492504,
+      "lat": 34.0837385,
+      "lon": 74.79742,
+      "tags": {
+        "name": "New Asian Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113500891,
+      "lat": 34.0860252,
+      "lon": 74.8014743,
+      "tags": {
+        "name": "Car Point",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113501353,
+      "lat": 34.0782999,
+      "lon": 74.8093817,
+      "tags": {
+        "name": "Lucky Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113504588,
+      "lat": 34.0812588,
+      "lon": 74.7984584,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Service Station"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113507812,
+      "lat": 34.0837516,
+      "lon": 74.7999403,
+      "tags": {
+        "name": "Bashir Engineering Works",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113507823,
+      "lat": 34.0787178,
+      "lon": 74.8096155,
+      "tags": {
+        "amenity": "car_wash",
+        "automated": "no",
+        "name": "Neway Car Wash",
+        "self_service": "no"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113507829,
+      "lat": 34.0848204,
+      "lon": 74.7967051,
+      "tags": {
+        "name": "Asian Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113514240,
+      "lat": 34.0826593,
+      "lon": 74.7980326,
+      "tags": {
+        "name": "Car City",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113514241,
+      "lat": 34.0839605,
+      "lon": 74.7965688,
+      "tags": {
+        "name": "Pamposh Automobiles",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113515466,
+      "lat": 34.0808747,
+      "lon": 74.7991004,
+      "tags": {
+        "name": "New Vehicle Point",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9113515617,
+      "lat": 34.082441,
+      "lon": 74.7981883,
+      "tags": {
+        "name": "Car n Care Car Gallery",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116794511,
+      "lat": 34.1292737,
+      "lon": 74.7982698,
+      "tags": {
+        "name": "Aftab Automobiles and Repairs",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116860051,
+      "lat": 34.1340031,
+      "lon": 74.8038981,
+      "tags": {
+        "name": "Gousia Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116867783,
+      "lat": 34.1136957,
+      "lon": 74.7944778,
+      "tags": {
+        "name": "Tyre Care Mrf Tyres",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116873279,
+      "lat": 34.1337861,
+      "lon": 74.804064,
+      "tags": {
+        "name": "Tyre Repair Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116883176,
+      "lat": 34.1190842,
+      "lon": 74.7955574,
+      "tags": {
+        "name": "Car-20 Car Gallery",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116883861,
+      "lat": 34.1105317,
+      "lon": 74.7942693,
+      "tags": {
+        "name": "Friends Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116884468,
+      "lat": 34.1276996,
+      "lon": 74.7965155,
+      "tags": {
+        "name": "Khan Car Club Scrap Car Dealer",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116885185,
+      "lat": 34.1280369,
+      "lon": 74.7973535,
+      "tags": {
+        "name": "Peaks Auto Private Limited",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116885673,
+      "lat": 34.1300034,
+      "lon": 74.7981061,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Gudoo Automobiles"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116888684,
+      "lat": 34.1132286,
+      "lon": 74.7943688,
+      "tags": {
+        "name": "Haadis Car Lobby",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116888685,
+      "lat": 34.12548,
+      "lon": 74.795317,
+      "tags": {
+        "name": "Labroo Motors",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116895455,
+      "lat": 34.1279756,
+      "lon": 74.7967299,
+      "tags": {
+        "name": "Al-Hamzah Automobiles Workshop and Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116895767,
+      "lat": 34.1193609,
+      "lon": 74.7955486,
+      "tags": {
+        "name": "Makhdoomi Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116895768,
+      "lat": 34.1274666,
+      "lon": 74.7969885,
+      "tags": {
+        "name": "Suleman Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116895838,
+      "lat": 34.1110887,
+      "lon": 74.7945869,
+      "tags": {
+        "name": "Teeka Khan Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116897659,
+      "lat": 34.1102497,
+      "lon": 74.7943216,
+      "tags": {
+        "name": "Tyre Works Repair",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116898050,
+      "lat": 34.1329189,
+      "lon": 74.8041971,
+      "tags": {
+        "name": "M.S Sheikh Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116898242,
+      "lat": 34.1081509,
+      "lon": 74.7945083,
+      "tags": {
+        "name": "Afaan Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9116899633,
+      "lat": 34.1274892,
+      "lon": 74.7963828,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Wani Automobiles and Detailing Centre"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131796893,
+      "lat": 34.1441123,
+      "lon": 74.8023726,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Crown Car Wash"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131814976,
+      "lat": 34.1616692,
+      "lon": 74.8084505,
+      "tags": {
+        "name": "S.Y Automobiles Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131819089,
+      "lat": 34.1160884,
+      "lon": 74.8061534,
+      "tags": {
+        "name": "All Good Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131819110,
+      "lat": 34.1267715,
+      "lon": 74.8061656,
+      "tags": {
+        "name": "Bio Safe Pollution Checking Centre",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131848395,
+      "lat": 34.1254502,
+      "lon": 74.8059944,
+      "tags": {
+        "name": "Tyres and Batteries",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131856031,
+      "lat": 34.1127158,
+      "lon": 74.808334,
+      "tags": {
+        "name": "Tyres Auto Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131862465,
+      "lat": 34.1428642,
+      "lon": 74.8082643,
+      "tags": {
+        "name": "Haadi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131868089,
+      "lat": 34.1502781,
+      "lon": 74.8084507,
+      "tags": {
+        "name": "Car Port",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131868095,
+      "lat": 34.1616482,
+      "lon": 74.8085158,
+      "tags": {
+        "name": "Hubbi Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131871673,
+      "lat": 34.1599706,
+      "lon": 74.8084475,
+      "tags": {
+        "name": "True Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131873890,
+      "lat": 34.1243182,
+      "lon": 74.8061916,
+      "tags": {
+        "name": "Car King",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131876491,
+      "lat": 34.1420442,
+      "lon": 74.8083512,
+      "tags": {
+        "name": "Hamzah Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131876634,
+      "lat": 34.1393486,
+      "lon": 74.8084149,
+      "tags": {
+        "name": "True Cars",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9131878374,
+      "lat": 34.1447477,
+      "lon": 74.8082882,
+      "tags": {
+        "name": "Shah Motors",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9144956577,
+      "lat": 34.1406614,
+      "lon": 74.8390689,
+      "tags": {
+        "name": "Naseem Tyre Shop",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9144961306,
+      "lat": 34.1056817,
+      "lon": 74.8325789,
+      "tags": {
+        "name": "Abid Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9144994313,
+      "lat": 34.1115195,
+      "lon": 74.8370055,
+      "tags": {
+        "name": "Arhan Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145001341,
+      "lat": 34.1489234,
+      "lon": 74.8371922,
+      "tags": {
+        "name": "Auto Masters",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145001895,
+      "lat": 34.1543131,
+      "lon": 74.8397326,
+      "tags": {
+        "name": "MD Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145009993,
+      "lat": 34.1496036,
+      "lon": 74.8366707,
+      "tags": {
+        "name": "Aijaz Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145020690,
+      "lat": 34.1305487,
+      "lon": 74.8211045,
+      "tags": {
+        "name": "Car Space Complete Workshop",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145029918,
+      "lat": 34.133162,
+      "lon": 74.8235545,
+      "tags": {
+        "name": "Manzoor Tyre Works",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145029919,
+      "lat": 34.1481557,
+      "lon": 74.8372593,
+      "tags": {
+        "name": "Naseem Motors Service",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145039325,
+      "lat": 34.1112805,
+      "lon": 74.8369832,
+      "tags": {
+        "name": "Four Wheels Car Accessories",
+        "shop": "car_parts"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145042825,
+      "lat": 34.1249363,
+      "lon": 74.8373368,
+      "tags": {
+        "name": "I.A Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9145042827,
+      "lat": 34.1134722,
+      "lon": 74.8367768,
+      "tags": {
+        "name": "Sultan Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9150679242,
+      "lat": 34.1313659,
+      "lon": 74.8308106,
+      "tags": {
+        "name": "M.A Motors",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9150689878,
+      "lat": 34.1322861,
+      "lon": 74.8304253,
+      "tags": {
+        "name": "Javed Automobiles",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9580791015,
+      "lat": 34.0017115,
+      "lon": 74.7959672,
+      "tags": {
+        "addr:city": "Budgam",
+        "addr:district": "Budgam",
+        "addr:postcode": "191132",
+        "addr:street": "SIDCO Industrial Area, Rangreth",
+        "brand": "Škoda",
+        "brand:wikidata": "Q29637",
+        "name": "Škoda",
+        "operator": "Elysian Automobile Pvt Ltd",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 9704706482,
+      "lat": 33.9983903,
+      "lon": 74.7919096,
+      "tags": {
+        "addr:city": "Rangreth, Budgam",
+        "addr:housenumber": "76",
+        "addr:postcode": "191132",
+        "addr:street": "SIDCO Industrial Estate",
+        "name": "Rahim Engineers",
+        "opening_hours": "Mo-Sa 09:00-18:00",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10934178511,
+      "lat": 34.0609384,
+      "lon": 74.7849801,
+      "tags": {
+        "addr:street": "Tengpora, NH-44, Srinagar",
+        "name": "Himalaya Motors (Tata cars)",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 10934182420,
+      "lat": 34.0122014,
+      "lon": 74.8942729,
+      "tags": {
+        "addr:street": "Taingan, NH-44, Pampore",
+        "name": "New Highway Service Hub",
+        "shop": "car_repair"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12041871442,
+      "lat": 34.0266758,
+      "lon": 74.8228884,
+      "tags": {
+        "addr:street": "Nowgam Byepass, Srinagar",
+        "name": "JD Motors (Mahindra First Choice)",
+        "shop": "car"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12064260159,
+      "lat": 34.0128782,
+      "lon": 74.8104996,
+      "tags": {
+        "amenity": "car_wash",
+        "name": "Car wash"
+      }
+    },
+    {
+      "type": "node",
+      "id": 12942096778,
+      "lat": 34.0909194,
+      "lon": 74.8028646,
+      "tags": {
+        "addr:street": "Dalal Mohalla, Nawabazar",
+        "name": "Rehman Tyre House",
+        "shop": "tyres"
+      }
+    },
+    {
+      "type": "node",
+      "id": 13279980801,
+      "lat": 34.1393428,
+      "lon": 74.808638,
+      "tags": {
+        "addr:housenumber": "00045126",
+        "addr:postcode": "190011",
+        "name": "First choice cars",
+        "opening_hours": "Mo-Sa 00:00-24:00",
+        "shop": "car"
+      }
+    }
+  ]
+}
