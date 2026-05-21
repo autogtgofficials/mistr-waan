@@ -3,7 +3,7 @@
 
 [build]
   command = "pnpm --filter user-pwa run build"
-  publish = ".next"
+  publish = "apps/user-pwa/.next"
 
 [build.environment]
   NEXT_TELEMETRY_DISABLED = "1"
