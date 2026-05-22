@@ -2,18 +2,19 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { useGarageAuth } from "@/lib/store/auth";
+import { useGarageAuth, garageAuth } from "@/lib/store/auth";
+import { ApiError } from "@/lib/api/client";
 import { Button } from "@/components/ui/Button";
 
 /**
- * Garage PWA login — same-shape OTP flow as user-pwa, simpler V0 demo.
+ * Garage PWA login — real OTP flow via /api/garage/auth/otp/{send,verify}.
  *
- * Mock: any 10-digit phone + any 6-digit OTP (except "000000") signs in
- * as the demo garage owner.
+ * Send is anti-enumeration: it always returns success even when the phone
+ * isn't onboarded, but verify will fail with `phone_not_registered`.
  */
 export default function GarageLoginPage() {
   const router = useRouter();
-  const { signIn, isAuthed, hydrated } = useGarageAuth();
+  const { isAuthed, hydrated, refresh } = useGarageAuth();
   const [step, setStep] = useState<"phone" | "otp">("phone");
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
@@ -29,9 +30,20 @@ export default function GarageLoginPage() {
   function handlePhone(e: React.FormEvent) {
     e.preventDefault();
     if (!phoneOk) return;
+    setError(null);
     startTransition(async () => {
-      await new Promise((r) => setTimeout(r, 600));
-      setStep("otp");
+      try {
+        await garageAuth.sendOtp(`+91${phone}`);
+        setStep("otp");
+      } catch (err) {
+        setError(
+          err instanceof ApiError
+            ? err.code === "cooldown"
+              ? "Too many requests — wait a moment."
+              : "Couldn't send code. Try again."
+            : "Network error.",
+        );
+      }
     });
   }
 
@@ -41,15 +53,28 @@ export default function GarageLoginPage() {
       setError("Enter all 6 digits.");
       return;
     }
+    setError(null);
     startTransition(async () => {
-      await new Promise((r) => setTimeout(r, 700));
-      if (otp === "000000") {
-        setError("Wrong code. Try again.");
-        setOtp("");
-        return;
+      try {
+        await garageAuth.verifyOtp({ phone: `+91${phone}`, code: otp });
+        await refresh();
+        router.replace("/");
+      } catch (err) {
+        if (err instanceof ApiError) {
+          if (err.code === "phone_not_registered") {
+            setError("This phone isn't registered as a garage. Ask ops to onboard you.");
+          } else if (err.code === "wrong_code") {
+            setError("Wrong code. Try again.");
+            setOtp("");
+          } else if (err.code === "expired") {
+            setError("Code expired. Tap Change to resend.");
+          } else {
+            setError("Couldn't verify. Try again.");
+          }
+        } else {
+          setError("Network error.");
+        }
       }
-      signIn(`+91 ${phone}`);
-      router.replace("/");
     });
   }
 
@@ -86,6 +111,7 @@ export default function GarageLoginPage() {
                 className="flex-1 bg-card px-3 py-3 text-base text-foreground tabular outline-none placeholder:text-steel-300"
               />
             </div>
+            {error ? <p className="mt-2 text-sm text-danger">{error}</p> : null}
             <Button
               type="submit"
               loading={isPending}
@@ -94,10 +120,6 @@ export default function GarageLoginPage() {
             >
               Send code
             </Button>
-            <p className="mt-4 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-              <span className="font-semibold">Mock V0:</span> any valid 10-digit Indian
-              mobile signs in as &quot;Imran K. — Khan Auto Detailing&quot;.
-            </p>
           </form>
         ) : (
           <form onSubmit={handleOtp}>
@@ -107,7 +129,11 @@ export default function GarageLoginPage() {
               <span className="tabular font-medium">+91 {phone}</span>{" "}
               <button
                 type="button"
-                onClick={() => setStep("phone")}
+                onClick={() => {
+                  setStep("phone");
+                  setOtp("");
+                  setError(null);
+                }}
                 className="text-primary underline-offset-2 hover:underline"
               >
                 Change
@@ -135,10 +161,6 @@ export default function GarageLoginPage() {
             >
               Verify & sign in
             </Button>
-            <p className="mt-4 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-              Any 6 digits work. Try{" "}
-              <span className="font-mono">000000</span> for the wrong-code state.
-            </p>
           </form>
         )}
       </main>

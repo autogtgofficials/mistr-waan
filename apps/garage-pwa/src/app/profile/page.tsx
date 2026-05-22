@@ -3,26 +3,22 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
-  User,
   LogOut,
   Phone,
   Store,
   MapPin,
   MessageCircle,
-  RotateCcw,
 } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
 import { Button } from "@/components/ui/Button";
 import { useGarageAuth } from "@/lib/store/auth";
-import { useGarageJobs } from "@/lib/store/jobs";
 import { MOCK_GARAGE } from "@/lib/mock/garage";
 import { ownerLabel } from "@/lib/utils";
 
 export default function GarageProfilePage() {
   const router = useRouter();
   const { user, isAuthed, hydrated, signOut } = useGarageAuth();
-  const { reset } = useGarageJobs();
 
   useEffect(() => {
     if (hydrated && !isAuthed) router.replace("/login");
@@ -112,29 +108,9 @@ export default function GarageProfilePage() {
 
           <Divider />
 
-          <Section title="Demo data">
-            <button
-              type="button"
-              onClick={reset}
-              className="flex w-full items-center justify-between gap-3 rounded-md border border-border bg-card p-4 hover:bg-muted"
-            >
-              <span className="flex items-center gap-3">
-                <RotateCcw className="size-5 text-foreground" strokeWidth={2} />
-                <span className="text-base font-medium text-foreground">
-                  Reset demo jobs
-                </span>
-              </span>
-              <span className="text-xs text-muted-foreground">
-                Restore the seed inbox
-              </span>
-            </button>
-          </Section>
-
-          <Divider />
-
           <Button
             variant="ghost"
-            onClick={signOut}
+            onClick={() => void signOut()}
             className="w-full justify-center text-danger hover:bg-danger-soft"
           >
             <LogOut className="size-4" strokeWidth={2} />

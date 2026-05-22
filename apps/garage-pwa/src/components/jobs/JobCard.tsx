@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ChevronRight, Wallet, Wrench, Sparkles, PaintBucket } from "lucide-react";
 import { StatusPill } from "./StatusPill";
 import { rupees, cn } from "@/lib/utils";
-import type { GarageJob } from "@/lib/mock/jobs";
+import type { GarageJob } from "@/lib/api/types";
 
 const BUCKET_ICON = {
   detailing: Sparkles,
@@ -12,8 +12,17 @@ const BUCKET_ICON = {
   denting: PaintBucket,
 };
 
+function summaryFor(job: GarageJob): string {
+  if (job.services && job.services.length > 0) {
+    const names = job.services.map((s) => s.name);
+    return names.length === 1 ? names[0]! : `${names[0]} + ${names.length - 1} more`;
+  }
+  return job.bucket;
+}
+
 export function JobCard({ job }: { job: GarageJob }) {
   const Icon = BUCKET_ICON[job.bucket];
+  const summary = summaryFor(job);
   return (
     <Link
       href={`/jobs/${job.id}`}
@@ -35,11 +44,14 @@ export function JobCard({ job }: { job: GarageJob }) {
             <Icon className="size-5" strokeWidth={2} />
           </span>
           <div className="flex flex-col">
-            <span className="text-sm font-semibold text-foreground">{job.summary}</span>
+            <span className="text-sm font-semibold text-foreground">{summary}</span>
             <span className="text-xs text-muted-foreground">
               {job.customerLabel} · {job.customerArea}
             </span>
             <span className="mt-1 text-xs text-foreground">{job.slotLabel}</span>
+            <span className="mt-0.5 text-[10px] text-muted-foreground tabular">
+              {job.shortId}
+            </span>
           </div>
         </div>
         <StatusPill status={job.status} />
@@ -48,7 +60,7 @@ export function JobCard({ job }: { job: GarageJob }) {
       <div className="mt-3 flex items-center justify-between gap-2 border-t border-border-subtle pt-3 text-xs">
         <span className="inline-flex items-center gap-1 text-foreground">
           <Wallet className="size-3.5" strokeWidth={2} />
-          {job.total > 0 ? rupees(job.total) : "—"}{" "}
+          {job.total != null ? rupees(job.total) : "—"}{" "}
           <span className="text-muted-foreground">
             {job.paymentMode === "upi" ? "(UPI)" : "(Cash)"}
           </span>

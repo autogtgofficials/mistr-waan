@@ -41,6 +41,8 @@ export default function BookingTrackPage({
     "loading",
   );
   const [cancelOpen, setCancelOpen] = useState(false);
+  const [cancelBusy, setCancelBusy] = useState(false);
+  const [cancelError, setCancelError] = useState<string | null>(null);
   const [rateOpen, setRateOpen] = useState(false);
   const [reasonOpen, setReasonOpen] = useState(false);
   const [pickedRating, setPickedRating] = useState<number | null>(null);
@@ -101,9 +103,35 @@ export default function BookingTrackPage({
     if (pickedRating <= 2) setReasonOpen(true);
   }
 
-  function optimisticCancel() {
-    // TODO Week 3: PATCH /api/bookings/[id]/cancel. Optimistic for now.
-    setBooking((prev) => (prev ? { ...prev, status: "cancelled" } : prev));
+  async function doCancel() {
+    if (!booking) return;
+    setCancelBusy(true);
+    setCancelError(null);
+    try {
+      const res = await fetch(`/api/bookings/${booking.id}/cancel`, {
+        method: "PATCH",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({}),
+      });
+      const data = (await res.json()) as { booking?: Booking; error?: string };
+      if (!res.ok || !data.booking) {
+        const code = data.error ?? `HTTP ${res.status}`;
+        // Translate the common server error codes to friendly copy.
+        if (code.startsWith("cutoff_exceeded")) {
+          throw new Error(
+            "Less than 1 hour to your slot — please WhatsApp us if you need to cancel.",
+          );
+        }
+        throw new Error(code);
+      }
+      setBooking(data.booking);
+      setCancelOpen(false);
+    } catch (err) {
+      setCancelError(err instanceof Error ? err.message : "Cancellation failed");
+    } finally {
+      setCancelBusy(false);
+    }
   }
 
   const statusLine =
@@ -293,21 +321,33 @@ export default function BookingTrackPage({
       {/* Cancel sheet */}
       <Sheet
         open={cancelOpen}
-        onClose={() => setCancelOpen(false)}
+        onClose={() => {
+          if (!cancelBusy) {
+            setCancelOpen(false);
+            setCancelError(null);
+          }
+        }}
         title="Cancel this booking?"
         description="Free to cancel up to 1 hour before your slot."
       >
         <div className="flex flex-col gap-3 pt-2">
+          {cancelError ? (
+            <p className="rounded-md border border-ignite-100 bg-ignite-50 p-3 text-sm text-ignite-900">
+              {cancelError}
+            </p>
+          ) : null}
           <Button
             variant="danger"
-            onClick={() => {
-              optimisticCancel();
-              setCancelOpen(false);
-            }}
+            loading={cancelBusy}
+            onClick={() => void doCancel()}
           >
             Yes, cancel booking
           </Button>
-          <Button variant="ghost" onClick={() => setCancelOpen(false)}>
+          <Button
+            variant="ghost"
+            disabled={cancelBusy}
+            onClick={() => setCancelOpen(false)}
+          >
             Keep booking
           </Button>
         </div>

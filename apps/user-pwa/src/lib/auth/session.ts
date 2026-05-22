@@ -46,8 +46,16 @@ export async function setSessionCookie(args: {
   });
 }
 
-/** Clear a session cookie for a given role (signout). */
-export async function clearSessionCookie(role: SessionRole): Promise<void> {
+/** Clear a session cookie for a given role (signout).
+ *
+ * `crossSubdomain` must match what was passed to `setSessionCookie` — browsers
+ * key cookies by name+domain+path, so clearing without the domain leaves the
+ * cross-subdomain copy alive. Default false (host-only).
+ */
+export async function clearSessionCookie(
+  role: SessionRole,
+  { crossSubdomain = false }: { crossSubdomain?: boolean } = {},
+): Promise<void> {
   const cookieStore = await cookies();
   cookieStore.set(cookieNameFor(role), "", {
     httpOnly: true,
@@ -55,6 +63,7 @@ export async function clearSessionCookie(role: SessionRole): Promise<void> {
     secure: process.env.NODE_ENV === "production",
     path: "/",
     maxAge: 0,
+    domain: crossSubdomain ? ".autogtg.com" : undefined,
   });
 }
 

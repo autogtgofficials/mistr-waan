@@ -1,0 +1,22 @@
+# Netlify build config for the garage-pwa monorepo package.
+# Site: garage-mistr-waan.netlify.app  (CNAME → garage.autogtg.com)
+#
+# This app is purely a UI that calls the user-pwa API at
+# `NEXT_PUBLIC_APP_ORIGIN` with credentials. Session cookies are set with
+# `domain=.autogtg.com` so they travel across the two subdomains.
+
+[build]
+  command = "pnpm --filter garage-pwa run build"
+  publish = "apps/garage-pwa/.next"
+
+[build.environment]
+  NEXT_TELEMETRY_DISABLED = "1"
+  NETLIFY_NEXT_PLUGIN_SKIP = "false"
+  # Default in dev; override in the Netlify UI for prod (https://autogtg.com).
+  NEXT_PUBLIC_APP_ORIGIN = "https://autogtg.com"
+
+# Explicit plugin declaration — without this, Netlify auto-detection leaves
+# framework="unknown" / plugin_state="none" and SSR routes 404. Same fix as
+# user-pwa + ops.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
