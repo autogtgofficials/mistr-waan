@@ -1,13 +1,11 @@
 "use client";
 
-import { use, useEffect, useMemo, useState } from "react";
+import { use, useEffect, useState } from "react";
 import Link from "next/link";
 import { Phone, MessageCircle, MapPin, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { TabBar } from "@/components/layout/TabBar";
-import { useJobs } from "@/lib/store/jobs";
-import { getGarageById } from "@/lib/mock/garages";
-import { detailingServices } from "@/lib/mock/services";
+import type { Booking } from "@/lib/bookings/types";
 import { ownerLabel, rupees } from "@/lib/utils";
 
 /**
@@ -22,8 +20,10 @@ export default function ConfirmationPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = use(params);
-  const { jobs, hydrated } = useJobs();
-  const job = jobs.find((j) => j.id === id);
+  const [booking, setBooking] = useState<Booking | null>(null);
+  const [loadState, setLoadState] = useState<"loading" | "loaded" | "not_found" | "error">(
+    "loading",
+  );
   const [callSheetOpen, setCallSheetOpen] = useState(false);
 
   /* Fade-in check icon on mount */
@@ -33,25 +33,34 @@ export default function ConfirmationPage({
     return () => clearTimeout(t);
   }, []);
 
-  const garage = useMemo(
-    () => (job ? getGarageById(job.garageId) : undefined),
-    [job],
-  );
-  const services = useMemo(
-    () =>
-      (job?.serviceIds ?? [])
-        .map((sid) => detailingServices.find((s) => s.id === sid))
-        .filter((s): s is NonNullable<typeof s> => Boolean(s)),
-    [job],
-  );
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch(`/api/bookings/${id}`, { credentials: "include" });
+        if (cancelled) return;
+        if (res.status === 404) return setLoadState("not_found");
+        if (!res.ok) return setLoadState("error");
+        const data = (await res.json()) as { booking: Booking };
+        setBooking(data.booking);
+        setLoadState("loaded");
+      } catch {
+        if (!cancelled) setLoadState("error");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
 
-  if (!hydrated) return <div className="flex min-h-full" />;
-  if (!job || !garage) {
+  if (loadState === "loading") return <div className="flex min-h-full" />;
+
+  if (loadState === "not_found" || !booking) {
     return (
       <div className="flex min-h-full flex-col items-center justify-center px-6 text-center">
         <h1 className="text-xl font-bold text-foreground">Booking not found</h1>
         <p className="mt-1 text-sm text-muted-foreground">
-          This booking may have expired or is on a different device.
+          This booking may have been removed or you don&apos;t have access to it.
         </p>
         <Link href="/" className="mt-4 text-sm text-primary underline">
           Back to home
@@ -60,9 +69,23 @@ export default function ConfirmationPage({
     );
   }
 
-  const directionsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    garage.fullAddress,
-  )}`;
+  if (loadState === "error") {
+    return (
+      <div className="flex min-h-full flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-xl font-bold text-foreground">Something went wrong</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          Couldn&apos;t load your booking right now. Try refreshing.
+        </p>
+      </div>
+    );
+  }
+
+  const garage = booking.garage;
+  const services = booking.services ?? [];
+
+  const directionsHref = garage
+    ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(garage.fullAddress)}`
+    : "#";
 
   return (
     <div className="flex min-h-full flex-col bg-background">
@@ -75,88 +98,112 @@ export default function ConfirmationPage({
               }`}
               strokeWidth={1.5}
             />
-            <h1 className="mt-3 text-2xl font-bold text-primary">Booking confirmed</h1>
-            <p className="mt-2 text-base text-foreground">{job.slotLabel}</p>
+            <h1 className="mt-3 text-2xl font-bold text-primary">
+              {booking.status === "queued_for_call"
+                ? "Booking received"
+                : "Booking confirmed"}
+            </h1>
+            <p className="mt-2 text-base text-foreground">{booking.slotLabel}</p>
+            {booking.status === "queued_for_call" ? (
+              <p className="mt-3 rounded-md bg-pulse-50 border border-pulse-100 p-3 text-sm text-pulse-900">
+                We&apos;ll call you in a few minutes to confirm the details and final quote.
+              </p>
+            ) : null}
           </div>
 
           <Divider />
 
-          <Section title="Garage">
-            <div className="flex items-center gap-3">
-              <span
-                className="flex size-12 items-center justify-center rounded-md bg-pulse-100 text-pulse-700 text-sm font-semibold"
-                aria-hidden
-              >
-                {(garage.ownerFirstName.charAt(0) + garage.ownerLastName.charAt(0)).toUpperCase()}
-              </span>
-              <div className="flex flex-col">
-                <span className="text-base font-semibold text-foreground">
-                  {ownerLabel(garage.ownerFirstName, garage.ownerLastName)}
-                </span>
-                {/* Shop name is REVEALED post-confirmation */}
-                <span className="text-sm text-foreground">{garage.shopName}</span>
-                <span className="text-sm text-muted-foreground">{garage.area}</span>
-              </div>
-            </div>
+          {garage ? (
+            <>
+              <Section title="Garage">
+                <div className="flex items-center gap-3">
+                  <span
+                    className="flex size-12 items-center justify-center rounded-md bg-pulse-100 text-pulse-700 text-sm font-semibold"
+                    aria-hidden
+                  >
+                    {(garage.ownerFirstName.charAt(0) + garage.ownerLastName.charAt(0)).toUpperCase()}
+                  </span>
+                  <div className="flex flex-col">
+                    <span className="text-base font-semibold text-foreground">
+                      {ownerLabel(garage.ownerFirstName, garage.ownerLastName)}
+                    </span>
+                    {/* Shop name is REVEALED post-confirmation */}
+                    <span className="text-sm text-foreground">{garage.shopName}</span>
+                    <span className="text-sm text-muted-foreground">{garage.area}</span>
+                  </div>
+                </div>
 
-            <div className="mt-4 flex items-start gap-2 rounded-md bg-muted/40 p-3">
-              <MapPin className="mt-0.5 size-4 shrink-0 text-foreground" strokeWidth={2} />
-              <span className="text-sm text-foreground">{garage.fullAddress}</span>
-            </div>
+                <div className="mt-4 flex items-start gap-2 rounded-md bg-muted/40 p-3">
+                  <MapPin className="mt-0.5 size-4 shrink-0 text-foreground" strokeWidth={2} />
+                  <span className="text-sm text-foreground">{garage.fullAddress}</span>
+                </div>
 
-            <a
-              href={directionsHref}
-              target="_blank"
-              rel="noreferrer"
-              className="mt-3 inline-flex h-10 items-center justify-center rounded-md border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
-            >
-              Get directions →
-            </a>
-          </Section>
+                <a
+                  href={directionsHref}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex h-10 items-center justify-center rounded-md border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
+                >
+                  Get directions →
+                </a>
+              </Section>
 
-          <Divider />
+              <Divider />
 
-          <Section title="Talk to your garage">
-            <Button onClick={() => setCallSheetOpen(true)} className="w-full">
-              <Phone className="size-4" strokeWidth={2} />
-              Call {garage.ownerFirstName} via Mister Waan
-            </Button>
-            <p className="mt-2 text-xs text-muted-foreground">Your number stays private.</p>
+              <Section title="Talk to your garage">
+                <Button onClick={() => setCallSheetOpen(true)} className="w-full">
+                  <Phone className="size-4" strokeWidth={2} />
+                  Call {garage.ownerFirstName} via Mister Waan
+                </Button>
+                <p className="mt-2 text-xs text-muted-foreground">Your number stays private.</p>
 
-            <button
-              type="button"
-              className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-md border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
-            >
-              <MessageCircle className="size-4" strokeWidth={2} />
-              WhatsApp us (need help?)
-            </button>
-          </Section>
+                <button
+                  type="button"
+                  className="mt-3 flex h-10 w-full items-center justify-center gap-2 rounded-md border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
+                >
+                  <MessageCircle className="size-4" strokeWidth={2} />
+                  WhatsApp us (need help?)
+                </button>
+              </Section>
 
-          <Divider />
+              <Divider />
+            </>
+          ) : (
+            <>
+              <Section title="Next step">
+                <p className="text-sm text-foreground">
+                  Our team will pick the best-fit garage after speaking with you and assign it
+                  to your booking shortly.
+                </p>
+              </Section>
+              <Divider />
+            </>
+          )}
 
           {services.length > 0 ? (
-            <Section title="Services">
-              <ul className="flex flex-col gap-2">
-                {services.map((s) => (
-                  <li key={s.id} className="flex items-baseline justify-between">
-                    <span className="text-sm text-foreground">{s.name}</span>
-                    <span className="tabular text-sm font-medium text-foreground">
-                      {rupees(s.price)}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </Section>
+            <>
+              <Section title="Services">
+                <ul className="flex flex-col gap-2">
+                  {services.map((s) => (
+                    <li key={s.id} className="flex items-baseline justify-between">
+                      <span className="text-sm text-foreground">{s.name}</span>
+                      <span className="tabular text-sm font-medium text-foreground">
+                        {s.isQuoted ? "On inspection" : rupees(s.basePrice)}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+              <Divider />
+            </>
           ) : null}
 
-          <Divider />
-
           <section className="text-sm text-muted-foreground">
-            <p className="tabular">Booking ID: {job.id}</p>
+            <p className="tabular">Booking ID: {booking.shortId}</p>
             <p className="mt-1">
-              {job.paymentMode === "upi"
-                ? `Paid: ${rupees(job.total)} via UPI`
-                : `Pay ${rupees(job.total)} cash on completion`}
+              {booking.paymentMode === "upi"
+                ? `Paid: ${rupees(booking.total ?? 0)} via UPI`
+                : `Pay ${rupees(booking.total ?? booking.baseTotal ?? 0)} cash on completion`}
             </p>
           </section>
 
@@ -165,7 +212,7 @@ export default function ConfirmationPage({
           <section className="text-sm">
             <p className="text-muted-foreground">Free to cancel up to 1 hour before slot.</p>
             <Link
-              href={`/bookings/${job.id}`}
+              href={`/bookings/${booking.shortId}`}
               className="mt-2 inline-flex text-primary font-medium underline-offset-2 hover:underline"
             >
               Track this booking →
@@ -176,7 +223,7 @@ export default function ConfirmationPage({
 
       <TabBar />
 
-      {callSheetOpen ? (
+      {callSheetOpen && garage ? (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-6"
           onClick={() => setCallSheetOpen(false)}

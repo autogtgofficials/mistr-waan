@@ -9,7 +9,6 @@ import { EmptyState } from "@/components/ui/EmptyState";
 import { StatusPill } from "@/components/booking/StatusPill";
 import { useJobs } from "@/lib/store/jobs";
 import { useAuth } from "@/lib/store/auth";
-import { getGarageById } from "@/lib/mock/garages";
 import { ownerLabel, rupees, timeAgo } from "@/lib/utils";
 
 /**
@@ -85,15 +84,16 @@ export default function BookingsPage() {
           ) : (
             <ul className="mt-6 flex flex-col gap-3">
               {sorted.map((job) => {
-                const garage = getGarageById(job.garageId);
+                const garage = job.garage ?? null;
                 const days = Math.max(
                   0,
                   Math.floor((Date.now() - new Date(job.createdAt).getTime()) / 86400000),
                 );
+                const amount = job.total ?? job.baseTotal ?? 0;
                 return (
                   <li key={job.id}>
                     <Link
-                      href={`/bookings/${job.id}`}
+                      href={`/bookings/${job.shortId}`}
                       className="tap block rounded-md border border-border bg-card p-4 shadow-sm transition-transform active:scale-[0.99]"
                     >
                       <div className="flex items-start justify-between gap-3">
@@ -101,7 +101,7 @@ export default function BookingsPage() {
                           <span className="text-base font-semibold text-foreground">
                             {garage
                               ? ownerLabel(garage.ownerFirstName, garage.ownerLastName)
-                              : "Unknown garage"}
+                              : "Finding garage…"}
                           </span>
                           <span className="text-sm text-muted-foreground capitalize">
                             {job.bucket} · {job.slotLabel}
@@ -113,8 +113,12 @@ export default function BookingsPage() {
                       <div className="mt-3 flex items-baseline justify-between gap-2 text-sm">
                         <span className="text-muted-foreground">
                           {job.paymentMode === "upi"
-                            ? `Paid ${rupees(job.total)} via UPI`
-                            : `${rupees(job.total)} cash on completion`}
+                            ? amount > 0
+                              ? `Paid ${rupees(amount)} via UPI`
+                              : "UPI"
+                            : amount > 0
+                              ? `${rupees(amount)} cash on completion`
+                              : "Cash on completion"}
                         </span>
                         <span className="text-xs text-muted-foreground">{timeAgo(days)}</span>
                       </div>

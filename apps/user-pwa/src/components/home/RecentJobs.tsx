@@ -4,8 +4,6 @@ import Link from "next/link";
 import { Star } from "lucide-react";
 import { useJobs } from "@/lib/store/jobs";
 import { useAuth } from "@/lib/store/auth";
-import { getGarageById } from "@/lib/mock/garages";
-import { detailingServices } from "@/lib/mock/services";
 import { ownerLabel, rupees } from "@/lib/utils";
 import { StatusPill } from "@/components/booking/StatusPill";
 
@@ -38,16 +36,13 @@ export function RecentJobs() {
 
       <ul className="mt-3 flex flex-col gap-3">
         {recent.map((job) => {
-          const garage = getGarageById(job.garageId);
-          const labelService =
-            job.serviceIds.length > 0
-              ? detailingServices.find((s) => s.id === job.serviceIds[0])?.name ??
-                job.bucket
-              : job.bucket;
+          const garage = job.garage ?? null;
+          const labelService = job.bucket;
+          const amount = job.total ?? job.baseTotal ?? 0;
           return (
             <li key={job.id}>
               <Link
-                href={`/bookings/${job.id}`}
+                href={`/bookings/${job.shortId}`}
                 className="tap block rounded-md border border-border bg-card p-4 shadow-sm transition-transform active:scale-[0.99]"
               >
                 <div className="flex items-start justify-between gap-3">
@@ -56,23 +51,22 @@ export function RecentJobs() {
                       {labelService}
                     </span>
                     <span className="text-sm text-muted-foreground">
-                      With{" "}
                       {garage
-                        ? ownerLabel(garage.ownerFirstName, garage.ownerLastName)
-                        : "—"}
+                        ? `With ${ownerLabel(garage.ownerFirstName, garage.ownerLastName)}`
+                        : "Awaiting garage"}
                     </span>
                   </div>
                   <StatusPill status={job.status} />
                 </div>
 
                 <div className="mt-3 flex items-center justify-between gap-2">
-                  {job.rating ? (
+                  {job.ratingValue ? (
                     <div className="flex items-center gap-0.5">
                       {[1, 2, 3, 4, 5].map((n) => (
                         <Star
                           key={n}
                           className={
-                            n <= job.rating!
+                            n <= job.ratingValue!
                               ? "size-4 fill-ignite-500 text-ignite-500"
                               : "size-4 text-steel-300"
                           }
@@ -82,9 +76,11 @@ export function RecentJobs() {
                     </div>
                   ) : (
                     <span className="text-xs text-muted-foreground">
-                      {job.paymentMode === "upi"
-                        ? `Paid ${rupees(job.total)}`
-                        : `${rupees(job.total)} cash`}
+                      {amount > 0
+                        ? job.paymentMode === "upi"
+                          ? `Paid ${rupees(amount)}`
+                          : `${rupees(amount)} cash`
+                        : "Quote pending"}
                     </span>
                   )}
                   <span className="text-sm text-primary font-medium">View →</span>

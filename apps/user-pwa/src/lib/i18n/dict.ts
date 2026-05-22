@@ -71,10 +71,14 @@ const en = {
     "By continuing, you agree to our Terms and Privacy.",
 
   /* Status pills */
+  "status.queued_for_call": "Awaiting call",
+  "status.quoted": "Quote ready",
+  "status.awaiting_garage": "Finding garage",
   "status.assigned": "Booked",
   "status.in_progress": "In progress",
   "status.completed": "Completed",
   "status.cancelled": "Cancelled",
+  "status.declined_by_garage": "Reassigning",
 
   /* CTA verbs */
   "cta.continue": "Continue",
@@ -314,10 +318,14 @@ const ur: Partial<Record<Key, string>> = {
   "login.terms":
     "جاری رکھ کر آپ ہماری شرائط اور پرائیویسی پالیسی سے اتفاق کرتے ہیں۔",
 
+  "status.queued_for_call": "کال کا انتظار",
+  "status.quoted": "قیمت تیار",
+  "status.awaiting_garage": "گیراج کی تلاش",
   "status.assigned": "بُک کی گئی",
   "status.in_progress": "جاری",
   "status.completed": "مکمل",
   "status.cancelled": "منسوخ",
+  "status.declined_by_garage": "دوبارہ مقرر",
 
   "cta.continue": "جاری رکھیں",
   "cta.continueToPay": "ادائیگی کیلئے آگے بڑھیں",

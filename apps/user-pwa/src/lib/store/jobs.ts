@@ -1,104 +1,80 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import type { BookingBucket } from "./booking-draft";
-
 /**
- * Mock jobs store — V0 only. Bookings are persisted in sessionStorage.
- * Real jobs land when backend joins; this keeps the UI demoable.
+ * Client-side bookings hook (kept under the legacy `jobs` filename so existing
+ * imports keep working — full rename to `bookings.ts` lands after week 1).
+ *
+ * Reads from `/api/bookings` (GET list) on mount and on `refresh()`.
+ * Mutations (cancel, rate) call dedicated endpoints — for week 1 those endpoints
+ * don't exist yet, so the optimistic update is gated behind a TODO.
  */
 
-export type JobStatus =
-  | "assigned" /* booked, garage notified — slot pending */
-  | "in_progress" /* garage marked started */
-  | "completed" /* garage marked done; user can rate */
-  | "cancelled";
+import { useCallback, useEffect, useState } from "react";
+import type { Booking, BookingBucket, BookingStatus } from "@/lib/bookings/types";
 
-export interface Job {
-  id: string;
-  bucket: BookingBucket;
-  serviceIds: string[];
-  garageId: string;
-  slotLabel: string;
-  paymentMode: "upi" | "cash";
-  total: number;
-  status: JobStatus;
-  createdAt: string; // ISO
-  rating?: 1 | 2 | 3 | 4 | 5;
-}
+/** Legacy alias kept for components that imported JobStatus. */
+export type JobStatus = BookingStatus;
 
-const KEY = "mw_mock_jobs";
+/** Legacy alias kept for components that imported Job. */
+export type Job = Booking;
 
-function readAll(): Job[] {
-  if (typeof window === "undefined") return [];
-  const raw = sessionStorage.getItem(KEY);
-  if (!raw) return [];
-  try {
-    return JSON.parse(raw) as Job[];
-  } catch {
-    return [];
-  }
-}
-
-function writeAll(jobs: Job[]) {
-  sessionStorage.setItem(KEY, JSON.stringify(jobs));
-}
-
-export function newJobId(): string {
-  // Format: MW-XXXXXX
-  return `MW-${Math.random().toString(36).slice(2, 8).toUpperCase()}`;
-}
-
-/** Synchronous read. */
-export function getJob(id: string): Job | undefined {
-  return readAll().find((j) => j.id === id);
-}
-
-/** Synchronous create — returns the new Job (with generated id). */
-export function createJob(input: Omit<Job, "id" | "createdAt" | "status">): Job {
-  const job: Job = {
-    ...input,
-    id: newJobId(),
-    createdAt: new Date().toISOString(),
-    status: "assigned",
-  };
-  const next = [...readAll(), job];
-  writeAll(next);
-  return job;
-}
-
-/** Reactive React hook for the jobs list. */
 export function useJobs() {
-  const [jobs, setJobs] = useState<Job[]>([]);
+  const [jobs, setJobs] = useState<Booking[]>([]);
   const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
-    setJobs(readAll());
-    setHydrated(true);
-
-    function handleStorage(e: StorageEvent) {
-      if (e.key === KEY) setJobs(readAll());
+  const refresh = useCallback(async () => {
+    try {
+      const res = await fetch("/api/bookings", { credentials: "include" });
+      if (!res.ok) {
+        setJobs([]);
+        return;
+      }
+      const data = (await res.json()) as { bookings: Booking[] };
+      setJobs(data.bookings);
+    } catch {
+      setJobs([]);
     }
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
-  const update = useCallback((id: string, patch: Partial<Job>) => {
-    setJobs((prev) => {
-      const next = prev.map((j) => (j.id === id ? { ...j, ...patch } : j));
-      writeAll(next);
-      return next;
-    });
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      await refresh();
+      if (!cancelled) setHydrated(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [refresh]);
+
+  // TODO Week 3: call PATCH /api/bookings/[id]/cancel.
+  // For now, optimistic local update so the existing UI still feels responsive.
+  const cancel = useCallback((id: string) => {
+    setJobs((prev) =>
+      prev.map((b) =>
+        b.id === id || b.shortId === id ? { ...b, status: "cancelled" } : b,
+      ),
+    );
   }, []);
 
-  const cancel = useCallback(
-    (id: string) => update(id, { status: "cancelled" }),
-    [update],
-  );
+  // TODO Week 4: call POST /api/bookings/[id]/rating.
+  const update = useCallback((id: string, patch: Partial<Booking>) => {
+    setJobs((prev) =>
+      prev.map((b) => (b.id === id || b.shortId === id ? { ...b, ...patch } : b)),
+    );
+  }, []);
 
   const activeJob = jobs.find(
-    (j) => j.status === "assigned" || j.status === "in_progress",
+    (b) =>
+      b.status === "queued_for_call" ||
+      b.status === "quoted" ||
+      b.status === "awaiting_garage" ||
+      b.status === "assigned" ||
+      b.status === "in_progress",
   );
 
-  return { jobs, hydrated, update, cancel, activeJob };
+  return { jobs, hydrated, update, cancel, activeJob, refresh };
 }
+
+/** Re-export BookingBucket for legacy consumers. */
+export type { BookingBucket };

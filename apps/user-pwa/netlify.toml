@@ -16,14 +16,6 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-[[redirects]]
-  from = "/ops"
-  to = "https://waan-ops.netlify.app"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/ops/*"
-  to = "https://waan-ops.netlify.app/:splat"
-  status = 200
-  force = true
+# Legacy /ops -> waan-ops.netlify.app redirect removed in Week 1.
+# Ops dashboard now lives at /ops/* inside this same app. A future Week 2+
+# DNS change can split it onto ops.autogtg.com as its own site if desired.

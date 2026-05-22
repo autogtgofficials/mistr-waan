@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { useJobs } from "@/lib/store/jobs";
-import { getGarageById } from "@/lib/mock/garages";
 import { ownerLabel, cn } from "@/lib/utils";
 import { useLocale } from "@/lib/i18n/client";
 import { t } from "@/lib/i18n/dict";
@@ -13,14 +12,12 @@ export function ActiveJobBar() {
   const locale = useLocale();
   if (!hydrated || !activeJob) return null;
 
-  const garage = getGarageById(activeJob.garageId);
-  if (!garage) return null;
-
-  const name = ownerLabel(garage.ownerFirstName, garage.ownerLastName);
+  const garage = activeJob.garage ?? null;
+  const name = garage ? ownerLabel(garage.ownerFirstName, garage.ownerLastName) : "your garage";
 
   return (
     <Link
-      href={`/bookings/${activeJob.id}`}
+      href={`/bookings/${activeJob.shortId}`}
       className={cn(
         "tap flex h-10 items-center gap-2 border-b border-pulse-100 bg-pulse-50 px-4 text-sm text-pulse-900",
         locale === "ur" && "font-urdu",
