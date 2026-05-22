@@ -3,73 +3,85 @@
 import { useCallback, useEffect, useState } from "react";
 
 /**
- * Mock auth — V0 only. Stores a "logged in" user in sessionStorage.
- * Real auth lands when Django + JWT lands.
+ * Client-side auth hook.
+ *
+ * Source of truth is the `mw_session` httpOnly cookie set by `/api/auth/otp/verify`.
+ * On mount we call `/api/auth/me` to hydrate. `signIn` is a no-op because the
+ * server already issued the cookie before we got here — we just re-fetch.
  */
 
-export interface MockUser {
-  phone: string; // e.g. "+91 6006617842"
-  firstName: string; // default "User" — prompted in profile
+export interface SessionUser {
+  id: string;
+  phone: string;
+  firstName: string;
   language: "en" | "ur";
 }
 
-const KEY = "mw_mock_user";
-
-export function readUser(): MockUser | null {
-  if (typeof window === "undefined") return null;
-  const raw = sessionStorage.getItem(KEY);
-  if (!raw) return null;
-  try {
-    return JSON.parse(raw) as MockUser;
-  } catch {
-    return null;
-  }
-}
-
-export function writeUser(user: MockUser) {
-  sessionStorage.setItem(KEY, JSON.stringify(user));
-}
-
-export function clearUser() {
-  sessionStorage.removeItem(KEY);
+interface MeResponse {
+  profile: {
+    id: string;
+    phone: string;
+    firstName: string | null;
+    language: string | null;
+  };
 }
 
 export function useAuth() {
-  const [user, setUser] = useState<MockUser | null>(null);
+  const [user, setUser] = useState<SessionUser | null>(null);
   const [hydrated, setHydrated] = useState(false);
 
-  useEffect(() => {
-    setUser(readUser());
-    setHydrated(true);
-
-    /* Sync across tabs / sheet-driven sign-ins */
-    function handleStorage(e: StorageEvent) {
-      if (e.key === KEY) setUser(readUser());
+  const refresh = useCallback(async () => {
+    try {
+      const res = await fetch("/api/auth/me", { credentials: "include" });
+      if (!res.ok) {
+        setUser(null);
+        return;
+      }
+      const data = (await res.json()) as MeResponse;
+      setUser({
+        id: data.profile.id,
+        phone: data.profile.phone,
+        firstName: data.profile.firstName ?? "User",
+        language: (data.profile.language === "ur" ? "ur" : "en") as "en" | "ur",
+      });
+    } catch {
+      setUser(null);
     }
-    window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
   }, []);
 
-  const signIn = useCallback((phone: string) => {
-    const u: MockUser = { phone, firstName: "User", language: "en" };
-    writeUser(u);
-    setUser(u);
-    return u;
-  }, []);
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      await refresh();
+      if (!cancelled) setHydrated(true);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [refresh]);
 
-  const signOut = useCallback(() => {
-    clearUser();
+  /** Compat shim: OtpEntry called `signIn(phone)` after verify. Now a no-op
+   *  because /api/auth/otp/verify already set the cookie; we just re-pull. */
+  const signIn = useCallback(
+    async (_phone: string) => {
+      await refresh();
+    },
+    [refresh],
+  );
+
+  const signOut = useCallback(async () => {
+    try {
+      await fetch("/api/auth/signout", { method: "POST", credentials: "include" });
+    } catch {
+      // best-effort; if network fails the cookie still expires server-side
+    }
     setUser(null);
   }, []);
 
+  /** Local-only name update; will be wired to a PATCH /api/auth/me later. */
   const updateName = useCallback((firstName: string) => {
-    setUser((prev) => {
-      if (!prev) return prev;
-      const next = { ...prev, firstName };
-      writeUser(next);
-      return next;
-    });
+    setUser((prev) => (prev ? { ...prev, firstName } : prev));
   }, []);
 
-  return { user, hydrated, isAuthed: !!user, signIn, signOut, updateName };
+  return { user, hydrated, isAuthed: !!user, signIn, signOut, updateName, refresh };
 }

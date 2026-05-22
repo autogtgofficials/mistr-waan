@@ -9,6 +9,24 @@ const STATUS_META: Record<
   JobStatus,
   { labelKey: DictKey; bg: string; text: string; dot: string }
 > = {
+  queued_for_call: {
+    labelKey: "status.queued_for_call",
+    bg: "bg-pulse-50",
+    text: "text-pulse-700",
+    dot: "bg-pulse-500",
+  },
+  quoted: {
+    labelKey: "status.quoted",
+    bg: "bg-pulse-50",
+    text: "text-pulse-700",
+    dot: "bg-pulse-500",
+  },
+  awaiting_garage: {
+    labelKey: "status.awaiting_garage",
+    bg: "bg-pulse-50",
+    text: "text-pulse-700",
+    dot: "bg-pulse-500",
+  },
   assigned: {
     labelKey: "status.assigned",
     bg: "bg-pulse-50",
@@ -32,6 +50,12 @@ const STATUS_META: Record<
     bg: "bg-muted",
     text: "text-muted-foreground",
     dot: "bg-steel-300",
+  },
+  declined_by_garage: {
+    labelKey: "status.declined_by_garage",
+    bg: "bg-orange-50",
+    text: "text-ignite-700",
+    dot: "bg-ignite-500",
   },
 };
 

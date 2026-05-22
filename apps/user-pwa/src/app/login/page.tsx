@@ -24,8 +24,10 @@ function LoginInner() {
   const [phone, setPhone] = useState("");
   const [channel, setChannel] = useState<"whatsapp" | "sms">("whatsapp");
 
-  function handleVerified() {
-    signIn(phone);
+  async function handleVerified() {
+    // /api/auth/otp/verify already set the mw_session cookie.
+    // signIn just refreshes the in-memory profile from /api/auth/me.
+    await signIn(phone);
     router.replace(next);
   }
 

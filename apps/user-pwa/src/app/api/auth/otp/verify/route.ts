@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { normalizeIndianPhone } from "@/lib/whatsapp/phone";
 import { verifyOtp } from "@/lib/otp/store";
 import { appendAuditEntry } from "@/lib/audit/log";
+import { upsertProfileByPhone } from "@/lib/auth/profile";
+import { setSessionCookie } from "@/lib/auth/session";
 
 export const runtime = "nodejs";
 
@@ -50,6 +52,24 @@ export async function POST(request: Request) {
     );
   }
 
+  // OTP verified — upsert profile and issue JWT session cookie.
+  let profileId: string;
+  try {
+    const profile = await upsertProfileByPhone(phone);
+    profileId = profile.id;
+    await setSessionCookie({ role: "customer", sub: profile.id, phone });
+  } catch (err) {
+    await appendAuditEntry({
+      action: "verify_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      outcome: "error",
+      error: `profile_or_session_failed: ${(err as Error).message}`,
+    });
+    return NextResponse.json({ error: "session_failed" }, { status: 500 });
+  }
+
   await appendAuditEntry({
     action: "verify_otp",
     entityType: "auth",
@@ -57,5 +77,12 @@ export async function POST(request: Request) {
     actor,
     outcome: "success",
   });
-  return NextResponse.json({ verified: true, phone });
+  await appendAuditEntry({
+    action: "signin",
+    entityType: "profile",
+    entityId: profileId,
+    actor: profileId,
+    outcome: "success",
+  });
+  return NextResponse.json({ verified: true, phone, profileId });
 }

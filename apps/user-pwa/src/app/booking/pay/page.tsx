@@ -8,7 +8,6 @@ import { BottomCTA } from "@/components/booking/BottomCTA";
 import { Button } from "@/components/ui/Button";
 import { useBookingDraft, clearDraft } from "@/lib/store/booking-draft";
 import { useAuth } from "@/lib/store/auth";
-import { createJob } from "@/lib/store/jobs";
 import { getGarageById } from "@/lib/mock/garages";
 import { detailingServices } from "@/lib/mock/services";
 import { rupees, cn } from "@/lib/utils";
@@ -27,6 +26,7 @@ export default function BookingPayPage() {
   const { isAuthed, hydrated: authHydrated } = useAuth();
   const [mode, setMode] = useState<"upi" | "cash">("upi");
   const [isPending, startTransition] = useTransition();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!hydrated || !authHydrated) return;
@@ -52,23 +52,55 @@ export default function BookingPayPage() {
 
   function handleConfirm() {
     if (!garage || !draft.slot) return;
-    const computedTotal = total > 0 ? total : 1500; /* repairs/denting placeholder */
+    setError(null);
 
     startTransition(async () => {
       if (mode === "upi") {
-        // Mock Razorpay sheet delay
+        // TODO Week 3: real Razorpay Checkout. Until then, fake the wait so
+        // the flow feels natural; we still hit the cash code path on the API
+        // (the server will eventually require a captured payment row before
+        // moving status off 'queued_for_call').
         await new Promise((r) => setTimeout(r, 1500));
       }
-      const job = createJob({
-        bucket: draft.bucket ?? "detailing",
-        serviceIds: draft.serviceIds ?? [],
-        garageId: garage.id,
-        slotLabel: draft.slot!.label,
-        paymentMode: mode,
-        total: computedTotal,
-      });
-      clearDraft();
-      router.replace(`/booking/confirmation/${job.id}`);
+
+      try {
+        const res = await fetch("/api/bookings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify({
+            bucket: draft.bucket ?? "detailing",
+            serviceIds: draft.serviceIds ?? [],
+            garageId: garage.id, // ops may reassign; UI passes user's pick as a hint
+            slotLabel: draft.slot!.label,
+            paymentMode: mode,
+            symptoms: draft.symptoms ?? null,
+            denting: draft.denting ?? null,
+          }),
+        });
+
+        if (!res.ok) {
+          const data = (await res.json().catch(() => ({}))) as { error?: string };
+          if (res.status === 401) {
+            router.replace(`/login?next=${encodeURIComponent("/booking/pay")}`);
+            return;
+          }
+          setError(
+            data.error === "invalid_payment_mode"
+              ? "That payment method isn't supported."
+              : "Couldn't confirm your booking. Please try again.",
+          );
+          return;
+        }
+
+        const data = (await res.json()) as { booking: { id: string; shortId: string } };
+        clearDraft();
+        // Confirmation page is keyed by the human short_id (MW-XXXXXX) for
+        // readability. The API supports lookup by either, but URLs use short.
+        router.replace(`/booking/confirmation/${data.booking.shortId}`);
+      } catch {
+        setError("Network problem — check your connection and try again.");
+      }
     });
   }
 
@@ -131,6 +163,15 @@ export default function BookingPayPage() {
           <p className="mt-6 text-sm text-muted-foreground">
             Free to cancel until 1 hour before your slot.
           </p>
+
+          {error ? (
+            <p
+              role="alert"
+              className="mt-4 rounded-md border border-danger/30 bg-danger/5 p-3 text-sm text-danger"
+            >
+              {error}
+            </p>
+          ) : null}
         </div>
       </main>
 
