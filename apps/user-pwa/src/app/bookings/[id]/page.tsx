@@ -9,8 +9,16 @@ import { TabBar } from "@/components/layout/TabBar";
 import { Button } from "@/components/ui/Button";
 import { Sheet } from "@/components/ui/Sheet";
 import { StatusPill } from "@/components/booking/StatusPill";
+import { PayNowButton } from "@/components/booking/PayNowButton";
 import type { Booking } from "@/lib/bookings/types";
 import { ownerLabel, rupees, cn } from "@/lib/utils";
+
+interface PaymentSummary {
+  id: string;
+  status: "pending" | "authorized" | "captured" | "refunded" | "failed";
+  amount: number;
+  capturedAt: string | null;
+}
 
 /**
  * /bookings/[id] — live tracking + post-completion rating.
@@ -37,6 +45,7 @@ export default function BookingTrackPage({
   const { id } = use(params);
   const router = useRouter();
   const [booking, setBooking] = useState<Booking | null>(null);
+  const [payment, setPayment] = useState<PaymentSummary | null>(null);
   const [loadState, setLoadState] = useState<"loading" | "loaded" | "not_found" | "error">(
     "loading",
   );
@@ -44,27 +53,53 @@ export default function BookingTrackPage({
   const [cancelBusy, setCancelBusy] = useState(false);
   const [cancelError, setCancelError] = useState<string | null>(null);
   const [rateOpen, setRateOpen] = useState(false);
+  const [rateBusy, setRateBusy] = useState(false);
+  const [rateError, setRateError] = useState<string | null>(null);
   const [reasonOpen, setReasonOpen] = useState(false);
   const [pickedRating, setPickedRating] = useState<number | null>(null);
-  const [, setPickedReason] = useState<string | null>(null);
+  const [pickedReason, setPickedReason] = useState<string | null>(null);
 
+  // Initial load + polling for live status. Polls every 15s — Realtime would
+  // be nicer (Week 5+) but polling is robust against missed events.
   useEffect(() => {
     let cancelled = false;
-    void (async () => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    async function loadOnce(isInitial: boolean) {
       try {
-        const res = await fetch(`/api/bookings/${id}`, { credentials: "include" });
+        const [bRes, pRes] = await Promise.all([
+          fetch(`/api/bookings/${id}`, { credentials: "include" }),
+          fetch(`/api/bookings/${id}/payment`, { credentials: "include" }).catch(
+            () => null,
+          ),
+        ]);
         if (cancelled) return;
-        if (res.status === 404) return setLoadState("not_found");
-        if (!res.ok) return setLoadState("error");
-        const data = (await res.json()) as { booking: Booking };
-        setBooking(data.booking);
+        if (bRes.status === 404) return setLoadState("not_found");
+        if (!bRes.ok) {
+          if (isInitial) setLoadState("error");
+          return;
+        }
+        const bData = (await bRes.json()) as { booking: Booking };
+        setBooking(bData.booking);
+        if (pRes && pRes.ok) {
+          const pData = (await pRes.json()) as { payment: PaymentSummary | null };
+          setPayment(pData.payment);
+        }
         setLoadState("loaded");
       } catch {
-        if (!cancelled) setLoadState("error");
+        if (isInitial && !cancelled) setLoadState("error");
       }
-    })();
+    }
+    void loadOnce(true);
+    const poll = () => {
+      if (cancelled) return;
+      void loadOnce(false).finally(() => {
+        if (!cancelled) timer = setTimeout(poll, 15_000);
+      });
+    };
+    timer = setTimeout(poll, 15_000);
     return () => {
       cancelled = true;
+      if (timer) clearTimeout(timer);
     };
   }, [id]);
 
@@ -93,14 +128,32 @@ export default function BookingTrackPage({
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(garage.fullAddress)}`
     : "#";
 
-  function submitRating() {
-    if (pickedRating === null) return;
-    // TODO Week 4: POST /api/bookings/[id]/rating. Optimistic for now.
-    setBooking((prev) =>
-      prev ? { ...prev, ratingValue: pickedRating as 1 | 2 | 3 | 4 | 5 } : prev,
-    );
-    setRateOpen(false);
-    if (pickedRating <= 2) setReasonOpen(true);
+  async function submitRating(comment?: string | null) {
+    if (pickedRating === null || !booking) return;
+    setRateBusy(true);
+    setRateError(null);
+    try {
+      const res = await fetch(`/api/bookings/${booking.id}/rating`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          score: pickedRating,
+          comment: comment ?? pickedReason ?? null,
+        }),
+      });
+      const data = (await res.json()) as { booking?: Booking; error?: string };
+      if (!res.ok || !data.booking) {
+        throw new Error(data.error ?? `HTTP ${res.status}`);
+      }
+      setBooking(data.booking);
+      setRateOpen(false);
+      if (pickedRating <= 2 && !comment) setReasonOpen(true);
+    } catch (err) {
+      setRateError(err instanceof Error ? err.message : "Rating failed");
+    } finally {
+      setRateBusy(false);
+    }
   }
 
   async function doCancel() {
@@ -204,6 +257,45 @@ export default function BookingTrackPage({
               )}
             >
               {statusLine}
+            </div>
+          ) : null}
+
+          {/* Pay Now — UPI booking, has a quote, no captured payment yet,
+              and Razorpay is enabled. */}
+          {booking.paymentMode === "upi" &&
+          booking.total != null &&
+          booking.total > 0 &&
+          (booking.status === "quoted" || booking.status === "awaiting_garage") &&
+          payment?.status !== "captured" &&
+          process.env.NEXT_PUBLIC_RAZORPAY_ENABLED === "true" ? (
+            <div className="mt-6 rounded-md border border-pulse-100 bg-pulse-50 p-4">
+              <h3 className="text-sm font-semibold text-pulse-900">
+                Payment due: {rupees(booking.total)}
+              </h3>
+              <p className="mt-1 text-xs text-pulse-900">
+                Pay now to lock in your slot.
+              </p>
+              <div className="mt-3">
+                <PayNowButton
+                  bookingId={booking.id}
+                  amount={booking.total}
+                  customerName={undefined}
+                  onSuccess={() => {
+                    // Trigger an immediate refresh after the modal closes.
+                    setPayment((prev) =>
+                      prev
+                        ? { ...prev, status: "captured", capturedAt: new Date().toISOString() }
+                        : prev,
+                    );
+                  }}
+                />
+              </div>
+            </div>
+          ) : null}
+
+          {payment?.status === "captured" ? (
+            <div className="mt-6 rounded-md border border-aqua-100 bg-aqua-50 p-4 text-sm text-aqua-900">
+              UPI payment of {rupees(payment.amount)} received. Thank you!
             </div>
           ) : null}
 
@@ -356,7 +448,12 @@ export default function BookingTrackPage({
       {/* Rating sheet */}
       <Sheet
         open={rateOpen}
-        onClose={() => setRateOpen(false)}
+        onClose={() => {
+          if (!rateBusy) {
+            setRateOpen(false);
+            setRateError(null);
+          }
+        }}
         title={`How was ${garage?.ownerFirstName ?? "your garage"}?`}
       >
         <div className="flex flex-col items-center gap-2 pt-4 pb-6">
@@ -384,9 +481,13 @@ export default function BookingTrackPage({
           <p className="text-sm text-muted-foreground">
             {pickedRating ? `${pickedRating} star${pickedRating === 1 ? "" : "s"}` : "Tap to rate"}
           </p>
+          {rateError ? (
+            <p className="mt-2 text-sm text-danger">{rateError}</p>
+          ) : null}
         </div>
         <Button
-          onClick={submitRating}
+          onClick={() => void submitRating()}
+          loading={rateBusy}
           disabled={pickedRating === null}
           className="w-full"
         >
@@ -394,7 +495,9 @@ export default function BookingTrackPage({
         </Button>
       </Sheet>
 
-      {/* Bad-rating reason sheet */}
+      {/* Bad-rating reason sheet — submits an updated rating with the comment.
+          Backend allows a single rating per booking so this is the same row,
+          but we display the reason in the audit log for ops. */}
       <Sheet
         open={reasonOpen}
         onClose={() => setReasonOpen(false)}
@@ -408,6 +511,7 @@ export default function BookingTrackPage({
                 type="button"
                 onClick={() => {
                   setPickedReason(r);
+                  void submitRating(r);
                   setReasonOpen(false);
                 }}
                 className="tap flex w-full items-center justify-between rounded-md py-3 text-left active:bg-muted"
@@ -421,8 +525,8 @@ export default function BookingTrackPage({
             </li>
           ))}
         </ul>
-        <Button onClick={() => setReasonOpen(false)} className="w-full">
-          Done
+        <Button onClick={() => setReasonOpen(false)} variant="ghost" className="w-full">
+          Skip
         </Button>
       </Sheet>
     </div>

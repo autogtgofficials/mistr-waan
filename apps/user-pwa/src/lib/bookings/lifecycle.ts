@@ -2,6 +2,7 @@ import "server-only";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { getBookingById } from "./data";
 import { incrementJobsCompleted } from "@/lib/garage/data";
+import { maybeIssueReferralReward } from "@/lib/referrals/data";
 import type { Booking } from "./types";
 
 /**
@@ -46,6 +47,15 @@ export async function completeJob(bookingId: string): Promise<Booking> {
   if (before.garageId) {
     await incrementJobsCompleted(before.garageId);
   }
+
+  // Fire-and-forget the referral reward path. We never want a referral
+  // failure to surface as a complete-job error to the garage.
+  void maybeIssueReferralReward({
+    refereeProfileId: before.profileId,
+    completedBookingId: bookingId,
+  }).catch((err) =>
+    console.error("[referral] maybeIssueReferralReward failed", err),
+  );
 
   const refreshed = await getBookingById(bookingId);
   if (!refreshed) throw new Error("booking vanished after complete update");

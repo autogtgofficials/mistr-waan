@@ -39,6 +39,7 @@ yarn-error.log*
 /data/otp-store.json
 /data/audit-log.ndjson
 /data/audit-log.json
+/data/rate-limits.json
 
 # vercel
 .vercel
