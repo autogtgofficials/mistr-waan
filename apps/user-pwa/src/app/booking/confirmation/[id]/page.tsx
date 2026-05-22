@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Phone, MessageCircle, MapPin, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { TabBar } from "@/components/layout/TabBar";
+import { PhotoUploader } from "@/components/booking/PhotoUploader";
 import type { Booking } from "@/lib/bookings/types";
 import { ownerLabel, rupees } from "@/lib/utils";
 
@@ -175,6 +176,19 @@ export default function ConfirmationPage({
                   Our team will pick the best-fit garage after speaking with you and assign it
                   to your booking shortly.
                 </p>
+              </Section>
+              <Divider />
+            </>
+          )}
+
+          {(booking.bucket === "repairs" || booking.bucket === "denting") && (
+            <>
+              <Section title="Photos">
+                <p className="mb-3 text-sm text-muted-foreground">
+                  Send a few clear photos of the damage so our team can quote accurately
+                  before they call you.
+                </p>
+                <PhotoUploader bookingId={booking.id} />
               </Section>
               <Divider />
             </>
