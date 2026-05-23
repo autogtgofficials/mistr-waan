@@ -14,6 +14,9 @@ vi.mock("@/lib/audit/log", () => ({
 vi.mock("@/lib/whatsapp/client", () => ({
   sendWhatsAppTemplate: vi.fn(async () => ({ messageId: "wamid.MOCK", provider: "meta" })),
 }));
+vi.mock("@/lib/rate-limit/store", () => ({
+  rateLimit: vi.fn(async () => ({ ok: true, remaining: 99, resetAt: Date.now() + 60_000 })),
+}));
 
 import { POST, GET } from "./route";
 import { getCustomerSession } from "@/lib/auth/session";

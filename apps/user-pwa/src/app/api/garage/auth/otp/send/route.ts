@@ -6,6 +6,10 @@ import { issueOtp } from "@/lib/otp/store";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { findGarageByPhone } from "@/lib/garage/data";
 import { applyCorsHeaders, handleCorsPreflight } from "@/lib/cors";
+import { rateLimit } from "@/lib/rate-limit/store";
+
+const OTP_PER_DAY = 10;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 export const runtime = "nodejs";
 
@@ -40,6 +44,29 @@ export async function POST(request: Request) {
     });
     return applyCorsHeaders(
       NextResponse.json({ error: "invalid_phone" }, { status: 400 }),
+      request,
+    );
+  }
+
+  // Per-phone daily cap (defence-in-depth on top of issueOtp's 60s cooldown).
+  const rl = await rateLimit(`garage:otp:send:${phone}`, {
+    max: OTP_PER_DAY,
+    windowMs: ONE_DAY_MS,
+  });
+  if (!rl.ok) {
+    await appendAuditEntry({
+      action: "garage_send_otp",
+      entityType: "garage_auth",
+      entityId: phone,
+      actor,
+      outcome: "error",
+      error: "rate_limited",
+    });
+    return applyCorsHeaders(
+      NextResponse.json(
+        { error: "rate_limited", resetAt: rl.resetAt },
+        { status: 429 },
+      ),
       request,
     );
   }

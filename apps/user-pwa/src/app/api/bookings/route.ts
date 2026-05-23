@@ -12,11 +12,17 @@ import type {
 } from "@/lib/bookings/types";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { sendWhatsAppTemplate } from "@/lib/whatsapp/client";
+import { rateLimit } from "@/lib/rate-limit/store";
 
 export const runtime = "nodejs";
 
 const VALID_BUCKETS: BookingBucket[] = ["detailing", "repairs", "denting"];
 const VALID_PAYMENT_MODES: PaymentMode[] = ["upi", "cash"];
+
+// Per-profile booking cap — deters spam and accidental double-submits.
+// 5 in an hour is comfortably more than any sane real user.
+const BOOKINGS_PER_HOUR = 5;
+const ONE_HOUR_MS = 60 * 60 * 1000;
 
 interface CreateBody {
   bucket?: string;
@@ -56,6 +62,26 @@ export async function POST(request: Request) {
     !VALID_PAYMENT_MODES.includes(body.paymentMode as PaymentMode)
   ) {
     return NextResponse.json({ error: "invalid_payment_mode" }, { status: 400 });
+  }
+
+  // Per-profile rate limit. Above the cap returns 429 + Retry-After hint.
+  const rl = await rateLimit(`booking:create:${session.sub}`, {
+    max: BOOKINGS_PER_HOUR,
+    windowMs: ONE_HOUR_MS,
+  });
+  if (!rl.ok) {
+    await appendAuditEntry({
+      action: "create_booking",
+      entityType: "booking",
+      entityId: "rate_limited",
+      actor: session.sub,
+      outcome: "error",
+      error: "rate_limited",
+    });
+    return NextResponse.json(
+      { error: "rate_limited", resetAt: rl.resetAt },
+      { status: 429 },
+    );
   }
 
   // Customer UI passes either a UUID or a legacy slug like "g-imran-k".

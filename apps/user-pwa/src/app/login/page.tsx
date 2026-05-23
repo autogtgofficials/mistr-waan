@@ -18,6 +18,10 @@ function LoginInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const next = searchParams.get("next") || "/";
+  // ?ref=XYZ123 — referral code carried in from a shared link. We capture
+  // it before sign-in and POST to /api/me/referral/claim after the session
+  // cookie is set. Silently ignores failures.
+  const refCode = searchParams.get("ref");
   const { signIn } = useAuth();
 
   const [step, setStep] = useState<"phone" | "otp">("phone");
@@ -28,6 +32,18 @@ function LoginInner() {
     // /api/auth/otp/verify already set the mw_session cookie.
     // signIn just refreshes the in-memory profile from /api/auth/me.
     await signIn(phone);
+    if (refCode) {
+      try {
+        await fetch("/api/me/referral/claim", {
+          method: "POST",
+          credentials: "include",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ code: refCode }),
+        });
+      } catch {
+        // ignore — referral is optional and silently no-ops if already claimed
+      }
+    }
     router.replace(next);
   }
 
