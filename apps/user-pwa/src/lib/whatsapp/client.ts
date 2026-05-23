@@ -37,6 +37,12 @@ export async function sendWhatsAppTemplate(opts: {
   to: string;
   template: TemplateName;
   variables?: string[];
+  /**
+   * Dynamic quick-reply button payloads. Index matches the button position
+   * in the template (0 = first button, 1 = second). The payload string is
+   * what comes back to us via the webhook as `interactive.button_reply.id`.
+   */
+  buttonPayloads?: { index: number; payload: string }[];
 }): Promise<SendResult> {
   const tpl = getTemplate(opts.template);
   return getProvider().sendTemplate({
@@ -44,6 +50,11 @@ export async function sendWhatsAppTemplate(opts: {
     templateName: tpl.name,
     languageCode: tpl.language,
     bodyVariables: opts.variables,
+    buttonVariables: opts.buttonPayloads?.map((b) => ({
+      subType: "quick_reply" as const,
+      index: b.index,
+      value: b.payload,
+    })),
   });
 }
 

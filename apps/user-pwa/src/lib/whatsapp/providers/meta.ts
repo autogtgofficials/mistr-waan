@@ -107,11 +107,18 @@ export const metaProvider: WhatsAppProvider = {
     }
     if (buttonVariables) {
       for (const b of buttonVariables) {
+        // url buttons take a dynamic URL/path suffix as a "text" param.
+        // quick_reply buttons carry a dynamic payload that comes back to us
+        // as `interactive.button_reply.id` in the webhook.
+        const param =
+          b.subType === "quick_reply"
+            ? { type: "payload", payload: b.value }
+            : { type: "text", text: b.value };
         components.push({
           type: "button",
           sub_type: b.subType,
           index: b.index,
-          parameters: [{ type: "text", text: b.value }],
+          parameters: [param],
         });
       }
     }

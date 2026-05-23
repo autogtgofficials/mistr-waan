@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { OpsBookingRow } from "@/lib/bookings/ops-data";
 import { rupees, timeAgo } from "@/lib/utils";
@@ -109,8 +110,15 @@ export function OpsBookingsTable({
               );
               const amount = b.total ?? b.baseTotal ?? 0;
               return (
-                <tr key={b.id} className="border-b border-border-subtle align-top">
-                  <td className="py-3 pe-3 tabular font-mono text-xs">{b.shortId}</td>
+                <tr key={b.id} className="border-b border-border-subtle align-top hover:bg-muted/40">
+                  <td className="py-3 pe-3 tabular font-mono text-xs">
+                    <Link
+                      href={`/ops/bookings/${b.shortId}`}
+                      className="text-pulse-700 hover:underline"
+                    >
+                      {b.shortId}
+                    </Link>
+                  </td>
                   <td className="py-3 pe-3">
                     <div className="font-medium text-foreground">
                       {b.customerFirstName ?? "User"}

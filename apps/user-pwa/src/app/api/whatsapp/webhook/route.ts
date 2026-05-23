@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { verifyMetaSignature } from "@/lib/whatsapp/signature";
 import { parseInboundMessages } from "@/lib/whatsapp/client";
+import { handleInboundMessage } from "@/lib/whatsapp/intents";
 import { appendAuditEntry } from "@/lib/audit/log";
 
 export const runtime = "nodejs";
@@ -67,7 +68,13 @@ export async function POST(request: Request) {
       payload: { type: msg.type, text: msg.text, interactiveId: msg.interactiveId },
       outcome: "success",
     });
-    // TODO Packet B6 — route to intent handler (start/help/book/track/cancel/rate)
+    // Route to intent handler. Failures are logged inside the handler so we
+    // can always return 200 to Meta (avoids the retry storm).
+    try {
+      await handleInboundMessage(msg);
+    } catch (err) {
+      console.error("[webhook] intent handler crashed", err);
+    }
   }
 
   return NextResponse.json({ ok: true });
