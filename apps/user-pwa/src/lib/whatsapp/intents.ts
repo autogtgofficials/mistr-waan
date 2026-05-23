@@ -2,15 +2,20 @@ import "server-only";
 import { getBookingByShortId, getBookingById } from "@/lib/bookings/data";
 import { respondToAssignment } from "@/lib/bookings/assign";
 import { cancelJob, completeJob, startJob } from "@/lib/bookings/lifecycle";
+import { listBookingsForProfile } from "@/lib/bookings/data";
+import { addBookingRating } from "@/lib/bookings/ratings";
 import { notifyTemplate, notifyText, recordInbound } from "@/lib/notifications/outbox";
-import { findGarageByPhone, type Garage } from "@/lib/garage/data";
+import { findGarageByPhone, setGarageActive, type Garage } from "@/lib/garage/data";
 import { listGarageJobs } from "@/lib/garage/jobs";
+import { findProfileByPhone } from "@/lib/auth/profile";
+import { ensureReferralCode } from "@/lib/referrals/data";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { handleWizardMessage } from "./bot/wizard";
 import { getWizardState } from "./bot/state";
 import type { InboundMessage } from "./types";
 import { isValidShortId } from "@/lib/supabase/short-id";
+import { rupees } from "@/lib/utils";
 
 /**
  * Router for inbound WhatsApp messages.
@@ -110,6 +115,21 @@ async function handleGarageMessage(opts: {
     return;
   }
 
+  if (lower === "earnings" || lower === "balance" || lower === "payout") {
+    await handleGarageEarnings({ garage, from });
+    return;
+  }
+
+  if (lower === "pause" || lower === "stop accepting") {
+    await handleGaragePauseResume({ garage, from, active: false });
+    return;
+  }
+
+  if (lower === "resume" || lower === "unpause" || lower === "start accepting") {
+    await handleGaragePauseResume({ garage, from, active: true });
+    return;
+  }
+
   const startMatch = lower.match(/^start\s+(mw-[a-z0-9-]+)$/i);
   if (startMatch) {
     await handleGarageStart({
@@ -167,11 +187,17 @@ function garageHelpText(garage: Garage): string {
   return [
     `Hi ${garage.ownerFirstName} — Mistr Waan garage commands:`,
     "",
+    "Jobs:",
     "• JOBS — your active jobs",
     "• ACCEPT MW-XXXXXX — accept a new job",
     "• DECLINE MW-XXXXXX — pass on a job",
     "• START MW-XXXXXX — mark a job in progress",
     "• COMPLETE MW-XXXXXX — mark a job done",
+    "",
+    "Account:",
+    "• EARNINGS — recent earnings + commission balance",
+    "• PAUSE — stop receiving new jobs",
+    "• RESUME — start receiving new jobs again",
     "",
     "Or use the app: garage.autogtg.com",
   ].join("\n");
@@ -351,6 +377,94 @@ async function handleGarageStart(opts: {
   }
 }
 
+async function handleGarageEarnings(opts: {
+  garage: Garage;
+  from: string;
+}): Promise<void> {
+  let jobs;
+  try {
+    jobs = await listGarageJobs(opts.garage.id);
+  } catch (err) {
+    console.error("[intents] earnings list failed", err);
+    await notifyText({
+      to: opts.from,
+      body: "Couldn't fetch earnings right now. Try again in a moment.",
+    });
+    return;
+  }
+  // Window: rolling 30 days from "now".
+  const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+  const recentCompleted = jobs.filter(
+    (j) => j.status === "completed" && new Date(j.completedAt ?? 0).getTime() >= cutoff,
+  );
+  const gross = recentCompleted.reduce((acc, j) => acc + (j.total ?? 0), 0);
+  const commission = recentCompleted.reduce(
+    (acc, j) => acc + (j.commissionCut ?? 0),
+    0,
+  );
+  const cashCommissionOwed = recentCompleted
+    .filter((j) => j.paymentMode === "cash")
+    .reduce((acc, j) => acc + (j.commissionCut ?? 0), 0);
+  const net = gross - commission;
+
+  const lines = [
+    `💰 ${opts.garage.shopName} — last 30 days`,
+    "",
+    `Completed jobs: ${recentCompleted.length}`,
+    `Gross: ${rupees(gross)}`,
+    `Mistr Waan fee: ${rupees(commission)} (${opts.garage.commissionPct}%)`,
+    `Your net: ${rupees(net)}`,
+  ];
+  if (cashCommissionOwed > 0) {
+    lines.push(
+      "",
+      `⚠️ Commission owed on cash jobs: ${rupees(cashCommissionOwed)}`,
+      "Settle weekly via UPI to +91 80000 11122.",
+    );
+  }
+  await notifyText({ to: opts.from, body: lines.join("\n") });
+}
+
+async function handleGaragePauseResume(opts: {
+  garage: Garage;
+  from: string;
+  active: boolean;
+}): Promise<void> {
+  if (opts.garage.active === opts.active) {
+    await notifyText({
+      to: opts.from,
+      body: opts.active
+        ? "You're already accepting new jobs. ✓"
+        : "You're already paused. New jobs won't be assigned.",
+    });
+    return;
+  }
+  try {
+    await setGarageActive(opts.garage.id, opts.active);
+    await notifyText({
+      to: opts.from,
+      body: opts.active
+        ? "✓ Resumed. We'll send you new jobs again."
+        : "✓ Paused. Ops won't assign new jobs to you until you reply RESUME. Existing jobs are unaffected.",
+    });
+    await appendAuditEntry({
+      action: opts.active ? "garage_resume" : "garage_pause",
+      entityType: "garage",
+      entityId: opts.garage.id,
+      actor: opts.garage.id,
+      payload: { source: "whatsapp_text" },
+      before: { active: opts.garage.active },
+      outcome: "success",
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "unknown_error";
+    await notifyText({
+      to: opts.from,
+      body: `Couldn't update status: ${message}`,
+    });
+  }
+}
+
 async function handleGarageComplete(opts: {
   garage: Garage;
   from: string;
@@ -433,6 +547,26 @@ async function handleCustomerMessage(opts: {
     return;
   }
 
+  if (
+    lower === "my bookings" ||
+    lower === "bookings" ||
+    lower === "my orders"
+  ) {
+    await handleCustomerBookingsList({ from: opts.from });
+    return;
+  }
+
+  if (
+    lower === "referral" ||
+    lower === "my code" ||
+    lower === "refer" ||
+    lower === "points" ||
+    lower === "loyalty"
+  ) {
+    await handleCustomerReferral({ from: opts.from });
+    return;
+  }
+
   const trackMatch = lower.match(/^track\s+(mw-[a-z0-9-]+)$/i);
   if (trackMatch) {
     await handleTrack({
@@ -447,6 +581,20 @@ async function handleCustomerMessage(opts: {
     await handleCustomerCancel({
       from: opts.from,
       shortId: cancelMatch[1]!.toUpperCase(),
+    });
+    return;
+  }
+
+  // RATE MW-XXXXXX <1-5> [free-text comment]
+  const rateMatch = opts.text
+    .trim()
+    .match(/^rate\s+(MW-[A-Z0-9-]+)\s+([1-5])(?:\s+(.+))?$/i);
+  if (rateMatch) {
+    await handleCustomerRate({
+      from: opts.from,
+      shortId: rateMatch[1]!.toUpperCase(),
+      score: Number(rateMatch[2]),
+      comment: rateMatch[3] ?? null,
     });
     return;
   }
@@ -473,8 +621,11 @@ function customerHelpText(): string {
     "",
     "Reply with:",
     "• BOOK — start a new booking",
+    "• MY BOOKINGS — recent bookings",
     "• TRACK MW-XXXXXX — booking status",
     "• CANCEL MW-XXXXXX — cancel (>1hr before slot)",
+    "• RATE MW-XXXXXX 5 great service — rate a completed job",
+    "• REFERRAL — your code + loyalty points",
     "",
     "Or visit autogtg.com.",
   ].join("\n");
@@ -505,6 +656,166 @@ async function handleTrack(opts: {
     body: lines.join("\n"),
     bookingId: booking.id,
   });
+}
+
+async function handleCustomerBookingsList(opts: {
+  from: string;
+}): Promise<void> {
+  const profile = await findProfileByPhone(opts.from);
+  if (!profile) {
+    await notifyText({
+      to: opts.from,
+      body: "No bookings yet. Reply BOOK to start one!",
+    });
+    return;
+  }
+  let bookings;
+  try {
+    bookings = await listBookingsForProfile(profile.id);
+  } catch (err) {
+    console.error("[intents] bookings list failed", err);
+    await notifyText({
+      to: opts.from,
+      body: "Couldn't fetch your bookings right now. Try again in a moment.",
+    });
+    return;
+  }
+  if (bookings.length === 0) {
+    await notifyText({
+      to: opts.from,
+      body: "No bookings yet. Reply BOOK to start one!",
+    });
+    return;
+  }
+  // Show up to 5 most recent. listBookingsForProfile returns newest first.
+  const recent = bookings.slice(0, 5);
+  const lines = ["📋 Your recent bookings:", ""];
+  for (const b of recent) {
+    const total = b.total != null ? rupees(b.total) : "—";
+    lines.push(
+      `${b.shortId} · ${b.bucket} · ${b.status.replace(/_/g, " ")}`,
+      `  Slot: ${b.slotLabel} · ${total}`,
+      `  → TRACK ${b.shortId}`,
+      "",
+    );
+  }
+  if (bookings.length > 5) {
+    lines.push(`+ ${bookings.length - 5} older — see autogtg.com/bookings`);
+  }
+  await notifyText({ to: opts.from, body: lines.join("\n").trim() });
+}
+
+async function handleCustomerReferral(opts: { from: string }): Promise<void> {
+  const profile = await findProfileByPhone(opts.from);
+  if (!profile) {
+    await notifyText({
+      to: opts.from,
+      body:
+        "You'll get a referral code on your first booking. " +
+        "Reply BOOK to start.",
+    });
+    return;
+  }
+  let code: string;
+  try {
+    code = await ensureReferralCode(profile.id);
+  } catch (err) {
+    console.error("[intents] referral code failed", err);
+    await notifyText({
+      to: opts.from,
+      body: "Couldn't fetch your code right now. Try again in a moment.",
+    });
+    return;
+  }
+  const origin = process.env.NEXT_PUBLIC_APP_ORIGIN ?? "https://autogtg.com";
+  await notifyText({
+    to: opts.from,
+    body: [
+      "🎁 Your Mistr Waan referral",
+      "",
+      `Code: ${code}`,
+      `Share link: ${origin}/?ref=${code}`,
+      "",
+      `Loyalty points: ${profile.loyaltyPoints}`,
+      "",
+      "When a friend signs up with your code and completes their first booking, you both get 200 points (₹200 off).",
+    ].join("\n"),
+  });
+}
+
+async function handleCustomerRate(opts: {
+  from: string;
+  shortId: string;
+  score: number;
+  comment: string | null;
+}): Promise<void> {
+  if (!isValidShortId(opts.shortId)) {
+    await notifyText({
+      to: opts.from,
+      body: `Invalid booking id ${opts.shortId}.`,
+    });
+    return;
+  }
+  const booking = await getBookingByShortId(opts.shortId);
+  if (!booking) {
+    await notifyText({
+      to: opts.from,
+      body: `Booking ${opts.shortId} not found.`,
+    });
+    return;
+  }
+  const supabase = getSupabaseAdmin();
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("id, phone")
+    .eq("id", booking.profileId)
+    .maybeSingle();
+  const normFrom = normalisePhone(opts.from);
+  if (!profile || normalisePhone(profile.phone) !== normFrom) {
+    await notifyText({
+      to: opts.from,
+      body: `You can't rate booking ${opts.shortId} from this number.`,
+    });
+    return;
+  }
+  try {
+    await addBookingRating({
+      bookingId: booking.id,
+      profileId: profile.id,
+      score: opts.score,
+      comment: opts.comment,
+    });
+    await notifyText({
+      to: opts.from,
+      body: `⭐ Thanks for rating ${opts.shortId} ${opts.score}/5!`,
+    });
+    await appendAuditEntry({
+      action: "add_rating",
+      entityType: "booking",
+      entityId: booking.id,
+      actor: opts.from,
+      payload: { score: opts.score, comment: opts.comment, source: "whatsapp_text" },
+      outcome: "success",
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "unknown_error";
+    const friendly =
+      message === "already_rated"
+        ? `${opts.shortId} has already been rated.`
+        : message.includes("cannot rate")
+          ? `${opts.shortId} can't be rated yet — wait until it's completed.`
+          : `Couldn't add rating: ${message}`;
+    await notifyText({ to: opts.from, body: friendly });
+    await appendAuditEntry({
+      action: "add_rating",
+      entityType: "booking",
+      entityId: booking.id,
+      actor: opts.from,
+      payload: { score: opts.score, source: "whatsapp_text" },
+      outcome: "error",
+      error: message,
+    });
+  }
 }
 
 async function handleCustomerCancel(opts: {

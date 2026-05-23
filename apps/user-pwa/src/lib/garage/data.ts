@@ -102,6 +102,19 @@ export async function getGarageById(id: string): Promise<Garage | null> {
   return fromRow(data);
 }
 
+/** Toggle whether the garage is accepting new assignments. Used by the
+ *  WhatsApp PAUSE / RESUME commands and by ops manually. When `active=false`
+ *  ops's assign form filters this garage out; existing assignments stay.
+ */
+export async function setGarageActive(garageId: string, active: boolean): Promise<void> {
+  const supabase = getSupabaseAdmin();
+  const { error } = await supabase
+    .from("garages")
+    .update({ active })
+    .eq("id", garageId);
+  if (error) throw new Error(`garage active update failed: ${error.message}`);
+}
+
 /** Atomic +1 to garages.jobs_completed when a job finishes. */
 export async function incrementJobsCompleted(garageId: string): Promise<void> {
   const supabase = getSupabaseAdmin();

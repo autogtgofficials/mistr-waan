@@ -6,6 +6,7 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("@/lib/bookings/data", () => ({
   getBookingByShortId: vi.fn(),
   getBookingById: vi.fn(),
+  listBookingsForProfile: vi.fn(async () => []),
 }));
 vi.mock("@/lib/bookings/assign", () => ({
   respondToAssignment: vi.fn(),
@@ -14,6 +15,15 @@ vi.mock("@/lib/bookings/lifecycle", () => ({
   startJob: vi.fn(),
   completeJob: vi.fn(),
   cancelJob: vi.fn(),
+}));
+vi.mock("@/lib/bookings/ratings", () => ({
+  addBookingRating: vi.fn(),
+}));
+vi.mock("@/lib/auth/profile", () => ({
+  findProfileByPhone: vi.fn(async () => null),
+}));
+vi.mock("@/lib/referrals/data", () => ({
+  ensureReferralCode: vi.fn(async () => "ABC123"),
 }));
 vi.mock("@/lib/notifications/outbox", () => ({
   notifyTemplate: vi.fn(async () => ({ outboxId: "o-1", messageId: "wamid.x" })),
@@ -25,6 +35,7 @@ vi.mock("@/lib/audit/log", () => ({
 }));
 vi.mock("@/lib/garage/data", () => ({
   findGarageByPhone: vi.fn(async () => null),
+  setGarageActive: vi.fn(async () => undefined),
 }));
 vi.mock("@/lib/garage/jobs", () => ({
   listGarageJobs: vi.fn(async () => []),
@@ -61,26 +72,37 @@ vi.mock("@/lib/supabase/server", () => ({
 }));
 
 import { handleInboundMessage } from "./intents";
-import { getBookingByShortId } from "@/lib/bookings/data";
+import {
+  getBookingByShortId,
+  listBookingsForProfile,
+} from "@/lib/bookings/data";
 import { respondToAssignment } from "@/lib/bookings/assign";
 import { startJob, completeJob } from "@/lib/bookings/lifecycle";
+import { addBookingRating } from "@/lib/bookings/ratings";
 import { notifyTemplate, notifyText, recordInbound } from "@/lib/notifications/outbox";
 import { appendAuditEntry } from "@/lib/audit/log";
-import { findGarageByPhone } from "@/lib/garage/data";
+import { findGarageByPhone, setGarageActive } from "@/lib/garage/data";
 import { listGarageJobs } from "@/lib/garage/jobs";
+import { findProfileByPhone } from "@/lib/auth/profile";
+import { ensureReferralCode } from "@/lib/referrals/data";
 import { getWizardState } from "./bot/state";
 import { handleWizardMessage } from "./bot/wizard";
 
 const lookupMock = vi.mocked(getBookingByShortId);
+const listBookingsMock = vi.mocked(listBookingsForProfile);
 const respondMock = vi.mocked(respondToAssignment);
 const startMock = vi.mocked(startJob);
 const completeMock = vi.mocked(completeJob);
+const rateMock = vi.mocked(addBookingRating);
 const notifyTplMock = vi.mocked(notifyTemplate);
 const notifyTextMock = vi.mocked(notifyText);
 const inboundMock = vi.mocked(recordInbound);
 const auditMock = vi.mocked(appendAuditEntry);
 const garageLookupMock = vi.mocked(findGarageByPhone);
+const setActiveMock = vi.mocked(setGarageActive);
 const listJobsMock = vi.mocked(listGarageJobs);
+const profileLookupMock = vi.mocked(findProfileByPhone);
+const referralCodeMock = vi.mocked(ensureReferralCode);
 const wizardStateMock = vi.mocked(getWizardState);
 const wizardMock = vi.mocked(handleWizardMessage);
 
@@ -132,22 +154,30 @@ const booking = {
 
 beforeEach(() => {
   lookupMock.mockReset();
+  listBookingsMock.mockReset();
   respondMock.mockReset();
   startMock.mockReset();
   completeMock.mockReset();
+  rateMock.mockReset();
   notifyTplMock.mockReset();
   notifyTextMock.mockReset();
   inboundMock.mockReset();
   auditMock.mockReset();
   garageLookupMock.mockReset();
+  setActiveMock.mockReset();
   listJobsMock.mockReset();
+  profileLookupMock.mockReset();
+  referralCodeMock.mockReset();
   wizardStateMock.mockReset();
   wizardMock.mockReset();
   notifyTplMock.mockResolvedValue({ outboxId: "o-1", messageId: "wamid.x" });
   notifyTextMock.mockResolvedValue({ outboxId: "o-1", messageId: "wamid.x" });
-  garageLookupMock.mockResolvedValue(null); // default: sender is not a garage
-  wizardStateMock.mockResolvedValue(null); // default: no wizard session
+  garageLookupMock.mockResolvedValue(null);
+  wizardStateMock.mockResolvedValue(null);
   wizardMock.mockResolvedValue({ reply: "" });
+  listBookingsMock.mockResolvedValue([]);
+  profileLookupMock.mockResolvedValue(null);
+  referralCodeMock.mockResolvedValue("ABC123");
 });
 
 function inbound(opts: { text?: string; interactiveId?: string; from?: string }) {
@@ -347,5 +377,134 @@ describe("handleInboundMessage — garage text commands", () => {
     );
     expect(startMock).not.toHaveBeenCalled();
     expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("isn't assigned");
+  });
+
+  it("EARNINGS returns a 30-day summary", async () => {
+    listJobsMock.mockResolvedValueOnce([
+      {
+        ...booking,
+        status: "completed",
+        completedAt: new Date().toISOString(),
+        total: 2000,
+        commissionCut: 240,
+        paymentMode: "cash",
+        services: [],
+        customerLabel: "X",
+        customerArea: "—",
+        customerPhoneMasked: "•••• 0000",
+      },
+    ]);
+    await handleInboundMessage(inbound({ text: "earnings", from: "+919999999999" }));
+    const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
+    expect(body).toContain("Imran's Auto");
+    expect(body).toContain("Completed jobs: 1");
+    // cash commission should be flagged as owed
+    expect(body).toContain("Commission owed");
+  });
+
+  it("PAUSE flips active=false + replies confirmation", async () => {
+    await handleInboundMessage(inbound({ text: "pause", from: "+919999999999" }));
+    expect(setActiveMock).toHaveBeenCalledWith("g-1", false);
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("Paused");
+  });
+
+  it("PAUSE is a no-op + tells you when already paused", async () => {
+    garageLookupMock.mockResolvedValue({ ...sampleGarage, active: false });
+    await handleInboundMessage(inbound({ text: "pause", from: "+919999999999" }));
+    expect(setActiveMock).not.toHaveBeenCalled();
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("already paused");
+  });
+
+  it("RESUME flips active=true", async () => {
+    garageLookupMock.mockResolvedValue({ ...sampleGarage, active: false });
+    await handleInboundMessage(inbound({ text: "resume", from: "+919999999999" }));
+    expect(setActiveMock).toHaveBeenCalledWith("g-1", true);
+  });
+});
+
+describe("handleInboundMessage — customer extended commands", () => {
+  it("MY BOOKINGS lists recent bookings for a known phone", async () => {
+    profileLookupMock.mockResolvedValueOnce({
+      id: "p-1",
+      phone: "+916006617842",
+      firstName: "Aaliyah",
+      language: null,
+      referralCode: null,
+      referredBy: null,
+      loyaltyPoints: 0,
+      createdAt: new Date().toISOString(),
+      lastSeenAt: null,
+    });
+    listBookingsMock.mockResolvedValueOnce([
+      { ...booking, shortId: "MW-AAAAAA", status: "completed", total: 500 },
+      { ...booking, shortId: "MW-BBBBBB", status: "queued_for_call", total: null },
+    ]);
+    await handleInboundMessage(inbound({ text: "my bookings" }));
+    const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
+    expect(body).toContain("MW-AAAAAA");
+    expect(body).toContain("MW-BBBBBB");
+  });
+
+  it("MY BOOKINGS for unknown phone replies with BOOK nudge", async () => {
+    profileLookupMock.mockResolvedValueOnce(null);
+    await handleInboundMessage(inbound({ text: "bookings" }));
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("Reply BOOK");
+  });
+
+  it("REFERRAL returns code + loyalty points for a known phone", async () => {
+    profileLookupMock.mockResolvedValueOnce({
+      id: "p-1",
+      phone: "+916006617842",
+      firstName: "Aaliyah",
+      language: null,
+      referralCode: "ABC123",
+      referredBy: null,
+      loyaltyPoints: 200,
+      createdAt: new Date().toISOString(),
+      lastSeenAt: null,
+    });
+    referralCodeMock.mockResolvedValueOnce("ABC123");
+    await handleInboundMessage(inbound({ text: "referral" }));
+    const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
+    expect(body).toContain("ABC123");
+    expect(body).toContain("Loyalty points: 200");
+  });
+
+  it("RATE MW-XXX 5 great service calls addBookingRating with the parsed args", async () => {
+    lookupMock.mockResolvedValueOnce({ ...booking, status: "completed" });
+    rateMock.mockResolvedValueOnce({ ...booking, ratingValue: 5 });
+    await handleInboundMessage(
+      inbound({ text: "rate MW-AB23CD 5 fantastic work" }),
+    );
+    expect(rateMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        bookingId: "b-1",
+        score: 5,
+        comment: "fantastic work",
+      }),
+    );
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("5/5");
+  });
+
+  it("RATE rejects scores outside 1-5 by falling through to unknown intent", async () => {
+    await handleInboundMessage(inbound({ text: "rate MW-AB23CD 7" }));
+    expect(rateMock).not.toHaveBeenCalled();
+    // The regex requires [1-5], so this hits the unknown-intent path
+    expect(auditMock).toHaveBeenCalledWith(
+      expect.objectContaining({ action: "whatsapp_unknown_intent" }),
+    );
+  });
+
+  it("RATE on someone else's booking is rejected by phone-match", async () => {
+    lookupMock.mockResolvedValueOnce({
+      ...booking,
+      status: "completed",
+      profileId: "p-other",
+    });
+    await handleInboundMessage(
+      inbound({ text: "rate MW-AB23CD 5", from: "+910000000000" }),
+    );
+    expect(rateMock).not.toHaveBeenCalled();
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("can't rate");
   });
 });
