@@ -1,65 +1,118 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { TopBar } from "@/components/layout/TopBar";
+import { TabBar } from "@/components/layout/TabBar";
+import { JobCard } from "@/components/jobs/JobCard";
+import { EmptyState } from "@/components/ui/EmptyState";
+import { useGarageAuth } from "@/lib/store/auth";
+import { useGarageJobs } from "@/lib/store/jobs";
+
+/**
+ * Garage inbox — three buckets:
+ *   • New requests (awaiting_garage) — needs Accept/Decline
+ *   • Active (assigned + in_progress) — work the garage is doing
+ *   • Recent (completed + cancelled) — last few outcomes
+ */
+export default function GarageInboxPage() {
+  const router = useRouter();
+  const { user, hydrated: authHydrated, isAuthed } = useGarageAuth();
+  const { hydrated, error, pending, active, completed, cancelled, refresh } = useGarageJobs();
+
+  useEffect(() => {
+    if (authHydrated && !isAuthed) router.replace("/login");
+  }, [authHydrated, isAuthed, router]);
+
+  if (!authHydrated || !isAuthed) {
+    return <div className="flex min-h-full" />;
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex min-h-full flex-col">
+      <TopBar
+        title={
+          <div className="flex flex-col leading-tight">
+            <span className="text-sm font-semibold text-foreground">
+              {user?.shopName ?? "Garage"}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              {user?.ownerFirstName} · {user?.area}
+            </span>
+          </div>
+        }
+        right={
+          <button
+            onClick={() => void refresh()}
+            className="tap rounded-md border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground hover:bg-muted"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            Refresh
+          </button>
+        }
+      />
+
+      <main className="flex-1 pb-24">
+        <div className="mx-auto w-full max-w-md px-4 pt-4">
+          {!hydrated ? (
+            <div className="mt-12 flex justify-center text-sm text-muted-foreground">
+              Loading…
+            </div>
+          ) : error ? (
+            <EmptyState title="Couldn't load jobs" body={error} />
+          ) : (
+            <>
+              <Section
+                title="New requests"
+                empty="No new requests right now."
+                jobs={pending}
+              />
+              <Section
+                title="Active"
+                empty="No active jobs."
+                jobs={active}
+              />
+              <Section
+                title="Recently finished"
+                empty="No recent jobs."
+                jobs={[...completed, ...cancelled].slice(0, 5)}
+              />
+            </>
+          )}
         </div>
       </main>
+
+      <TabBar />
     </div>
+  );
+}
+
+function Section({
+  title,
+  empty,
+  jobs,
+}: {
+  title: string;
+  empty: string;
+  jobs: ReturnType<typeof useGarageJobs>["pending"];
+}) {
+  return (
+    <section className="mt-6 first:mt-0">
+      <h2 className="px-1 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+        {title}
+      </h2>
+      {jobs.length === 0 ? (
+        <p className="mt-3 rounded-md border border-dashed border-border p-4 text-center text-xs text-muted-foreground">
+          {empty}
+        </p>
+      ) : (
+        <ul className="mt-3 flex flex-col gap-3">
+          {jobs.map((j) => (
+            <li key={j.id}>
+              <JobCard job={j} />
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
   );
 }
