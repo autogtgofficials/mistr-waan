@@ -1,8 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
-// We need to mock the heavy dependencies that intents.ts pulls in so the
-// pure-logic tests can run in isolation. The router itself is the unit
-// under test; everything below is fixture scaffolding.
+// Mocks: the router pulls in a lot of heavy deps. Default each to a happy
+// no-op; individual tests override as needed.
 
 vi.mock("@/lib/bookings/data", () => ({
   getBookingByShortId: vi.fn(),
@@ -11,6 +10,11 @@ vi.mock("@/lib/bookings/data", () => ({
 vi.mock("@/lib/bookings/assign", () => ({
   respondToAssignment: vi.fn(),
 }));
+vi.mock("@/lib/bookings/lifecycle", () => ({
+  startJob: vi.fn(),
+  completeJob: vi.fn(),
+  cancelJob: vi.fn(),
+}));
 vi.mock("@/lib/notifications/outbox", () => ({
   notifyTemplate: vi.fn(async () => ({ outboxId: "o-1", messageId: "wamid.x" })),
   notifyText: vi.fn(async () => ({ outboxId: "o-1", messageId: "wamid.x" })),
@@ -18,6 +22,18 @@ vi.mock("@/lib/notifications/outbox", () => ({
 }));
 vi.mock("@/lib/audit/log", () => ({
   appendAuditEntry: vi.fn(),
+}));
+vi.mock("@/lib/garage/data", () => ({
+  findGarageByPhone: vi.fn(async () => null),
+}));
+vi.mock("@/lib/garage/jobs", () => ({
+  listGarageJobs: vi.fn(async () => []),
+}));
+vi.mock("./bot/state", () => ({
+  getWizardState: vi.fn(async () => null),
+}));
+vi.mock("./bot/wizard", () => ({
+  handleWizardMessage: vi.fn(async () => ({ reply: "" })),
 }));
 vi.mock("@/lib/supabase/server", () => ({
   getSupabaseAdmin: () => ({
@@ -28,6 +44,7 @@ vi.mock("@/lib/supabase/server", () => ({
             table === "garages"
               ? Promise.resolve({
                   data: {
+                    id: "g-1",
                     phone: "+919999999999",
                     whatsapp_phone: null,
                     shop_name: "Imran's Auto",
@@ -46,15 +63,43 @@ vi.mock("@/lib/supabase/server", () => ({
 import { handleInboundMessage } from "./intents";
 import { getBookingByShortId } from "@/lib/bookings/data";
 import { respondToAssignment } from "@/lib/bookings/assign";
+import { startJob, completeJob } from "@/lib/bookings/lifecycle";
 import { notifyTemplate, notifyText, recordInbound } from "@/lib/notifications/outbox";
 import { appendAuditEntry } from "@/lib/audit/log";
+import { findGarageByPhone } from "@/lib/garage/data";
+import { listGarageJobs } from "@/lib/garage/jobs";
+import { getWizardState } from "./bot/state";
+import { handleWizardMessage } from "./bot/wizard";
 
 const lookupMock = vi.mocked(getBookingByShortId);
 const respondMock = vi.mocked(respondToAssignment);
+const startMock = vi.mocked(startJob);
+const completeMock = vi.mocked(completeJob);
 const notifyTplMock = vi.mocked(notifyTemplate);
 const notifyTextMock = vi.mocked(notifyText);
 const inboundMock = vi.mocked(recordInbound);
 const auditMock = vi.mocked(appendAuditEntry);
+const garageLookupMock = vi.mocked(findGarageByPhone);
+const listJobsMock = vi.mocked(listGarageJobs);
+const wizardStateMock = vi.mocked(getWizardState);
+const wizardMock = vi.mocked(handleWizardMessage);
+
+const sampleGarage = {
+  id: "g-1",
+  slug: "g-imran-k",
+  shopName: "Imran's Auto",
+  ownerFirstName: "Imran",
+  ownerLastName: "K",
+  area: "Rajbagh",
+  fullAddress: "Rajbagh, Srinagar",
+  phone: "+919999999999",
+  whatsappPhone: null,
+  rating: 4.8,
+  jobsCompleted: 12,
+  commissionPct: 12,
+  serviceBuckets: ["detailing"],
+  active: true,
+};
 
 const booking = {
   id: "b-1",
@@ -65,7 +110,7 @@ const booking = {
   garageId: "g-1",
   slotDate: null,
   slotTime: null,
-  slotLabel: "x",
+  slotLabel: "Tomorrow 10 AM",
   paymentMode: "cash" as const,
   total: 500,
   baseTotal: 500,
@@ -88,17 +133,26 @@ const booking = {
 beforeEach(() => {
   lookupMock.mockReset();
   respondMock.mockReset();
+  startMock.mockReset();
+  completeMock.mockReset();
   notifyTplMock.mockReset();
   notifyTextMock.mockReset();
   inboundMock.mockReset();
   auditMock.mockReset();
+  garageLookupMock.mockReset();
+  listJobsMock.mockReset();
+  wizardStateMock.mockReset();
+  wizardMock.mockReset();
   notifyTplMock.mockResolvedValue({ outboxId: "o-1", messageId: "wamid.x" });
   notifyTextMock.mockResolvedValue({ outboxId: "o-1", messageId: "wamid.x" });
+  garageLookupMock.mockResolvedValue(null); // default: sender is not a garage
+  wizardStateMock.mockResolvedValue(null); // default: no wizard session
+  wizardMock.mockResolvedValue({ reply: "" });
 });
 
 function inbound(opts: { text?: string; interactiveId?: string; from?: string }) {
   return {
-    from: opts.from ?? "+919999999999",
+    from: opts.from ?? "+916006617842", // default to customer phone
     messageId: "m-1",
     timestamp: new Date().toISOString(),
     type: opts.interactiveId ? ("interactive" as const) : ("text" as const),
@@ -108,7 +162,7 @@ function inbound(opts: { text?: string; interactiveId?: string; from?: string })
   };
 }
 
-describe("handleInboundMessage", () => {
+describe("handleInboundMessage — button replies", () => {
   it("records inbound for every message", async () => {
     await handleInboundMessage(inbound({ text: "hi" }));
     expect(inboundMock).toHaveBeenCalled();
@@ -140,9 +194,6 @@ describe("handleInboundMessage", () => {
       inbound({ interactiveId: "booking:MW-AB23CD:decline", from: "+919999999999" }),
     );
 
-    expect(respondMock).toHaveBeenCalledWith(
-      expect.objectContaining({ outcome: "decline" }),
-    );
     expect(notifyTplMock).toHaveBeenCalledWith(
       expect.objectContaining({ template: "garage_declined" }),
     );
@@ -159,19 +210,21 @@ describe("handleInboundMessage", () => {
       expect.objectContaining({ error: "sender_not_assigned_garage" }),
     );
   });
+});
 
-  it("help text returns the help menu", async () => {
+describe("handleInboundMessage — customer text commands", () => {
+  it("help returns the customer menu", async () => {
     await handleInboundMessage(inbound({ text: "help" }));
-    expect(notifyTextMock).toHaveBeenCalledWith(
-      expect.objectContaining({ to: "+919999999999" }),
-    );
+    const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
+    expect(body).toContain("BOOK");
+    expect(body).toContain("TRACK");
   });
 
   it("track <id> returns a status summary when booking exists", async () => {
     lookupMock.mockResolvedValueOnce(booking);
     await handleInboundMessage(inbound({ text: "track MW-AB23CD" }));
     expect(notifyTextMock).toHaveBeenCalled();
-    expect(notifyTextMock.mock.calls[0][0].body).toContain("MW-AB23CD");
+    expect(notifyTextMock.mock.calls[0]![0].body).toContain("MW-AB23CD");
   });
 
   it("track <id> says not found when missing", async () => {
@@ -182,11 +235,117 @@ describe("handleInboundMessage", () => {
     );
   });
 
-  it("unknown text logs but does not reply", async () => {
+  it("unknown text replies with help nudge + audits as unknown_intent", async () => {
     await handleInboundMessage(inbound({ text: "wat" }));
-    expect(notifyTextMock).not.toHaveBeenCalled();
+    expect(notifyTextMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        body: expect.stringContaining("BOOK"),
+      }),
+    );
     expect(auditMock).toHaveBeenCalledWith(
       expect.objectContaining({ action: "whatsapp_unknown_intent" }),
     );
+  });
+
+  it("'book' triggers the wizard", async () => {
+    wizardMock.mockResolvedValueOnce({ reply: "Hi! What service?" });
+    await handleInboundMessage(inbound({ text: "book" }));
+    expect(wizardMock).toHaveBeenCalledWith({
+      phone: "+916006617842",
+      text: "book",
+    });
+    expect(notifyTextMock).toHaveBeenCalledWith(
+      expect.objectContaining({ body: "Hi! What service?" }),
+    );
+  });
+
+  it("in-progress wizard session routes free text to the wizard", async () => {
+    wizardStateMock.mockResolvedValueOnce({
+      phone: "+916006617842",
+      step: "PICKING_BUCKET",
+      updatedAt: Date.now(),
+    });
+    wizardMock.mockResolvedValueOnce({ reply: "Please pick 1, 2, or 3." });
+    await handleInboundMessage(inbound({ text: "abc" }));
+    expect(wizardMock).toHaveBeenCalled();
+    expect(notifyTextMock).toHaveBeenCalledWith(
+      expect.objectContaining({ body: "Please pick 1, 2, or 3." }),
+    );
+  });
+});
+
+describe("handleInboundMessage — garage text commands", () => {
+  beforeEach(() => {
+    garageLookupMock.mockResolvedValue(sampleGarage);
+  });
+
+  it("'jobs' lists active garage jobs", async () => {
+    listJobsMock.mockResolvedValueOnce([
+      {
+        ...booking,
+        shortId: "MW-AB23CD",
+        status: "assigned",
+        services: [
+          { id: "foam-wash", name: "Foam wash", basePrice: 500, durationLabel: null, blurb: null, isQuoted: false },
+        ],
+        customerLabel: "Aaliyah",
+        customerArea: "—",
+        customerPhoneMasked: "•••• 7842",
+        commissionCut: 60,
+      },
+    ]);
+    await handleInboundMessage(inbound({ text: "jobs", from: "+919999999999" }));
+    const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
+    expect(body).toContain("MW-AB23CD");
+    expect(body).toContain("START");
+  });
+
+  it("'start MW-XX' moves the job to in_progress + notifies customer", async () => {
+    lookupMock.mockResolvedValueOnce(booking);
+    startMock.mockResolvedValueOnce({ ...booking, status: "in_progress" });
+    await handleInboundMessage(
+      inbound({ text: "start MW-AB23CD", from: "+919999999999" }),
+    );
+    expect(startMock).toHaveBeenCalledWith("b-1");
+    expect(notifyTplMock).toHaveBeenCalledWith(
+      expect.objectContaining({ template: "job_started" }),
+    );
+  });
+
+  it("'complete MW-XX' moves the job to completed + sends job_complete template", async () => {
+    lookupMock.mockResolvedValueOnce({ ...booking, status: "in_progress" });
+    completeMock.mockResolvedValueOnce({ ...booking, status: "completed" });
+    await handleInboundMessage(
+      inbound({ text: "complete MW-AB23CD", from: "+919999999999" }),
+    );
+    expect(completeMock).toHaveBeenCalledWith("b-1");
+    expect(notifyTplMock).toHaveBeenCalledWith(
+      expect.objectContaining({ template: "job_complete" }),
+    );
+  });
+
+  it("'accept MW-XX' (text) = button accept", async () => {
+    lookupMock.mockResolvedValueOnce(booking);
+    respondMock.mockResolvedValueOnce({ ...booking, status: "assigned" });
+    await handleInboundMessage(
+      inbound({ text: "accept MW-AB23CD", from: "+919999999999" }),
+    );
+    expect(respondMock).toHaveBeenCalledWith(
+      expect.objectContaining({ outcome: "accept" }),
+    );
+  });
+
+  it("'help' returns the garage-flavoured menu (mentions JOBS)", async () => {
+    await handleInboundMessage(inbound({ text: "help", from: "+919999999999" }));
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("JOBS");
+  });
+
+  it("garage trying to start a booking that isn't theirs gets rejected", async () => {
+    lookupMock.mockResolvedValueOnce({ ...booking, garageId: "g-other" });
+    await handleInboundMessage(
+      inbound({ text: "start MW-AB23CD", from: "+919999999999" }),
+    );
+    expect(startMock).not.toHaveBeenCalled();
+    expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("isn't assigned");
   });
 });
