@@ -68,6 +68,10 @@ function fromRow(args: {
     inProgressAt: row.in_progress_at,
     completedAt: row.completed_at,
     cancelledAt: row.cancelled_at,
+    vehicleType: row.vehicle_type,
+    vehicleBrand: row.vehicle_brand,
+    vehicleModel: row.vehicle_model,
+    vehicleRegistration: row.vehicle_registration,
     customerLabel: profile?.first_name ?? "Customer",
     customerArea: "—", // We don't store the customer's area on the profile yet.
     customerPhoneMasked: profile ? maskPhone(profile.phone) : "—",

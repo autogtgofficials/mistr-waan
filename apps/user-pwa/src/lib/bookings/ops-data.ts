@@ -68,6 +68,10 @@ function fromRow(
     inProgressAt: row.in_progress_at,
     completedAt: row.completed_at,
     cancelledAt: row.cancelled_at,
+    vehicleType: row.vehicle_type,
+    vehicleBrand: row.vehicle_brand,
+    vehicleModel: row.vehicle_model,
+    vehicleRegistration: row.vehicle_registration,
     customerPhone: row.profile.phone,
     customerFirstName: row.profile.first_name,
   };

@@ -109,6 +109,10 @@ export type Database = {
           symptoms: Json | null
           total: number | null
           updated_at: string
+          vehicle_brand: string | null
+          vehicle_model: string | null
+          vehicle_registration: string | null
+          vehicle_type: Database["public"]["Enums"]["vehicle_type"] | null
         }
         Insert: {
           assigned_at?: string | null
@@ -137,6 +141,10 @@ export type Database = {
           symptoms?: Json | null
           total?: number | null
           updated_at?: string
+          vehicle_brand?: string | null
+          vehicle_model?: string | null
+          vehicle_registration?: string | null
+          vehicle_type?: Database["public"]["Enums"]["vehicle_type"] | null
         }
         Update: {
           assigned_at?: string | null
@@ -165,6 +173,10 @@ export type Database = {
           symptoms?: Json | null
           total?: number | null
           updated_at?: string
+          vehicle_brand?: string | null
+          vehicle_model?: string | null
+          vehicle_registration?: string | null
+          vehicle_type?: Database["public"]["Enums"]["vehicle_type"] | null
         }
         Relationships: [
           {
@@ -197,15 +209,24 @@ export type Database = {
           lat: number | null
           lng: number | null
           mechanic_id: string | null
+          onboarding_status:
+            | Database["public"]["Enums"]["garage_onboarding_status"]
+            | null
           owner_first_name: string
           owner_last_name: string
           phone: string
+          pickup_available: boolean | null
           rating: number
+          rsa_available: boolean | null
+          rsa_radius_km: number | null
           service_buckets: Database["public"]["Enums"]["booking_bucket"][]
           shop_name: string
           slug: string | null
           updated_at: string
+          verification_doc_path: string | null
+          weekly_off: string | null
           whatsapp_phone: string | null
+          working_hours: string | null
         }
         Insert: {
           active?: boolean
@@ -220,15 +241,24 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           mechanic_id?: string | null
+          onboarding_status?:
+            | Database["public"]["Enums"]["garage_onboarding_status"]
+            | null
           owner_first_name: string
           owner_last_name: string
           phone: string
+          pickup_available?: boolean | null
           rating?: number
+          rsa_available?: boolean | null
+          rsa_radius_km?: number | null
           service_buckets?: Database["public"]["Enums"]["booking_bucket"][]
           shop_name: string
           slug?: string | null
           updated_at?: string
+          verification_doc_path?: string | null
+          weekly_off?: string | null
           whatsapp_phone?: string | null
+          working_hours?: string | null
         }
         Update: {
           active?: boolean
@@ -243,15 +273,24 @@ export type Database = {
           lat?: number | null
           lng?: number | null
           mechanic_id?: string | null
+          onboarding_status?:
+            | Database["public"]["Enums"]["garage_onboarding_status"]
+            | null
           owner_first_name?: string
           owner_last_name?: string
           phone?: string
+          pickup_available?: boolean | null
           rating?: number
+          rsa_available?: boolean | null
+          rsa_radius_km?: number | null
           service_buckets?: Database["public"]["Enums"]["booking_bucket"][]
           shop_name?: string
           slug?: string | null
           updated_at?: string
+          verification_doc_path?: string | null
+          weekly_off?: string | null
           whatsapp_phone?: string | null
+          working_hours?: string | null
         }
         Relationships: [
           {
@@ -779,7 +818,12 @@ export type Database = {
     }
     Enums: {
       actor_role: "customer" | "garage" | "ops" | "system" | "bot"
-      booking_bucket: "detailing" | "repairs" | "denting"
+      booking_bucket:
+        | "detailing"
+        | "repairs"
+        | "denting"
+        | "scheduled_maintenance"
+        | "rsa"
       booking_status:
         | "queued_for_call"
         | "quoted"
@@ -789,6 +833,11 @@ export type Database = {
         | "completed"
         | "cancelled"
         | "declined_by_garage"
+      garage_onboarding_status:
+        | "pending_verification"
+        | "active"
+        | "rejected"
+        | "suspended"
       garage_response: "accept" | "decline"
       notif_channel: "whatsapp" | "sms" | "email"
       notif_direction: "outbound" | "inbound"
@@ -804,6 +853,7 @@ export type Database = {
       quote_source: "catalog_fixed" | "ops_manual" | "ops_adjusted"
       rating_target: "garage" | "platform"
       referral_state: "pending" | "rewarded" | "expired"
+      vehicle_type: "car" | "bike"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -932,7 +982,13 @@ export const Constants = {
   public: {
     Enums: {
       actor_role: ["customer", "garage", "ops", "system", "bot"],
-      booking_bucket: ["detailing", "repairs", "denting"],
+      booking_bucket: [
+        "detailing",
+        "repairs",
+        "denting",
+        "scheduled_maintenance",
+        "rsa",
+      ],
       booking_status: [
         "queued_for_call",
         "quoted",
@@ -942,6 +998,12 @@ export const Constants = {
         "completed",
         "cancelled",
         "declined_by_garage",
+      ],
+      garage_onboarding_status: [
+        "pending_verification",
+        "active",
+        "rejected",
+        "suspended",
       ],
       garage_response: ["accept", "decline"],
       notif_channel: ["whatsapp", "sms", "email"],
@@ -959,6 +1021,7 @@ export const Constants = {
       quote_source: ["catalog_fixed", "ops_manual", "ops_adjusted"],
       rating_target: ["garage", "platform"],
       referral_state: ["pending", "rewarded", "expired"],
+      vehicle_type: ["car", "bike"],
     },
   },
 } as const

@@ -37,6 +37,15 @@ const sampleGarage = {
   commissionPct: 12,
   serviceBuckets: ["detailing"],
   active: true,
+  // Phase 5 — blueprint fields. Null = legacy garage (pre-migration); ops
+  // edits via /ops/garages/[id] populate these on real rows.
+  onboardingStatus: null,
+  workingHours: null,
+  weeklyOff: null,
+  rsaAvailable: null,
+  rsaRadiusKm: null,
+  pickupAvailable: null,
+  verificationDocPath: null,
 };
 
 beforeEach(() => {

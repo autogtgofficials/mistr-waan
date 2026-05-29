@@ -39,6 +39,15 @@ export class WhatsAppError extends Error {
   }
 }
 
+export interface InboundMedia {
+  /** Meta media id — exchange for a temporary download URL via GET /{id}. */
+  id: string;
+  mimeType: string;
+  caption?: string;
+  /** sha256 hash Meta provides — useful for de-dup if a customer resends. */
+  sha256?: string;
+}
+
 export interface InboundMessage {
   from: string;
   messageId: string;
@@ -46,5 +55,7 @@ export interface InboundMessage {
   type: "text" | "interactive" | "button" | "location" | "image" | "audio" | "other";
   text?: string;
   interactiveId?: string;
+  /** Populated for image / audio / document messages. */
+  media?: InboundMedia;
   raw: unknown;
 }

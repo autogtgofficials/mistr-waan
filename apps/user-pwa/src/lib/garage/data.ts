@@ -13,6 +13,9 @@ type GarageRow = Database["public"]["Tables"]["garages"]["Row"];
  * cookie with `sub = garage.id`.
  */
 
+export type GarageOnboardingStatus =
+  Database["public"]["Enums"]["garage_onboarding_status"];
+
 export interface Garage {
   id: string;
   slug: string | null;
@@ -28,6 +31,15 @@ export interface Garage {
   commissionPct: number;
   serviceBuckets: string[];
   active: boolean;
+  // Phase 5 (blueprint alignment) — all optional for back-compat with
+  // garages onboarded before the migration.
+  onboardingStatus: GarageOnboardingStatus | null;
+  workingHours: string | null;
+  weeklyOff: string | null;
+  rsaAvailable: boolean | null;
+  rsaRadiusKm: number | null;
+  pickupAvailable: boolean | null;
+  verificationDocPath: string | null;
 }
 
 function fromRow(row: GarageRow): Garage {
@@ -46,6 +58,13 @@ function fromRow(row: GarageRow): Garage {
     commissionPct: Number(row.commission_pct),
     serviceBuckets: row.service_buckets,
     active: row.active,
+    onboardingStatus: row.onboarding_status,
+    workingHours: row.working_hours,
+    weeklyOff: row.weekly_off,
+    rsaAvailable: row.rsa_available,
+    rsaRadiusKm: row.rsa_radius_km,
+    pickupAvailable: row.pickup_available,
+    verificationDocPath: row.verification_doc_path,
   };
 }
 
@@ -113,6 +132,74 @@ export async function setGarageActive(garageId: string, active: boolean): Promis
     .update({ active })
     .eq("id", garageId);
   if (error) throw new Error(`garage active update failed: ${error.message}`);
+}
+
+/** List the distinct active areas across all active garages. Used by the
+ *  customer wizard's PICKING_AREA step to offer the right options.
+ */
+export async function listActiveAreas(): Promise<string[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("garages")
+    .select("area")
+    .eq("active", true);
+  if (error) throw new Error(`areas list failed: ${error.message}`);
+  const set = new Set<string>();
+  for (const r of data ?? []) set.add(r.area);
+  return Array.from(set).sort();
+}
+
+/** Active garages in a given area that support the requested bucket.
+ *  Ordered by rating desc so the top picks are first in the numbered list.
+ */
+export async function listGaragesByAreaAndBucket(opts: {
+  area: string;
+  bucket: string;
+  limit?: number;
+}): Promise<Garage[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("garages")
+    .select("*")
+    .eq("active", true)
+    .eq("area", opts.area)
+    // service_buckets is text[]; use contains so we can pass the picked bucket.
+    .contains("service_buckets", [opts.bucket])
+    .order("rating", { ascending: false })
+    .limit(opts.limit ?? 10);
+  if (error) throw new Error(`garages by area failed: ${error.message}`);
+  return (data ?? []).map(fromRow);
+}
+
+/** List garages by onboarding status — used by the ops review UI. */
+export async function listGaragesByOnboardingStatus(
+  status: GarageOnboardingStatus,
+): Promise<Garage[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("garages")
+    .select("*")
+    .eq("onboarding_status", status)
+    .order("created_at", { ascending: false });
+  if (error) throw new Error(`garages list failed: ${error.message}`);
+  return (data ?? []).map(fromRow);
+}
+
+/** Update onboarding status + active flag together. Used by the ops
+ *  Activate / Reject buttons.
+ */
+export async function setGarageOnboardingStatus(opts: {
+  garageId: string;
+  status: GarageOnboardingStatus;
+  active?: boolean;
+}): Promise<void> {
+  const supabase = getSupabaseAdmin();
+  const update: { onboarding_status: GarageOnboardingStatus; active?: boolean } = {
+    onboarding_status: opts.status,
+  };
+  if (typeof opts.active === "boolean") update.active = opts.active;
+  const { error } = await supabase.from("garages").update(update).eq("id", opts.garageId);
+  if (error) throw new Error(`garage onboarding update failed: ${error.message}`);
 }
 
 /** Atomic +1 to garages.jobs_completed when a job finishes. */

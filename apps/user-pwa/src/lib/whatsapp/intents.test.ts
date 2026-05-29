@@ -121,6 +121,14 @@ const sampleGarage = {
   commissionPct: 12,
   serviceBuckets: ["detailing"],
   active: true,
+  // Phase 5 — blueprint fields.
+  onboardingStatus: null,
+  workingHours: null,
+  weeklyOff: null,
+  rsaAvailable: null,
+  rsaRadiusKm: null,
+  pickupAvailable: null,
+  verificationDocPath: null,
 };
 
 const booking = {
@@ -150,6 +158,10 @@ const booking = {
   inProgressAt: null,
   completedAt: null,
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 beforeEach(() => {

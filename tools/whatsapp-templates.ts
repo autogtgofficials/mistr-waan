@@ -171,6 +171,54 @@ const TEMPLATES: TemplateDef[] = [
       "you've earned {{2}} loyalty points.\n\nPoints apply automatically at your next checkout.",
     bodyExamples: ["Aaliyah", "200"],
   },
+  // ── Phase 5: blueprint alignment ─────────────────────────────────────────
+  {
+    name: "mechanic_onboarding_submitted",
+    category: "UTILITY",
+    language: "en",
+    body:
+      "Thanks {{1}}! Your workshop *{{2}}* has been submitted to Mistr Waan for verification.\n\n" +
+      "Our team will review your details and activate your partner profile within 24 hours. " +
+      "We'll WhatsApp you once you're live.",
+    bodyExamples: ["Imran", "Khan Auto Detailing"],
+  },
+  {
+    name: "mechanic_activated",
+    category: "UTILITY",
+    language: "en",
+    body:
+      "Great news {{1}}! Your workshop *{{2}}* is now live on Mistr Waan. " +
+      "You'll start receiving job requests on this number.\n\n" +
+      "Reply JOBS to see your active queue, HELP for all commands.",
+    bodyExamples: ["Imran", "Khan Auto Detailing"],
+  },
+  {
+    name: "mechanic_rejected",
+    category: "UTILITY",
+    language: "en",
+    body:
+      "Hi {{1}}, we couldn't verify your Mistr Waan workshop application.\n\n" +
+      "Reason: {{2}}\n\nPlease reply ONBOARD to try again, or message our team for help.",
+    bodyExamples: ["Imran", "Verification document was unclear"],
+  },
+  {
+    name: "request_photos",
+    category: "UTILITY",
+    language: "en",
+    body:
+      "Hi {{1}}, please send a few clear photos of the issue so our team can quote your " +
+      "booking *{{2}}* accurately.\n\nSend up to 8 photos in this chat, then reply DONE.",
+    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+  },
+  {
+    name: "rsa_acknowledged",
+    category: "UTILITY",
+    language: "en",
+    body:
+      "Hi {{1}}, your roadside assistance request *{{2}}* is received. " +
+      "Our team is calling you right now to dispatch the nearest mechanic.",
+    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+  },
 ];
 
 function findTemplate(name: string): TemplateDef {

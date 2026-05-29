@@ -62,6 +62,10 @@ function fromRow(
     status: row.status,
     symptoms: (row.symptoms as Record<string, unknown> | null) ?? null,
     denting: (row.denting as Record<string, unknown> | null) ?? null,
+    vehicleType: row.vehicle_type,
+    vehicleBrand: row.vehicle_brand,
+    vehicleModel: row.vehicle_model,
+    vehicleRegistration: row.vehicle_registration,
     cancellationReason: row.cancellation_reason,
     ratingValue: row.rating_value,
     ratingComment: row.rating_comment,
@@ -157,6 +161,10 @@ export async function createBooking(input: CreateBookingInput): Promise<Booking>
         total: baseTotal, // will be adjusted by ops in quote step
         symptoms: (input.symptoms as Json) ?? null,
         denting: (input.denting as Json) ?? null,
+        vehicle_type: input.vehicleType ?? null,
+        vehicle_brand: input.vehicleBrand ?? null,
+        vehicle_model: input.vehicleModel ?? null,
+        vehicle_registration: input.vehicleRegistration ?? null,
       })
       .select("*")
       .single();

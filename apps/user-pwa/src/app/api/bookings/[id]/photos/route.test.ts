@@ -81,6 +81,10 @@ const sample = {
   inProgressAt: null,
   completedAt: null,
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 const ctx = { params: Promise.resolve({ id: "b-1" }) };

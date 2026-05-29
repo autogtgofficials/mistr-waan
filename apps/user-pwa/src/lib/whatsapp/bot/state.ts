@@ -23,26 +23,59 @@ function fsPath(): string {
 }
 
 export type WizardStep =
+  // Phase 5 — blueprint-aligned steps prepended before the original ones.
+  | "PICKING_MODULE"
+  | "PICKING_VEHICLE_TYPE"
   | "PICKING_BUCKET"
   | "PICKING_SERVICE"
   | "PICKING_DESCRIPTION"
+  | "PICKING_AREA"
+  | "PICKING_GARAGE"
   | "PICKING_SLOT"
+  | "PICKING_VEHICLE_DETAILS"
   | "PICKING_PAYMENT"
   | "CONFIRMING";
+
+export type ServiceBucket =
+  | "detailing"
+  | "repairs"
+  | "denting"
+  | "scheduled_maintenance"
+  | "rsa";
+
+export type VehicleType = "car" | "bike";
+
+/** Customer-facing module taxonomy (blueprint). Maps to one or more buckets. */
+export type CustomerModule = "maintenance" | "rsa" | "additional";
 
 export interface WizardState {
   phone: string;
   step: WizardStep;
-  bucket?: "detailing" | "repairs" | "denting";
-  /** Catalog ids picked (detailing only — repairs/denting use description). */
+  /** Top-level module the customer picked (Maintenance / RSA / Additional). */
+  module?: CustomerModule;
+  /** Vehicle type (car/bike). Captured early — applies to all modules. */
+  vehicleType?: VehicleType;
+  /** The bucket inferred from module + (for Additional) sub-pick. */
+  bucket?: ServiceBucket;
+  /** Catalog ids picked (when bucket has a fixed catalog). */
   serviceIds?: string[];
   /** Names mirrored for confirmation prompt readability. */
   serviceNames?: string[];
-  /** Free-text problem statement for repairs/denting. */
+  /** Free-text problem statement (repairs / denting / RSA). */
   description?: string;
+  /** Area the customer picked — must match an active garage's `area`. */
+  area?: string;
+  /** Garage id the customer picked from the in-area list. */
+  garageId?: string;
+  /** Garage name mirrored for the confirmation prompt. */
+  garageName?: string;
   slotLabel?: string;
   slotDate?: string | null;
   slotTime?: string | null;
+  /** Vehicle brand + model + optional registration (captured late in flow). */
+  vehicleBrand?: string;
+  vehicleModel?: string;
+  vehicleRegistration?: string;
   paymentMode?: "cash" | "upi";
   updatedAt: number;
 }

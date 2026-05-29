@@ -2,10 +2,11 @@ import { describe, expect, it } from "vitest";
 import { TEMPLATES, getTemplate } from "./templates";
 
 describe("WhatsApp template registry", () => {
-  it("contains all 10 Week 1–4 template names", () => {
+  it("contains all 15 templates (Weeks 1-4 + Phase 5 blueprint)", () => {
     const names = Object.keys(TEMPLATES).sort();
     expect(names).toEqual(
       [
+        // Weeks 1-4
         "booking_cancelled",
         "booking_confirmed",
         "booking_quoted",
@@ -16,6 +17,12 @@ describe("WhatsApp template registry", () => {
         "mechanic_assigned",
         "otp_login",
         "referral_reward",
+        // Phase 5 — blueprint alignment
+        "mechanic_activated",
+        "mechanic_onboarding_submitted",
+        "mechanic_rejected",
+        "request_photos",
+        "rsa_acknowledged",
       ].sort(),
     );
   });

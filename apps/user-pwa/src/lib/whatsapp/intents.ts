@@ -4,7 +4,8 @@ import { respondToAssignment } from "@/lib/bookings/assign";
 import { cancelJob, completeJob, startJob } from "@/lib/bookings/lifecycle";
 import { listBookingsForProfile } from "@/lib/bookings/data";
 import { addBookingRating } from "@/lib/bookings/ratings";
-import { notifyTemplate, notifyText, recordInbound } from "@/lib/notifications/outbox";
+import { uploadBookingPhoto } from "@/lib/bookings/photos";
+import { notifyText, notifyTemplate, recordInbound } from "@/lib/notifications/outbox";
 import { findGarageByPhone, setGarageActive, type Garage } from "@/lib/garage/data";
 import { listGarageJobs } from "@/lib/garage/jobs";
 import { findProfileByPhone } from "@/lib/auth/profile";
@@ -13,6 +14,17 @@ import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { handleWizardMessage } from "./bot/wizard";
 import { getWizardState } from "./bot/state";
+import {
+  clearPhotoRequest,
+  getPhotoRequest,
+  incrementPhotoRequestCount,
+} from "./bot/photo-requests";
+import {
+  getOnboardingState,
+  handleOnboardingMessage,
+  isOnboardingEntry,
+} from "./bot/onboarding-wizard";
+import { downloadMediaBytes } from "./client";
 import type { InboundMessage } from "./types";
 import { isValidShortId } from "@/lib/supabase/short-id";
 import { rupees } from "@/lib/utils";
@@ -55,7 +67,51 @@ export async function handleInboundMessage(msg: InboundMessage): Promise<void> {
     }
   }
 
+  // 1b. Media inbound (image or PDF). Two possible owners:
+  //     - active mechanic onboarding wizard at VERIFICATION_DOC step → store
+  //       to verification-docs bucket via the onboarding wizard
+  //     - active ops PhotoRequest → store to booking-photos bucket
+  //     Onboarding takes precedence (mechanic is actively answering a prompt).
+  if (msg.media) {
+    const onboarding = await getOnboardingState(msg.from).catch(() => null);
+    if (onboarding && onboarding.step === "VERIFICATION_DOC") {
+      const result = await handleOnboardingMessage({
+        phone: msg.from,
+        text: "",
+        media: msg.media,
+      });
+      if (result.reply) await notifyText({ to: msg.from, body: result.reply });
+      return;
+    }
+    if (msg.media.mimeType?.startsWith("image/")) {
+      const active = await getPhotoRequest(msg.from).catch(() => null);
+      if (active) {
+        await handleInboundBookingPhoto({
+          media: msg.media,
+          from: msg.from,
+          bookingId: active.bookingId,
+          bookingShortId: active.bookingShortId,
+        });
+        return;
+      }
+    }
+    // No active request → fall through to text routing.
+  }
+
   const text = (msg.text ?? "").trim();
+  // DONE while a photo request is active → clear it + thank the customer.
+  if (
+    text.toLowerCase() === "done" &&
+    (await getPhotoRequest(msg.from).catch(() => null))
+  ) {
+    await clearPhotoRequest(msg.from);
+    await notifyText({
+      to: msg.from,
+      body: "✓ Thanks! Our team can see your photos now.",
+    });
+    return;
+  }
+
   if (!text) return;
 
   // 2. Garage identity → garage routing
@@ -70,7 +126,16 @@ export async function handleInboundMessage(msg: InboundMessage): Promise<void> {
     return;
   }
 
-  // 3. Customer wizard — in-session OR an entry trigger
+  // 3. Mechanic onboarding — in-session OR an entry trigger from an
+  //    UNKNOWN phone (already-onboarded garages caught by step 2).
+  const onboardingState = await getOnboardingState(msg.from).catch(() => null);
+  if (onboardingState || isOnboardingEntry(text)) {
+    const result = await handleOnboardingMessage({ phone: msg.from, text });
+    if (result.reply) await notifyText({ to: msg.from, body: result.reply });
+    return;
+  }
+
+  // 4. Customer wizard — in-session OR an entry trigger
   const wizardState = await getWizardState(msg.from).catch(() => null);
   if (wizardState || isWizardEntry(text)) {
     const result = await handleWizardMessage({ phone: msg.from, text });
@@ -80,7 +145,7 @@ export async function handleInboundMessage(msg: InboundMessage): Promise<void> {
     return;
   }
 
-  // 4. Customer free-text commands
+  // 5. Customer free-text commands
   await handleCustomerMessage({ from: msg.from, text });
 }
 
@@ -1021,6 +1086,65 @@ async function notifyCustomerAboutRespond(opts: {
 
 function normalisePhone(p: string): string {
   return p.replace(/\D+/g, "");
+}
+
+/**
+ * Customer sent an image while a PhotoRequest is open. Download the media
+ * from Meta and upload to Storage as a booking_photos row. Reply with a
+ * progress message and clear the request when the cap is hit.
+ *
+ * Failures are caught + audited so we always return 200 to Meta.
+ */
+async function handleInboundBookingPhoto(opts: {
+  media: NonNullable<InboundMessage["media"]>;
+  from: string;
+  bookingId: string;
+  bookingShortId: string;
+}): Promise<void> {
+  try {
+    const { bytes, mimeType } = await downloadMediaBytes(opts.media.id);
+    await uploadBookingPhoto({
+      bookingId: opts.bookingId,
+      bytes,
+      mimeType: opts.media.mimeType || mimeType,
+    });
+    const updated = await incrementPhotoRequestCount(opts.from);
+    const photosSoFar = updated?.photosSoFar ?? 0;
+    const cap = updated?.maxPhotos ?? 8;
+    await appendAuditEntry({
+      action: "upload_photo",
+      entityType: "booking",
+      entityId: opts.bookingId,
+      actor: opts.from,
+      payload: {
+        source: "whatsapp_text",
+        mediaId: opts.media.id,
+        photosSoFar,
+        cap,
+      },
+      outcome: "success",
+    });
+    const reply =
+      photosSoFar >= cap
+        ? `📸 Got ${photosSoFar}/${cap} — that's the max. Our team can see them now, thanks!`
+        : `📸 Got photo ${photosSoFar}/${cap}. Send more or reply DONE.`;
+    await notifyText({ to: opts.from, body: reply, bookingId: opts.bookingId });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "unknown_error";
+    await appendAuditEntry({
+      action: "upload_photo",
+      entityType: "booking",
+      entityId: opts.bookingId,
+      actor: opts.from,
+      payload: { source: "whatsapp_text", mediaId: opts.media.id },
+      outcome: "error",
+      error: message,
+    });
+    await notifyText({
+      to: opts.from,
+      body: "Sorry, that photo didn't go through. Please try again.",
+    });
+  }
 }
 
 export { getBookingById };

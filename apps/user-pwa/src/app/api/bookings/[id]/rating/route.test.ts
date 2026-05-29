@@ -50,6 +50,10 @@ const completed = {
   inProgressAt: new Date().toISOString(),
   completedAt: new Date().toISOString(),
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 beforeEach(() => {
