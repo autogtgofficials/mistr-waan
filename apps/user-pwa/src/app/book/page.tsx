@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Wrench, Siren, Sparkles } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
+import { CallToConfirm } from "@/components/booking/CallToConfirm";
 
 export const metadata = { title: "Book a service · Mistr Waan" };
 
@@ -45,6 +46,13 @@ export default function BookLandingPage() {
               subtitle="Detailing, repairs, denting & painting"
               tone="aqua"
             />
+          </div>
+
+          <div className="mt-8">
+            <p className="mb-2 text-center text-sm font-medium text-foreground">
+              Or skip the browsing — just call us
+            </p>
+            <CallToConfirm />
           </div>
 
           <div className="mt-6 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">

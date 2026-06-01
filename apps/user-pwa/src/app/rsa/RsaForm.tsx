@@ -1,71 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/Button";
+import { CallToConfirm } from "@/components/booking/CallToConfirm";
 import { cn } from "@/lib/utils";
 import type { CatalogService } from "@/lib/services/catalog";
 
 type VehicleType = "car" | "bike";
 
 /**
- * Emergency RSA request form. Self-contained: posts to /api/bookings with
- * bucket=rsa and slotLabel "ASAP (RSA)". Garage left null → ops dispatches.
+ * Emergency RSA — browse the issue list, then call us. No login, no payment,
+ * no booking POST: for a roadside emergency the fastest path is a phone call,
+ * and ops dispatches the nearest mechanic immediately. Payment settles on-site.
  */
 export function RsaForm({ services }: { services: CatalogService[] }) {
-  const router = useRouter();
   const [vehicleType, setVehicleType] = useState<VehicleType>("car");
   const [serviceId, setServiceId] = useState<string | null>(
     services[0]?.id ?? null,
   );
-  const [brand, setBrand] = useState("");
-  const [model, setModel] = useState("");
-  const [description, setDescription] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const canSubmit = !!serviceId && brand.trim() && model.trim() && !busy;
-
-  async function submit() {
-    if (!serviceId) return;
-    setBusy(true);
-    setError(null);
-    try {
-      const res = await fetch("/api/bookings", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: "include",
-        body: JSON.stringify({
-          bucket: "rsa",
-          serviceIds: [serviceId],
-          slotLabel: "ASAP (RSA)",
-          paymentMode: "cash",
-          vehicleType,
-          vehicleBrand: brand.trim(),
-          vehicleModel: model.trim(),
-          symptoms: description.trim()
-            ? { description: description.trim(), source: "web_rsa" }
-            : null,
-        }),
-      });
-      if (res.status === 401) {
-        router.replace(`/login?next=${encodeURIComponent("/rsa")}`);
-        return;
-      }
-      const data = (await res.json().catch(() => ({}))) as {
-        booking?: { shortId: string };
-        error?: string;
-      };
-      if (!res.ok || !data.booking) {
-        throw new Error(data.error ?? `HTTP ${res.status}`);
-      }
-      router.replace(`/booking/confirmation/${data.booking.shortId}`);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Couldn't submit. Try again.");
-    } finally {
-      setBusy(false);
-    }
-  }
+  const picked = services.find((s) => s.id === serviceId) ?? null;
 
   return (
     <div className="flex flex-col gap-6">
@@ -115,40 +67,7 @@ export function RsaForm({ services }: { services: CatalogService[] }) {
         </ul>
       </section>
 
-      <section>
-        <h2 className="text-sm font-semibold text-foreground">Details</h2>
-        <div className="mt-2 flex flex-col gap-2">
-          <input
-            placeholder="Vehicle brand"
-            value={brand}
-            onChange={(e) => setBrand(e.target.value)}
-            className="h-11 w-full rounded-md border border-input bg-card px-3 text-sm"
-          />
-          <input
-            placeholder="Vehicle model"
-            value={model}
-            onChange={(e) => setModel(e.target.value)}
-            className="h-11 w-full rounded-md border border-input bg-card px-3 text-sm"
-          />
-          <textarea
-            rows={2}
-            maxLength={500}
-            placeholder="Anything else we should know? (optional)"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="w-full rounded-md border border-input bg-card p-3 text-sm"
-          />
-        </div>
-      </section>
-
-      {error ? <p className="text-sm text-danger">{error}</p> : null}
-
-      <Button onClick={() => void submit()} loading={busy} disabled={!canSubmit} className="w-full">
-        Request assistance
-      </Button>
-      <p className="-mt-3 text-center text-xs text-muted-foreground">
-        Payment settled on-site after the job. We&apos;ll call you immediately.
-      </p>
+      <CallToConfirm serviceLabel={picked ? picked.name.toLowerCase() : undefined} />
     </div>
   );
 }

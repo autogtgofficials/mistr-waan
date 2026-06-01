@@ -171,6 +171,19 @@ export async function listGaragesByAreaAndBucket(opts: {
   return (data ?? []).map(fromRow);
 }
 
+/** Lightweight list of active garages for the ops create-booking dropdown. */
+export async function listActiveGarages(): Promise<Garage[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("garages")
+    .select("*")
+    .eq("active", true)
+    .order("area")
+    .order("shop_name");
+  if (error) throw new Error(`active garages list failed: ${error.message}`);
+  return (data ?? []).map(fromRow);
+}
+
 /** List garages by onboarding status — used by the ops review UI. */
 export async function listGaragesByOnboardingStatus(
   status: GarageOnboardingStatus,
