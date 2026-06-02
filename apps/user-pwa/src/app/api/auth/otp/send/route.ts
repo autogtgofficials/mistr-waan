@@ -3,6 +3,7 @@ import { normalizeIndianPhone } from "@/lib/whatsapp/phone";
 import { sendWhatsAppOtp } from "@/lib/whatsapp/client";
 import { WhatsAppError } from "@/lib/whatsapp/types";
 import { issueOtp } from "@/lib/otp/store";
+import { testOtpCodeFor } from "@/lib/otp/test-numbers";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { rateLimit } from "@/lib/rate-limit/store";
 
@@ -67,7 +68,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const issued = await issueOtp({ phone, channel });
+  // Test-number bypass: a fixed code + no WhatsApp send (set via OTP_TEST_NUMBERS).
+  const testCode = testOtpCodeFor(phone);
+
+  const issued = await issueOtp({
+    phone,
+    channel,
+    fixedCode: testCode ?? undefined,
+  });
   if (!issued.ok) {
     await appendAuditEntry({
       action: "send_otp",
@@ -82,6 +90,22 @@ export async function POST(request: Request) {
       { error: "cooldown", retryAfterMs: issued.retryAfterMs },
       { status: 429 },
     );
+  }
+
+  if (testCode) {
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      payload: { channel, test: true },
+      outcome: "success",
+    });
+    return NextResponse.json({
+      sent: true,
+      channel,
+      expiresAt: issued.result.expiresAt,
+    });
   }
 
   try {

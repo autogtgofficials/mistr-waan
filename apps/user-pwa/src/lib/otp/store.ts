@@ -132,6 +132,8 @@ export async function issueOtp(opts: {
   phone: string;
   channel: "whatsapp" | "sms";
   now?: number;
+  /** Override the random code with a fixed value (test-number bypass only). */
+  fixedCode?: string;
 }): Promise<{ ok: true; result: IssueResult } | { ok: false; reason: "cooldown"; retryAfterMs: number }> {
   const now = opts.now ?? Date.now();
   const existing = await getRecord(opts.phone);
@@ -142,7 +144,7 @@ export async function issueOtp(opts: {
       retryAfterMs: RESEND_COOLDOWN_MS - (now - existing.lastSentAt),
     };
   }
-  const code = generateCode();
+  const code = opts.fixedCode ?? generateCode();
   const record: OtpRecord = {
     phone: opts.phone,
     codeHash: hashCode(code),

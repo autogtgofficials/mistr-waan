@@ -3,6 +3,7 @@ import { normalizeIndianPhone } from "@/lib/whatsapp/phone";
 import { sendWhatsAppOtp } from "@/lib/whatsapp/client";
 import { WhatsAppError } from "@/lib/whatsapp/types";
 import { issueOtp } from "@/lib/otp/store";
+import { testOtpCodeFor } from "@/lib/otp/test-numbers";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { findGarageByPhone } from "@/lib/garage/data";
 import { applyCorsHeaders, handleCorsPreflight } from "@/lib/cors";
@@ -91,7 +92,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const issued = await issueOtp({ phone, channel: "whatsapp" });
+  // Test-number bypass: fixed code + no WhatsApp send (set via OTP_TEST_NUMBERS).
+  const testCode = testOtpCodeFor(phone);
+
+  const issued = await issueOtp({
+    phone,
+    channel: "whatsapp",
+    fixedCode: testCode ?? undefined,
+  });
   if (!issued.ok) {
     await appendAuditEntry({
       action: "garage_send_otp",
@@ -106,6 +114,25 @@ export async function POST(request: Request) {
         { error: "cooldown", retryAfterMs: issued.retryAfterMs },
         { status: 429 },
       ),
+      request,
+    );
+  }
+
+  if (testCode) {
+    await appendAuditEntry({
+      action: "garage_send_otp",
+      entityType: "garage_auth",
+      entityId: garage.id,
+      actor,
+      payload: { test: true },
+      outcome: "success",
+    });
+    return applyCorsHeaders(
+      NextResponse.json({
+        sent: true,
+        channel: "whatsapp",
+        expiresAt: issued.result.expiresAt,
+      }),
       request,
     );
   }
