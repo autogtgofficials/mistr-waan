@@ -74,6 +74,44 @@ export async function addBookingRating(opts: AddRatingOpts): Promise<Booking> {
   return refreshed;
 }
 
+export interface GarageReview {
+  id: string;
+  score: number;
+  comment: string | null;
+  createdAt: string;
+  reviewerFirstName: string | null;
+}
+
+/**
+ * Recent customer reviews for a garage — real `ratings` rows (target='garage'),
+ * newest first, with the reviewer's first name (no last name in `profiles`).
+ * Used by the public garage detail page.
+ */
+export async function getReviewsByGarage(
+  garageId: string,
+  limit = 5,
+): Promise<GarageReview[]> {
+  const supabase = getSupabaseAdmin();
+  const { data, error } = await supabase
+    .from("ratings")
+    .select("id, score, comment, created_at, profile:profiles(first_name)")
+    .eq("garage_id", garageId)
+    .eq("target", "garage")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`reviews fetch failed: ${error.message}`);
+  return (data ?? []).map((r) => {
+    const profile = r.profile as { first_name: string | null } | null;
+    return {
+      id: r.id,
+      score: r.score,
+      comment: r.comment,
+      createdAt: r.created_at,
+      reviewerFirstName: profile?.first_name ?? null,
+    };
+  });
+}
+
 export async function recomputeGarageRating(garageId: string): Promise<number> {
   const supabase = getSupabaseAdmin();
   const { data, error } = await supabase

@@ -24,7 +24,22 @@ export interface GarageInfo {
   id: string;
   shopName: string;
   ownerFirstName: string;
+  ownerLastName: string;
   area: string;
+  fullAddress: string;
+  rating: number;
+  jobsCompleted: number;
+  serviceBuckets: string[];
+}
+
+/** Aggregated earnings for the logged-in garage (from /api/garage/earnings). */
+export interface GarageEarnings {
+  /** Net earnings (after AutoGTG fee) in the last 30 days, ₹. */
+  last30Net: number;
+  /** Net earnings since joining, ₹. */
+  lifetimeNet: number;
+  /** Commission owed on cash jobs, ₹. */
+  commissionDue: number;
 }
 
 export interface GarageJob {

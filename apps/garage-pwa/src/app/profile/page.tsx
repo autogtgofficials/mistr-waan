@@ -13,7 +13,6 @@ import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
 import { Button } from "@/components/ui/Button";
 import { useGarageAuth } from "@/lib/store/auth";
-import { MOCK_GARAGE } from "@/lib/mock/garage";
 import { ownerLabel } from "@/lib/utils";
 
 export default function GarageProfilePage() {
@@ -24,7 +23,7 @@ export default function GarageProfilePage() {
     if (hydrated && !isAuthed) router.replace("/login");
   }, [hydrated, isAuthed, router]);
 
-  if (!hydrated || !isAuthed) {
+  if (!hydrated || !isAuthed || !user) {
     return (
       <div className="flex min-h-full flex-col">
         <TopBar />
@@ -46,15 +45,15 @@ export default function GarageProfilePage() {
               className="flex size-16 items-center justify-center rounded-full bg-pulse-100 text-pulse-700 text-xl font-semibold"
               aria-hidden
             >
-              {(MOCK_GARAGE.ownerFirstName.charAt(0) + MOCK_GARAGE.ownerLastName.charAt(0)).toUpperCase()}
+              {(user.ownerFirstName.charAt(0) + user.ownerLastName.charAt(0)).toUpperCase()}
             </span>
             <div className="flex flex-col">
               <h1 className="text-xl font-bold text-foreground">
-                {ownerLabel(MOCK_GARAGE.ownerFirstName, MOCK_GARAGE.ownerLastName)}
+                {ownerLabel(user.ownerFirstName, user.ownerLastName)}
               </h1>
-              <p className="text-sm text-foreground">{MOCK_GARAGE.shopName}</p>
+              <p className="text-sm text-foreground">{user.shopName}</p>
               <p className="text-xs text-muted-foreground tabular">
-                ★ {MOCK_GARAGE.rating} · {MOCK_GARAGE.jobsCompleted} jobs
+                ★ {user.rating} · {user.jobsCompleted} jobs
               </p>
             </div>
           </div>
@@ -62,20 +61,16 @@ export default function GarageProfilePage() {
           <Divider />
 
           <Section title="Shop">
-            <Row icon={Store} label="Shop name" value={MOCK_GARAGE.shopName} />
-            <Row icon={MapPin} label="Address" value={MOCK_GARAGE.fullAddress} />
-            <Row
-              icon={Phone}
-              label="Phone"
-              value={user?.phone ?? MOCK_GARAGE.ownerPhone}
-            />
+            <Row icon={Store} label="Shop name" value={user.shopName} />
+            <Row icon={MapPin} label="Address" value={user.fullAddress} />
+            <Row icon={Phone} label="Phone" value={user.phone} />
           </Section>
 
           <Divider />
 
           <Section title="Service capabilities">
             <div className="flex flex-wrap gap-2">
-              {MOCK_GARAGE.serviceBuckets.map((b) => (
+              {user.serviceBuckets.map((b) => (
                 <span
                   key={b}
                   className="inline-flex items-center rounded-full bg-pulse-50 px-3 py-1 text-xs font-semibold text-pulse-700 capitalize"

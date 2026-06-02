@@ -36,28 +36,49 @@ export default async function OpsBookingDetailPage({
       : null;
   if (!booking) notFound();
 
-  // Server-side fan-out: profile, photos, notes, garage candidates.
+  // Server-side fan-out: profile, photos, notes, garage candidates (by-bucket
+  // for the smart default, and all-active for manual override).
   const supabase = getSupabaseAdmin();
-  const [{ data: profile }, photos, notes, { data: garageOpts }] = await Promise.all([
-    supabase
-      .from("profiles")
-      .select("phone, first_name")
-      .eq("id", booking.profileId)
-      .maybeSingle(),
-    listBookingPhotos(booking.id),
-    listBookingNotes(booking.id).catch(() => []), // notes table may not yet exist on first deploy
-    supabase
-      .from("garages")
-      .select("id, slug, shop_name, area, owner_first_name, owner_last_name, service_buckets")
-      .eq("active", true)
-      .contains("service_buckets", [booking.bucket])
-      .order("rating", { ascending: false })
-      .limit(50)
-      .returns<GarageOpt[]>(),
-  ]);
+  const [{ data: profile }, photos, notes, { data: garageOpts }, { data: allGarageOpts }] =
+    await Promise.all([
+      supabase
+        .from("profiles")
+        .select("phone, first_name")
+        .eq("id", booking.profileId)
+        .maybeSingle(),
+      listBookingPhotos(booking.id),
+      listBookingNotes(booking.id).catch(() => []), // notes table may not yet exist on first deploy
+      supabase
+        .from("garages")
+        .select("id, slug, shop_name, area, owner_first_name, owner_last_name, service_buckets")
+        .eq("active", true)
+        .contains("service_buckets", [booking.bucket])
+        .order("rating", { ascending: false })
+        .limit(50)
+        .returns<GarageOpt[]>(),
+      supabase
+        .from("garages")
+        .select("id, slug, shop_name, area, owner_first_name, owner_last_name, service_buckets")
+        .eq("active", true)
+        .order("area")
+        .order("shop_name")
+        .limit(300)
+        .returns<GarageOpt[]>(),
+    ]);
 
   const signedPhotos = await signPhotoUrls(photos);
   const garageOptions = garageOpts ?? [];
+  const allGarageOptions = allGarageOpts ?? [];
+
+  // Customer's preferred garage (carried in symptoms; survives ops reassignment).
+  const preferredRaw = (booking.symptoms as { preferredGarage?: unknown } | null)
+    ?.preferredGarage;
+  const preferredGarageLabel =
+    typeof preferredRaw === "string" ? preferredRaw : null;
+  const preferredIdRaw = (booking.symptoms as { preferredGarageId?: unknown } | null)
+    ?.preferredGarageId;
+  const preferredGarageId =
+    typeof preferredIdRaw === "string" ? preferredIdRaw : null;
 
   return (
     <div className="min-h-screen bg-background">
@@ -115,6 +136,12 @@ export default async function OpsBookingDetailPage({
                   ? `${booking.garage.shopName} — ${booking.garage.area}`
                   : "Unassigned"}
               </dd>
+              {preferredGarageLabel ? (
+                <>
+                  <dt className="text-muted-foreground">Customer preferred</dt>
+                  <dd className="text-foreground">{preferredGarageLabel}</dd>
+                </>
+              ) : null}
             </dl>
           </div>
 
@@ -197,8 +224,12 @@ export default async function OpsBookingDetailPage({
             shortId={booking.shortId}
             currentStatus={booking.status}
             currentTotal={booking.total}
-            currentGarageId={booking.garageId}
+            currentGarageId={booking.garageId ?? preferredGarageId}
             garageOptions={garageOptions.map((g) => ({
+              id: g.id,
+              label: `${g.shop_name} — ${g.area}`,
+            }))}
+            allGarageOptions={allGarageOptions.map((g) => ({
               id: g.id,
               label: `${g.shop_name} — ${g.area}`,
             }))}

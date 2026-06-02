@@ -33,7 +33,12 @@ export function useGarageAuth() {
         id: data.garage.id,
         shopName: data.garage.shopName,
         ownerFirstName: data.garage.ownerFirstName,
+        ownerLastName: data.garage.ownerLastName,
         area: data.garage.area,
+        fullAddress: data.garage.fullAddress,
+        rating: data.garage.rating,
+        jobsCompleted: data.garage.jobsCompleted,
+        serviceBuckets: data.garage.serviceBuckets,
         phone: data.garage.phone,
       });
     } catch (err) {
