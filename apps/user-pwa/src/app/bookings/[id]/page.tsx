@@ -357,7 +357,7 @@ export default function BookingTrackPage({
               <Section title="Talk to your garage">
                 <Button className="w-full">
                   <Phone className="size-4" strokeWidth={2} />
-                  Call {garage.ownerFirstName} via Mister Waan
+                  Call {garage.ownerFirstName} via AutoGTG
                 </Button>
                 <p className="mt-2 text-xs text-muted-foreground">Your number stays private.</p>
                 <button

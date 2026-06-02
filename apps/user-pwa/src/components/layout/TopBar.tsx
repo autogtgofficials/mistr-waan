@@ -39,7 +39,7 @@ export function TopBar({ left, title, right, className }: TopBarProps) {
   );
 }
 
-/** Wordmark placeholder — designer ships real mark during rebrand week. */
+/** AutoGTG brand mark — logo car symbol on Violet Pulse + wordmark. */
 function BrandMark() {
   const locale = useLocale();
   return (
@@ -50,9 +50,10 @@ function BrandMark() {
     >
       <span
         aria-hidden
-        className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold"
+        className="flex size-8 items-center justify-center rounded-md bg-primary"
       >
-        MW
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-mark-white.png" alt="" className="h-4 w-auto" />
       </span>
       <span
         className={cn(

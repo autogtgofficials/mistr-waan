@@ -52,7 +52,7 @@ const notifyMock = vi.mocked(notifyTemplate);
 
 const sample = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "detailing" as const,
   serviceIds: ["foam-wash"],
@@ -144,8 +144,8 @@ describe("PATCH /api/ops/bookings/[id]/assign", () => {
         template: "garage_new_job",
         variables: ["Imran", "Aaliyah", "Foam wash", "Tomorrow 10 AM"],
         buttonPayloads: [
-          { index: 0, payload: "booking:MW-AB23CD:accept" },
-          { index: 1, payload: "booking:MW-AB23CD:decline" },
+          { index: 0, payload: "booking:AG-AB23CD:accept" },
+          { index: 1, payload: "booking:AG-AB23CD:decline" },
         ],
       }),
     );

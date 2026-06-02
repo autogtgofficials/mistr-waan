@@ -8,7 +8,7 @@ export function NavBar({ total }: { total: number }) {
           <span className="size-7 rounded-md bg-primary text-primary-foreground inline-flex items-center justify-center text-xs font-bold">
             W
           </span>
-          <span className="font-semibold text-foreground">Mister Waan · Ops</span>
+          <span className="font-semibold text-foreground">AutoGTG · Ops</span>
           <span className="ms-2 text-xs text-muted-foreground tabular">
             ({total} mechanics)
           </span>

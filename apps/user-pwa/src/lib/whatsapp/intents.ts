@@ -195,7 +195,7 @@ async function handleGarageMessage(opts: {
     return;
   }
 
-  const startMatch = lower.match(/^start\s+(mw-[a-z0-9-]+)$/i);
+  const startMatch = lower.match(/^start\s+(ag-[a-z0-9-]+)$/i);
   if (startMatch) {
     await handleGarageStart({
       garage,
@@ -204,7 +204,7 @@ async function handleGarageMessage(opts: {
     });
     return;
   }
-  const completeMatch = lower.match(/^(?:complete|done|finish)\s+(mw-[a-z0-9-]+)$/i);
+  const completeMatch = lower.match(/^(?:complete|done|finish)\s+(ag-[a-z0-9-]+)$/i);
   if (completeMatch) {
     await handleGarageComplete({
       garage,
@@ -213,7 +213,7 @@ async function handleGarageMessage(opts: {
     });
     return;
   }
-  const acceptMatch = lower.match(/^accept\s+(mw-[a-z0-9-]+)$/i);
+  const acceptMatch = lower.match(/^accept\s+(ag-[a-z0-9-]+)$/i);
   if (acceptMatch) {
     await handleGarageRespond({
       garage,
@@ -223,7 +223,7 @@ async function handleGarageMessage(opts: {
     });
     return;
   }
-  const declineMatch = lower.match(/^decline\s+(mw-[a-z0-9-]+)$/i);
+  const declineMatch = lower.match(/^decline\s+(ag-[a-z0-9-]+)$/i);
   if (declineMatch) {
     await handleGarageRespond({
       garage,
@@ -250,14 +250,14 @@ async function handleGarageMessage(opts: {
 
 function garageHelpText(garage: Garage): string {
   return [
-    `Hi ${garage.ownerFirstName} — Mistr Waan garage commands:`,
+    `Hi ${garage.ownerFirstName} — AutoGTG garage commands:`,
     "",
     "Jobs:",
     "• JOBS — your active jobs",
-    "• ACCEPT MW-XXXXXX — accept a new job",
-    "• DECLINE MW-XXXXXX — pass on a job",
-    "• START MW-XXXXXX — mark a job in progress",
-    "• COMPLETE MW-XXXXXX — mark a job done",
+    "• ACCEPT AG-XXXXXX — accept a new job",
+    "• DECLINE AG-XXXXXX — pass on a job",
+    "• START AG-XXXXXX — mark a job in progress",
+    "• COMPLETE AG-XXXXXX — mark a job done",
     "",
     "Account:",
     "• EARNINGS — recent earnings + commission balance",
@@ -477,7 +477,7 @@ async function handleGarageEarnings(opts: {
     "",
     `Completed jobs: ${recentCompleted.length}`,
     `Gross: ${rupees(gross)}`,
-    `Mistr Waan fee: ${rupees(commission)} (${opts.garage.commissionPct}%)`,
+    `AutoGTG fee: ${rupees(commission)} (${opts.garage.commissionPct}%)`,
     `Your net: ${rupees(net)}`,
   ];
   if (cashCommissionOwed > 0) {
@@ -632,7 +632,7 @@ async function handleCustomerMessage(opts: {
     return;
   }
 
-  const trackMatch = lower.match(/^track\s+(mw-[a-z0-9-]+)$/i);
+  const trackMatch = lower.match(/^track\s+(ag-[a-z0-9-]+)$/i);
   if (trackMatch) {
     await handleTrack({
       from: opts.from,
@@ -641,7 +641,7 @@ async function handleCustomerMessage(opts: {
     return;
   }
 
-  const cancelMatch = lower.match(/^cancel\s+(mw-[a-z0-9-]+)$/i);
+  const cancelMatch = lower.match(/^cancel\s+(ag-[a-z0-9-]+)$/i);
   if (cancelMatch) {
     await handleCustomerCancel({
       from: opts.from,
@@ -650,10 +650,10 @@ async function handleCustomerMessage(opts: {
     return;
   }
 
-  // RATE MW-XXXXXX <1-5> [free-text comment]
+  // RATE AG-XXXXXX <1-5> [free-text comment]
   const rateMatch = opts.text
     .trim()
-    .match(/^rate\s+(MW-[A-Z0-9-]+)\s+([1-5])(?:\s+(.+))?$/i);
+    .match(/^rate\s+(AG-[A-Z0-9-]+)\s+([1-5])(?:\s+(.+))?$/i);
   if (rateMatch) {
     await handleCustomerRate({
       from: opts.from,
@@ -676,20 +676,20 @@ async function handleCustomerMessage(opts: {
   await notifyText({
     to: opts.from,
     body:
-      "Sorry, I didn't get that. Reply BOOK to start a booking, TRACK <MW-XXXXXX> for status, or HELP for more.",
+      "Sorry, I didn't get that. Reply BOOK to start a booking, TRACK <AG-XXXXXX> for status, or HELP for more.",
   });
 }
 
 function customerHelpText(): string {
   return [
-    "Mistr Waan — Kashmir's car care.",
+    "AutoGTG — Kashmir's car care.",
     "",
     "Reply with:",
     "• BOOK — start a new booking",
     "• MY BOOKINGS — recent bookings",
-    "• TRACK MW-XXXXXX — booking status",
-    "• CANCEL MW-XXXXXX — cancel (>1hr before slot)",
-    "• RATE MW-XXXXXX 5 great service — rate a completed job",
+    "• TRACK AG-XXXXXX — booking status",
+    "• CANCEL AG-XXXXXX — cancel (>1hr before slot)",
+    "• RATE AG-XXXXXX 5 great service — rate a completed job",
     "• REFERRAL — your code + loyalty points",
     "",
     "Or visit autogtg.com.",
@@ -796,7 +796,7 @@ async function handleCustomerReferral(opts: { from: string }): Promise<void> {
   await notifyText({
     to: opts.from,
     body: [
-      "🎁 Your Mistr Waan referral",
+      "🎁 Your AutoGTG referral",
       "",
       `Code: ${code}`,
       `Share link: ${origin}/?ref=${code}`,

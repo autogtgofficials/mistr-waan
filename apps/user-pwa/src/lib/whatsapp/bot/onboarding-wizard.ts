@@ -126,7 +126,7 @@ const prompts = {
   workshopName: () =>
     [
       "Hello 👋",
-      "Welcome to Mistr Waan. We help workshops get more customers through our service network.",
+      "Welcome to AutoGTG. We help workshops get more customers through our service network.",
       "",
       "Let's get you onboarded — takes ~5 minutes. Reply CANCEL anytime to stop.",
       "",

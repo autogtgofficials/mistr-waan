@@ -1,4 +1,4 @@
-# Mistr Waan — Env vars checklist (Week 1)
+# AutoGTG — Env vars checklist (Week 1)
 
 Set these in **two places** for every variable:
 

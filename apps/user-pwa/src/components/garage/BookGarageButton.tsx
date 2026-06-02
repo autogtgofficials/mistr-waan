@@ -8,10 +8,10 @@ import { Button } from "@/components/ui/Button";
 /**
  * "Book this garage" CTA on the garage detail page.
  *
- * Writes the picked garageId into the draft, ensures the bucket is set,
- * and routes to the slot picker. If the user landed here without a
- * service bucket (e.g. direct deep link), default to "detailing" with
- * an empty service list so we still proceed gracefully.
+ * Writes the picked garageId into the draft (as a hint — ops makes the final
+ * assignment), ensures the bucket is set, and routes to the confirm step. If
+ * the user landed here without a service bucket (e.g. direct deep link),
+ * default to "detailing" with an empty service list so we still proceed.
  */
 export function BookGarageButton({
   garageId,
@@ -29,7 +29,7 @@ export function BookGarageButton({
       bucket: resolvedBucket,
       garageId,
     });
-    router.push("/booking/slot");
+    router.push("/booking/request");
   }
 
   return (

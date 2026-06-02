@@ -19,11 +19,11 @@ const bookingMock = vi.mocked(getBookingById);
 const shortIdMock = vi.mocked(getBookingByShortId);
 
 const VALID_UUID = "550e8400-e29b-41d4-a716-446655440000";
-const VALID_SHORT = "MW-AB23CD";
+const VALID_SHORT = "AG-AB23CD";
 
 const sampleBooking = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "owner-uuid",
   bucket: "detailing" as const,
   serviceIds: ["foam-wash"],

@@ -40,7 +40,7 @@ const QUERY = `
 out center tags;
 `.trim();
 
-const UA = "mister-waan-scraper/0.1 (contact: farhansyedain@gmail.com)";
+const UA = "autogtg-scraper/0.1 (contact: farhansyedain@gmail.com)";
 
 async function fetchOverpass() {
   let lastErr;

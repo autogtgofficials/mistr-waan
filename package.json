@@ -1,8 +1,8 @@
 {
-  "name": "mister-waan",
+  "name": "autogtg",
   "private": true,
   "version": "0.0.0",
-  "description": "Mister Waan monorepo — PWA + WhatsApp platform connecting Kashmir vehicle owners with vetted garages.",
+  "description": "AutoGTG monorepo — PWA + WhatsApp platform connecting Kashmir vehicle owners with vetted garages.",
   "scripts": {
     "dev": "pnpm --filter user-pwa dev",
     "build": "pnpm --filter user-pwa build",

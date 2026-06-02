@@ -1,4 +1,4 @@
-# Waan Monorepo — Production Readiness Audit
+# AutoGTG Monorepo — Production Readiness Audit
 
 **Date:** 2026-05-21
 **Auditor:** Claude (Opus 4.7)
@@ -277,7 +277,7 @@ Operational log of the production setup that landed user-pwa at **autogtg.com** 
 
 | | Value |
 |---|---|
-| **Live domain** | `https://autogtg.com` (Mistr Waan PWA, Next.js) |
+| **Live domain** | `https://autogtg.com` (AutoGTG PWA, Next.js) |
 | **Netlify site** | `mistr-waan-prod` |
 | **Site ID** | `df1a79b8-c154-4d84-b0ab-c4f2d754a858` |
 | **Account** | `autogtgofficials@gmail.com` (team `Autogtg`) |
@@ -426,7 +426,7 @@ cd apps/user-pwa && pnpm test
 
 If picking this up cold without prior context:
 
-1. **The live site is `https://autogtg.com`.** Confirm: `curl https://autogtg.com/` returns 200 with HTML title "Mister Waan".
+1. **The live site is `https://autogtg.com`.** Confirm: `curl https://autogtg.com/` returns 200 with HTML title "AutoGTG".
 2. **Netlify is at `autogtgofficials@gmail.com`**, team `Autogtg`. Don't log in to `autogtgparent@gmail.com` — that's an abandoned account.
 3. **GitHub source is `autogtgofficials/mistr-waan` (private).** Other mirrors exist but are stale.
 4. **WhatsApp test recipient is `+91 7889686682`** — must be added in Meta API Setup → "To" list before any sends.

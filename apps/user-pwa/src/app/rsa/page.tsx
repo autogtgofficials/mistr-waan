@@ -5,7 +5,7 @@ import { RsaForm } from "./RsaForm";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Roadside Assistance · Mistr Waan" };
+export const metadata = { title: "Roadside Assistance · AutoGTG" };
 
 /**
  * /rsa — emergency Roadside Assistance request. DB-backed; posts to

@@ -113,7 +113,7 @@ export function PayNowButton(props: {
         amount: orderData.amountPaise!,
         currency: orderData.currency!,
         order_id: orderData.orderId!,
-        name: "Mistr Waan",
+        name: "AutoGTG",
         description: `Booking ${orderData.shortId}`,
         prefill: {
           name: props.customerName,

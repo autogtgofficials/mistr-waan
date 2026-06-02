@@ -114,7 +114,7 @@ const MODULES: { key: CustomerModule; label: string; emoji: string }[] = [
 
 function modulePrompt(): string {
   return [
-    "Hi! 👋 I'm Mistr Waan. What do you need today?",
+    "Hi! 👋 I'm AutoGTG. What do you need today?",
     "",
     ...MODULES.map((m, i) => `${i + 1}. ${m.emoji} ${m.label}`),
     "",

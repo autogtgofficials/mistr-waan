@@ -37,7 +37,7 @@ const setReqMock = vi.mocked(setPhotoRequest);
 
 const booking = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "denting" as const,
   serviceIds: [],
@@ -77,7 +77,7 @@ beforeEach(() => {
   setReqMock.mockResolvedValue({
     phone: "+916006617842",
     bookingId: "b-1",
-    bookingShortId: "MW-AB23CD",
+    bookingShortId: "AG-AB23CD",
     maxPhotos: 8,
     photosSoFar: 0,
     createdAt: Date.now(),

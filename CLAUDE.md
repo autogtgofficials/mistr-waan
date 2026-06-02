@@ -1,4 +1,4 @@
-# Waan Monorepo — Claude Instructions
+# AutoGTG Monorepo — Claude Instructions
 
 ## Testing (required for every feature)
 

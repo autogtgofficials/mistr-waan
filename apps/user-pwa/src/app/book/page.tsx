@@ -4,7 +4,7 @@ import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
 import { CallToConfirm } from "@/components/booking/CallToConfirm";
 
-export const metadata = { title: "Book a service · Mistr Waan" };
+export const metadata = { title: "Book a service · AutoGTG" };
 
 /**
  * /book — module-picker landing aligned with the blueprint's three front
@@ -56,7 +56,7 @@ export default function BookLandingPage() {
           </div>
 
           <div className="mt-6 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-            Prefer WhatsApp? Message us &quot;BOOK&quot; on the Mistr Waan number and
+            Prefer WhatsApp? Message us &quot;BOOK&quot; on the AutoGTG number and
             our bot will walk you through it.
           </div>
         </div>

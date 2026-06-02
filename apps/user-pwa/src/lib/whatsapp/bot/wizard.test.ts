@@ -97,7 +97,7 @@ afterEach(() => {
 function sampleBooking(overrides: Record<string, unknown> = {}) {
   return {
     id: "b-1",
-    shortId: "MW-XYZ234",
+    shortId: "AG-XYZ234",
     profileId: "p-1",
     bucket: "detailing" as const,
     serviceIds: ["foam-wash"],
@@ -205,8 +205,8 @@ describe("customer wizard — Additional → Detailing full happy path", () => {
     expect(r.reply).toContain("Imran's Auto");
     expect(r.reply).toContain("Maruti");
     r = await handleWizardMessage({ phone: PHONE, text: "confirm" });
-    expect(r.reply).toContain("MW-XYZ234");
-    expect(r.done?.bookingShortId).toBe("MW-XYZ234");
+    expect(r.reply).toContain("AG-XYZ234");
+    expect(r.done?.bookingShortId).toBe("AG-XYZ234");
     expect(createMock).toHaveBeenCalledWith(
       expect.objectContaining({
         bucket: "detailing",
@@ -238,7 +238,7 @@ describe("customer wizard — RSA branch (short-circuit slot)", () => {
   it("'book' → 2 (RSA) → 1 (Car) → service → area → garage → vehicle → payment → confirm", async () => {
     profileMock.mockResolvedValueOnce(sampleProfile);
     createMock.mockResolvedValueOnce(
-      sampleBooking({ bucket: "rsa", shortId: "MW-RSA001", slotLabel: "ASAP (RSA)" }),
+      sampleBooking({ bucket: "rsa", shortId: "AG-RSA001", slotLabel: "ASAP (RSA)" }),
     );
 
     let r = await handleWizardMessage({ phone: PHONE, text: "book" });
@@ -255,7 +255,7 @@ describe("customer wizard — RSA branch (short-circuit slot)", () => {
     r = await handleWizardMessage({ phone: PHONE, text: "Maruti, Swift" });
     r = await handleWizardMessage({ phone: PHONE, text: "1" }); // cash
     r = await handleWizardMessage({ phone: PHONE, text: "confirm" });
-    expect(r.reply).toContain("MW-RSA001");
+    expect(r.reply).toContain("AG-RSA001");
     expect(createMock).toHaveBeenCalledWith(
       expect.objectContaining({
         bucket: "rsa",

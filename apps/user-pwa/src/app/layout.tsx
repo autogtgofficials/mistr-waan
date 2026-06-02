@@ -26,14 +26,14 @@ const notoNaskh = Noto_Naskh_Arabic({
 
 export const metadata: Metadata = {
   title: {
-    default: "Mister Waan",
-    template: "%s · Mister Waan",
+    default: "AutoGTG",
+    template: "%s · AutoGTG",
   },
   description:
     "Book vetted garages in Srinagar for repairs, detailing, and denting & painting. Pay safely, talk privately.",
-  applicationName: "Mister Waan",
+  applicationName: "AutoGTG",
   appleWebApp: {
-    title: "Mister Waan",
+    title: "AutoGTG",
     capable: true,
     statusBarStyle: "default",
   },

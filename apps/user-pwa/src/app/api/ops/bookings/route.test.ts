@@ -136,7 +136,7 @@ describe("POST /api/ops/bookings (create from call)", () => {
     profileMock.mockResolvedValueOnce(profile);
     createMock.mockResolvedValueOnce({
       id: "b-1",
-      shortId: "MW-CALL01",
+      shortId: "AG-CALL01",
       profileId: "p-1",
       bucket: "scheduled_maintenance",
       serviceIds: ["car-oil-change"],

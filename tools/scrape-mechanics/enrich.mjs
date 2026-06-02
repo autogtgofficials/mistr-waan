@@ -19,7 +19,7 @@ const DATA_DIR = join(__dirname, "data");
 const SRINAGAR_PATH = join(DATA_DIR, "srinagar.json");
 const CACHE_PATH = join(DATA_DIR, "geocode-cache.json");
 
-const UA = "mister-waan-scraper/0.1 (contact: farhansyedain@gmail.com)";
+const UA = "autogtg-scraper/0.1 (contact: farhansyedain@gmail.com)";
 const NOMINATIM = "https://nominatim.openstreetmap.org/reverse";
 const MIN_DELAY_MS = 1100; // Nominatim policy: max 1 req/sec
 

@@ -118,7 +118,7 @@ describe("timeAgo", () => {
 
 describe("jobsDoneLabel", () => {
   it("returns new-user label for 0", () => {
-    expect(jobsDoneLabel(0)).toBe("New on Mister Waan");
+    expect(jobsDoneLabel(0)).toBe("New on AutoGTG");
   });
 
   it("returns count for 1–99", () => {

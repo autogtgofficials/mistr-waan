@@ -29,15 +29,16 @@ export function TopBar({ left, title, right, className }: TopBarProps) {
 
 function BrandMark() {
   return (
-    <Link href="/" className="flex items-center gap-2 tap" aria-label="Mister Waan Garage">
+    <Link href="/" className="flex items-center gap-2 tap" aria-label="AutoGTG Garage">
       <span
         aria-hidden
-        className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold"
+        className="flex size-8 items-center justify-center rounded-md bg-primary"
       >
-        MW
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/logo-mark-white.png" alt="" className="h-4 w-auto" />
       </span>
       <span className="hidden text-base font-semibold text-foreground sm:inline">
-        Mister Waan
+        AutoGTG
       </span>
       <span className="ms-1 rounded-full bg-aqua-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-aqua-700">
         Garage

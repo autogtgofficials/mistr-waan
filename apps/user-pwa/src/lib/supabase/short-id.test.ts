@@ -2,11 +2,11 @@ import { describe, it, expect } from "vitest";
 import { generateShortId, isValidShortId, SHORT_ID_REGEX } from "./short-id";
 
 describe("generateShortId", () => {
-  it("produces 9-character strings with MW- prefix", () => {
+  it("produces 9-character strings with AG- prefix", () => {
     for (let i = 0; i < 50; i++) {
       const id = generateShortId();
       expect(id).toHaveLength(9);
-      expect(id.startsWith("MW-")).toBe(true);
+      expect(id.startsWith("AG-")).toBe(true);
     }
   });
 
@@ -27,21 +27,21 @@ describe("generateShortId", () => {
 
 describe("isValidShortId", () => {
   it("accepts well-formed IDs", () => {
-    expect(isValidShortId("MW-AB23CD")).toBe(true);
-    expect(isValidShortId("MW-PQRSTU")).toBe(true);
+    expect(isValidShortId("AG-AB23CD")).toBe(true);
+    expect(isValidShortId("AG-PQRSTU")).toBe(true);
   });
 
   it("rejects ambiguous characters", () => {
-    expect(isValidShortId("MW-O00000")).toBe(false);
-    expect(isValidShortId("MW-IL1234")).toBe(false);
+    expect(isValidShortId("AG-O00000")).toBe(false);
+    expect(isValidShortId("AG-IL1234")).toBe(false);
   });
 
   it("rejects wrong shape", () => {
     expect(isValidShortId("")).toBe(false);
-    expect(isValidShortId("MW-")).toBe(false);
-    expect(isValidShortId("MW-ABCDE")).toBe(false);
-    expect(isValidShortId("MW-ABCDEFG")).toBe(false);
-    expect(isValidShortId("mw-ABCDEF")).toBe(false);
+    expect(isValidShortId("AG-")).toBe(false);
+    expect(isValidShortId("AG-ABCDE")).toBe(false);
+    expect(isValidShortId("AG-ABCDEFG")).toBe(false);
+    expect(isValidShortId("ag-ABCDEF")).toBe(false);
     expect(isValidShortId("AB-CDEFGH")).toBe(false);
   });
 });

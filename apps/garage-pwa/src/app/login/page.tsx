@@ -82,10 +82,11 @@ export default function GarageLoginPage() {
     <div className="flex min-h-full flex-col bg-background">
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col px-5 pt-10 pb-10">
         <div className="mb-6 flex items-center gap-2">
-          <span className="flex size-9 items-center justify-center rounded-md bg-primary text-primary-foreground text-sm font-bold">
-            MW
+          <span className="flex size-9 items-center justify-center rounded-md bg-primary">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo-mark-white.png" alt="" className="h-5 w-auto" />
           </span>
-          <span className="text-base font-semibold text-foreground">Mister Waan</span>
+          <span className="text-base font-semibold text-foreground">AutoGTG</span>
           <span className="rounded-full bg-aqua-50 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-aqua-700">
             Garage
           </span>
@@ -95,7 +96,7 @@ export default function GarageLoginPage() {
           <form onSubmit={handlePhone}>
             <h1 className="text-2xl font-bold text-foreground">Sign in</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-              Use the phone number you registered with Mister Waan.
+              Use the phone number you registered with AutoGTG.
             </p>
             <div className="mt-6 flex items-stretch overflow-hidden rounded-md border border-input focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2">
               <span className="flex items-center bg-muted px-3 text-base font-medium text-muted-foreground">

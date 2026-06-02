@@ -5,7 +5,7 @@ import { MaintenanceForm } from "./MaintenanceForm";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Scheduled Maintenance · Mistr Waan" };
+export const metadata = { title: "Scheduled Maintenance · AutoGTG" };
 
 /**
  * /maintenance — DB-backed booking for the Scheduled Maintenance module.

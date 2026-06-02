@@ -63,8 +63,8 @@ export default function ReferralsPage() {
     if (!data) return;
     if (typeof navigator.share === "function") {
       await navigator.share({
-        title: "Mister Waan",
-        text: `Get ₹200 off your first car booking on Mister Waan with my code: ${data.referralCode}`,
+        title: "AutoGTG",
+        text: `Get ₹200 off your first car booking on AutoGTG with my code: ${data.referralCode}`,
         url: data.shareUrl,
       });
     } else {
@@ -95,7 +95,7 @@ export default function ReferralsPage() {
               <Gift className="size-7" strokeWidth={2} />
             </span>
             <h2 className="mt-4 text-2xl font-bold text-foreground">
-              Share Mister Waan, get rewarded
+              Share AutoGTG, get rewarded
             </h2>
             <p className="mt-2 text-sm text-muted-foreground">
               When a friend signs up with your code and completes their first booking,

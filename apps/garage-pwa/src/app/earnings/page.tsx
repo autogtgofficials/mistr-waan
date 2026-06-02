@@ -69,7 +69,7 @@ export default function EarningsPage() {
               {rupees(totalEarnings)}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              After Mister Waan fee. Lifetime: {rupees(MOCK_GARAGE.earningsLifetime + sessionEarnings)}
+              After AutoGTG fee. Lifetime: {rupees(MOCK_GARAGE.earningsLifetime + sessionEarnings)}
             </p>
           </section>
 

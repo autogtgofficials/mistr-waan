@@ -83,7 +83,7 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Your Mistr Waan login code is *{{1}}*. Valid for 5 minutes. " +
+      "Your AutoGTG login code is *{{1}}*. Valid for 5 minutes. " +
       "Do not share this code with anyone.",
     bodyExamples: ["123456"],
   },
@@ -92,25 +92,25 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Hi! Your Mistr Waan booking *{{1}}* is received. " +
+      "Hi! Your AutoGTG booking *{{1}}* is received. " +
       "Slot: {{2}}. Estimated total: ₹{{3}}.\n\nWe'll call you in a few minutes to confirm details.",
-    bodyExamples: ["MW-AB23CD", "Tomorrow 10 AM", "500"],
+    bodyExamples: ["AG-AB23CD", "Tomorrow 10 AM", "500"],
   },
   {
     name: "booking_quoted",
     category: "UTILITY",
     language: "en",
     body:
-      "Hi! Your Mistr Waan booking *{{1}}* has been quoted at *{{2}}*.\n\n" +
+      "Hi! Your AutoGTG booking *{{1}}* has been quoted at *{{2}}*.\n\n" +
       "Payment mode: {{3}}.\n\nWe'll assign a garage shortly.",
-    bodyExamples: ["MW-AB23CD", "₹3200", "Cash on visit"],
+    bodyExamples: ["AG-AB23CD", "₹3200", "Cash on visit"],
   },
   {
     name: "garage_new_job",
     category: "UTILITY",
     language: "en",
     body:
-      "Hi {{1}}, you have a new job from Mistr Waan:\n\n" +
+      "Hi {{1}}, you have a new job from AutoGTG:\n\n" +
       "Customer: {{2}}\nService: {{3}}\nSlot: {{4}}\n\n" +
       "Tap Accept to confirm or Decline to pass.",
     bodyExamples: ["Imran", "Aaliyah", "Foam wash", "Tomorrow 10 AM"],
@@ -124,9 +124,9 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Good news! Your Mistr Waan booking *{{2}}* has been assigned to *{{1}}*.\n\n" +
+      "Good news! Your AutoGTG booking *{{2}}* has been assigned to *{{1}}*.\n\n" +
       "They'll WhatsApp you when work starts.",
-    bodyExamples: ["Imran's Auto", "MW-AB23CD"],
+    bodyExamples: ["Imran's Auto", "AG-AB23CD"],
   },
   {
     name: "garage_declined",
@@ -135,39 +135,39 @@ const TEMPLATES: TemplateDef[] = [
     body:
       "Hi {{1}}, the garage we tried for booking *{{2}}* wasn't able to take it.\n\n" +
       "No worries — our team is finding you another garage. You'll hear back in a few minutes.",
-    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+    bodyExamples: ["Aaliyah", "AG-AB23CD"],
   },
   {
     name: "job_started",
     category: "UTILITY",
     language: "en",
-    body: "Hi {{1}}, work has started on your Mistr Waan booking *{{2}}*. 🛠️\n\nWe'll ping you when it's done.",
-    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+    body: "Hi {{1}}, work has started on your AutoGTG booking *{{2}}*. 🛠️\n\nWe'll ping you when it's done.",
+    bodyExamples: ["Aaliyah", "AG-AB23CD"],
   },
   {
     name: "job_complete",
     category: "UTILITY",
     language: "en",
     body:
-      "Your Mistr Waan booking *{{1}}* is complete! 🎉\n\n" +
+      "Your AutoGTG booking *{{1}}* is complete! 🎉\n\n" +
       "View details, pay (if cash), and rate your experience at autogtg.com/bookings/{{1}} — thanks for choosing us.",
-    bodyExamples: ["MW-AB23CD"],
+    bodyExamples: ["AG-AB23CD"],
   },
   {
     name: "booking_cancelled",
     category: "UTILITY",
     language: "en",
     body:
-      "Hi {{1}}, your Mistr Waan booking *{{2}}* has been cancelled.\n\n" +
+      "Hi {{1}}, your AutoGTG booking *{{2}}* has been cancelled.\n\n" +
       "If you cancelled by mistake or want to rebook, just visit autogtg.com.",
-    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+    bodyExamples: ["Aaliyah", "AG-AB23CD"],
   },
   {
     name: "referral_reward",
     category: "MARKETING",
     language: "en",
     body:
-      "🎁 Good news {{1}}! Your friend just completed their first Mistr Waan booking — " +
+      "🎁 Good news {{1}}! Your friend just completed their first AutoGTG booking — " +
       "you've earned {{2}} loyalty points.\n\nPoints apply automatically at your next checkout.",
     bodyExamples: ["Aaliyah", "200"],
   },
@@ -177,7 +177,7 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Thanks {{1}}! Your workshop *{{2}}* has been submitted to Mistr Waan for verification.\n\n" +
+      "Thanks {{1}}! Your workshop *{{2}}* has been submitted to AutoGTG for verification.\n\n" +
       "Our team will review your details and activate your partner profile within 24 hours. " +
       "We'll WhatsApp you once you're live.",
     bodyExamples: ["Imran", "Khan Auto Detailing"],
@@ -187,7 +187,7 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Great news {{1}}! Your workshop *{{2}}* is now live on Mistr Waan. " +
+      "Great news {{1}}! Your workshop *{{2}}* is now live on AutoGTG. " +
       "You'll start receiving job requests on this number.\n\n" +
       "Reply JOBS to see your active queue, HELP for all commands.",
     bodyExamples: ["Imran", "Khan Auto Detailing"],
@@ -197,7 +197,7 @@ const TEMPLATES: TemplateDef[] = [
     category: "UTILITY",
     language: "en",
     body:
-      "Hi {{1}}, we couldn't verify your Mistr Waan workshop application.\n\n" +
+      "Hi {{1}}, we couldn't verify your AutoGTG workshop application.\n\n" +
       "Reason: {{2}}\n\nPlease reply ONBOARD to try again, or message our team for help.",
     bodyExamples: ["Imran", "Verification document was unclear"],
   },
@@ -208,7 +208,7 @@ const TEMPLATES: TemplateDef[] = [
     body:
       "Hi {{1}}, please send a few clear photos of the issue so our team can quote your " +
       "booking *{{2}}* accurately.\n\nSend up to 8 photos in this chat, then reply DONE.",
-    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+    bodyExamples: ["Aaliyah", "AG-AB23CD"],
   },
   {
     name: "rsa_acknowledged",
@@ -217,7 +217,7 @@ const TEMPLATES: TemplateDef[] = [
     body:
       "Hi {{1}}, your roadside assistance request *{{2}}* is received. " +
       "Our team is calling you right now to dispatch the nearest mechanic.",
-    bodyExamples: ["Aaliyah", "MW-AB23CD"],
+    bodyExamples: ["Aaliyah", "AG-AB23CD"],
   },
 ];
 

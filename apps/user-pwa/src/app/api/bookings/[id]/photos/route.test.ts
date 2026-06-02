@@ -56,7 +56,7 @@ beforeEach(() => {
 
 const sample = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "denting" as const,
   serviceIds: [],

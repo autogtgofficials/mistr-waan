@@ -215,7 +215,7 @@ export default function GarageJobPage({
             </div>
             {job.commissionCut != null && job.commissionCut > 0 ? (
               <p className="mt-2 text-xs text-muted-foreground">
-                Mister Waan fee: {rupees(job.commissionCut)}
+                AutoGTG fee: {rupees(job.commissionCut)}
               </p>
             ) : null}
 

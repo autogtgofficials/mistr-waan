@@ -133,7 +133,7 @@ const sampleGarage = {
 
 const booking = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "detailing" as const,
   serviceIds: [],
@@ -215,7 +215,7 @@ describe("handleInboundMessage — button replies", () => {
     respondMock.mockResolvedValueOnce({ ...booking, status: "assigned" });
 
     await handleInboundMessage(
-      inbound({ interactiveId: "booking:MW-AB23CD:accept", from: "+919999999999" }),
+      inbound({ interactiveId: "booking:AG-AB23CD:accept", from: "+919999999999" }),
     );
 
     expect(respondMock).toHaveBeenCalledWith({
@@ -233,7 +233,7 @@ describe("handleInboundMessage — button replies", () => {
     respondMock.mockResolvedValueOnce({ ...booking, status: "declined_by_garage" });
 
     await handleInboundMessage(
-      inbound({ interactiveId: "booking:MW-AB23CD:decline", from: "+919999999999" }),
+      inbound({ interactiveId: "booking:AG-AB23CD:decline", from: "+919999999999" }),
     );
 
     expect(notifyTplMock).toHaveBeenCalledWith(
@@ -245,7 +245,7 @@ describe("handleInboundMessage — button replies", () => {
     lookupMock.mockResolvedValueOnce(booking);
 
     await handleInboundMessage(
-      inbound({ interactiveId: "booking:MW-AB23CD:accept", from: "+910000000000" }),
+      inbound({ interactiveId: "booking:AG-AB23CD:accept", from: "+910000000000" }),
     );
     expect(respondMock).not.toHaveBeenCalled();
     expect(auditMock).toHaveBeenCalledWith(
@@ -264,14 +264,14 @@ describe("handleInboundMessage — customer text commands", () => {
 
   it("track <id> returns a status summary when booking exists", async () => {
     lookupMock.mockResolvedValueOnce(booking);
-    await handleInboundMessage(inbound({ text: "track MW-AB23CD" }));
+    await handleInboundMessage(inbound({ text: "track AG-AB23CD" }));
     expect(notifyTextMock).toHaveBeenCalled();
-    expect(notifyTextMock.mock.calls[0]![0].body).toContain("MW-AB23CD");
+    expect(notifyTextMock.mock.calls[0]![0].body).toContain("AG-AB23CD");
   });
 
   it("track <id> says not found when missing", async () => {
     lookupMock.mockResolvedValueOnce(null);
-    await handleInboundMessage(inbound({ text: "track MW-XYZ234" }));
+    await handleInboundMessage(inbound({ text: "track AG-XYZ234" }));
     expect(notifyTextMock).toHaveBeenCalledWith(
       expect.objectContaining({ body: expect.stringContaining("No booking found") }),
     );
@@ -325,7 +325,7 @@ describe("handleInboundMessage — garage text commands", () => {
     listJobsMock.mockResolvedValueOnce([
       {
         ...booking,
-        shortId: "MW-AB23CD",
+        shortId: "AG-AB23CD",
         status: "assigned",
         services: [
           { id: "foam-wash", name: "Foam wash", basePrice: 500, durationLabel: null, blurb: null, isQuoted: false },
@@ -338,15 +338,15 @@ describe("handleInboundMessage — garage text commands", () => {
     ]);
     await handleInboundMessage(inbound({ text: "jobs", from: "+919999999999" }));
     const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
-    expect(body).toContain("MW-AB23CD");
+    expect(body).toContain("AG-AB23CD");
     expect(body).toContain("START");
   });
 
-  it("'start MW-XX' moves the job to in_progress + notifies customer", async () => {
+  it("'start AG-XX' moves the job to in_progress + notifies customer", async () => {
     lookupMock.mockResolvedValueOnce(booking);
     startMock.mockResolvedValueOnce({ ...booking, status: "in_progress" });
     await handleInboundMessage(
-      inbound({ text: "start MW-AB23CD", from: "+919999999999" }),
+      inbound({ text: "start AG-AB23CD", from: "+919999999999" }),
     );
     expect(startMock).toHaveBeenCalledWith("b-1");
     expect(notifyTplMock).toHaveBeenCalledWith(
@@ -354,11 +354,11 @@ describe("handleInboundMessage — garage text commands", () => {
     );
   });
 
-  it("'complete MW-XX' moves the job to completed + sends job_complete template", async () => {
+  it("'complete AG-XX' moves the job to completed + sends job_complete template", async () => {
     lookupMock.mockResolvedValueOnce({ ...booking, status: "in_progress" });
     completeMock.mockResolvedValueOnce({ ...booking, status: "completed" });
     await handleInboundMessage(
-      inbound({ text: "complete MW-AB23CD", from: "+919999999999" }),
+      inbound({ text: "complete AG-AB23CD", from: "+919999999999" }),
     );
     expect(completeMock).toHaveBeenCalledWith("b-1");
     expect(notifyTplMock).toHaveBeenCalledWith(
@@ -366,11 +366,11 @@ describe("handleInboundMessage — garage text commands", () => {
     );
   });
 
-  it("'accept MW-XX' (text) = button accept", async () => {
+  it("'accept AG-XX' (text) = button accept", async () => {
     lookupMock.mockResolvedValueOnce(booking);
     respondMock.mockResolvedValueOnce({ ...booking, status: "assigned" });
     await handleInboundMessage(
-      inbound({ text: "accept MW-AB23CD", from: "+919999999999" }),
+      inbound({ text: "accept AG-AB23CD", from: "+919999999999" }),
     );
     expect(respondMock).toHaveBeenCalledWith(
       expect.objectContaining({ outcome: "accept" }),
@@ -385,7 +385,7 @@ describe("handleInboundMessage — garage text commands", () => {
   it("garage trying to start a booking that isn't theirs gets rejected", async () => {
     lookupMock.mockResolvedValueOnce({ ...booking, garageId: "g-other" });
     await handleInboundMessage(
-      inbound({ text: "start MW-AB23CD", from: "+919999999999" }),
+      inbound({ text: "start AG-AB23CD", from: "+919999999999" }),
     );
     expect(startMock).not.toHaveBeenCalled();
     expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("isn't assigned");
@@ -448,13 +448,13 @@ describe("handleInboundMessage — customer extended commands", () => {
       lastSeenAt: null,
     });
     listBookingsMock.mockResolvedValueOnce([
-      { ...booking, shortId: "MW-AAAAAA", status: "completed", total: 500 },
-      { ...booking, shortId: "MW-BBBBBB", status: "queued_for_call", total: null },
+      { ...booking, shortId: "AG-AAAAAA", status: "completed", total: 500 },
+      { ...booking, shortId: "AG-BBBBBB", status: "queued_for_call", total: null },
     ]);
     await handleInboundMessage(inbound({ text: "my bookings" }));
     const body = notifyTextMock.mock.calls[0]?.[0].body ?? "";
-    expect(body).toContain("MW-AAAAAA");
-    expect(body).toContain("MW-BBBBBB");
+    expect(body).toContain("AG-AAAAAA");
+    expect(body).toContain("AG-BBBBBB");
   });
 
   it("MY BOOKINGS for unknown phone replies with BOOK nudge", async () => {
@@ -482,11 +482,11 @@ describe("handleInboundMessage — customer extended commands", () => {
     expect(body).toContain("Loyalty points: 200");
   });
 
-  it("RATE MW-XXX 5 great service calls addBookingRating with the parsed args", async () => {
+  it("RATE AG-XXX 5 great service calls addBookingRating with the parsed args", async () => {
     lookupMock.mockResolvedValueOnce({ ...booking, status: "completed" });
     rateMock.mockResolvedValueOnce({ ...booking, ratingValue: 5 });
     await handleInboundMessage(
-      inbound({ text: "rate MW-AB23CD 5 fantastic work" }),
+      inbound({ text: "rate AG-AB23CD 5 fantastic work" }),
     );
     expect(rateMock).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -499,7 +499,7 @@ describe("handleInboundMessage — customer extended commands", () => {
   });
 
   it("RATE rejects scores outside 1-5 by falling through to unknown intent", async () => {
-    await handleInboundMessage(inbound({ text: "rate MW-AB23CD 7" }));
+    await handleInboundMessage(inbound({ text: "rate AG-AB23CD 7" }));
     expect(rateMock).not.toHaveBeenCalled();
     // The regex requires [1-5], so this hits the unknown-intent path
     expect(auditMock).toHaveBeenCalledWith(
@@ -514,7 +514,7 @@ describe("handleInboundMessage — customer extended commands", () => {
       profileId: "p-other",
     });
     await handleInboundMessage(
-      inbound({ text: "rate MW-AB23CD 5", from: "+910000000000" }),
+      inbound({ text: "rate AG-AB23CD 5", from: "+910000000000" }),
     );
     expect(rateMock).not.toHaveBeenCalled();
     expect(notifyTextMock.mock.calls[0]?.[0].body).toContain("can't rate");

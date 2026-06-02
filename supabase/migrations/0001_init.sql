@@ -1,4 +1,4 @@
--- 0001_init.sql — Mistr Waan initial schema
+-- 0001_init.sql — AutoGTG initial schema
 -- Per /Users/farhan/.claude/plans/ask-me-questions-all-velvety-bentley.md
 -- All access is server-side via SUPABASE_SERVICE_ROLE_KEY; RLS is enabled but no
 -- policies are added for the anon role. Customers/garages never hit Supabase

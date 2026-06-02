@@ -47,7 +47,7 @@ export interface GarageJob {
  */
 export const SEED_JOBS: GarageJob[] = [
   {
-    id: "MW-PNDG01",
+    id: "AG-PNDG01",
     bucket: "repairs",
     summary: "Brake — sounds noisy when braking",
     customerLabel: "Aamir S.",
@@ -60,7 +60,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 12 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-PNDG02",
+    id: "AG-PNDG02",
     bucket: "detailing",
     summary: "Foam wash + Machine polish",
     customerLabel: "Ovais L.",
@@ -73,7 +73,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 5 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-QRQ001",
+    id: "AG-QRQ001",
     bucket: "denting",
     summary: "Driver-side dent — 3 photos uploaded",
     customerLabel: "Hilal D.",
@@ -86,7 +86,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-ASG001",
+    id: "AG-ASG001",
     bucket: "detailing",
     summary: "Ceramic coating",
     customerLabel: "Khalid M.",
@@ -99,7 +99,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-IPRG01",
+    id: "AG-IPRG01",
     bucket: "repairs",
     summary: "Engine — rough at idle",
     customerLabel: "Tariq W.",
@@ -112,7 +112,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 90 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-CMP001",
+    id: "AG-CMP001",
     bucket: "detailing",
     summary: "Foam wash",
     customerLabel: "Sameer W.",
@@ -125,7 +125,7 @@ export const SEED_JOBS: GarageJob[] = [
     createdAtIso: new Date(Date.now() - 30 * 60 * 60 * 1000).toISOString(),
   },
   {
-    id: "MW-CMP002",
+    id: "AG-CMP002",
     bucket: "repairs",
     summary: "Battery replacement",
     customerLabel: "Asif K.",

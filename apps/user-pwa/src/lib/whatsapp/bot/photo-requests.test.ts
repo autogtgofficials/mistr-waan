@@ -32,7 +32,7 @@ describe("photo-request store", () => {
     await setPhotoRequest({
       phone: PHONE,
       bookingId: "b-1",
-      bookingShortId: "MW-AB23CD",
+      bookingShortId: "AG-AB23CD",
     });
     const got = await getPhotoRequest(PHONE);
     expect(got?.bookingId).toBe("b-1");
@@ -41,7 +41,7 @@ describe("photo-request store", () => {
   });
 
   it("clear removes the request", async () => {
-    await setPhotoRequest({ phone: PHONE, bookingId: "b-1", bookingShortId: "MW-AB23CD" });
+    await setPhotoRequest({ phone: PHONE, bookingId: "b-1", bookingShortId: "AG-AB23CD" });
     await clearPhotoRequest(PHONE);
     expect(await getPhotoRequest(PHONE)).toBeNull();
   });
@@ -50,7 +50,7 @@ describe("photo-request store", () => {
     await setPhotoRequest({
       phone: PHONE,
       bookingId: "b-1",
-      bookingShortId: "MW-AB23CD",
+      bookingShortId: "AG-AB23CD",
       maxPhotos: 3,
     });
     const after1 = await incrementPhotoRequestCount(PHONE);
@@ -63,7 +63,7 @@ describe("photo-request store", () => {
     await setPhotoRequest({
       phone: PHONE,
       bookingId: "b-1",
-      bookingShortId: "MW-AB23CD",
+      bookingShortId: "AG-AB23CD",
       maxPhotos: 2,
     });
     await incrementPhotoRequestCount(PHONE); // 1
@@ -76,7 +76,7 @@ describe("photo-request store", () => {
     const aged = {
       phone: PHONE,
       bookingId: "b-1",
-      bookingShortId: "MW-AB23CD",
+      bookingShortId: "AG-AB23CD",
       maxPhotos: 8,
       photosSoFar: 0,
       createdAt: Date.now() - 25 * 60 * 60 * 1000, // 25h ago
