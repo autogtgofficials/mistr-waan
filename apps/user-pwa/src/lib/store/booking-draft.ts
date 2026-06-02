@@ -15,8 +15,11 @@ export type BookingBucket = "detailing" | "repairs" | "denting";
 export interface BookingDraft {
   bucket?: BookingBucket;
 
-  /** Selected service item ids (Detailing flow). */
+  /** Selected service item ids (catalog slugs, e.g. "ac-compressor-repair"). */
   serviceIds: string[];
+
+  /** Human-readable names for serviceIds — carried to ops since catalog is static. */
+  serviceNames?: string[];
 
   /** Picked garage id. */
   garageId?: string;

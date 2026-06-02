@@ -83,6 +83,13 @@ export default function ConfirmationPage({
 
   const garage = booking.garage;
   const services = booking.services ?? [];
+  // The catalog is static, so the picked service names ride along in
+  // symptoms.services — show those when there are no DB-resolved services.
+  const symptomServices = (booking.symptoms as { services?: unknown } | null)
+    ?.services;
+  const pickedNames = Array.isArray(symptomServices)
+    ? symptomServices.filter((x): x is string => typeof x === "string")
+    : [];
 
   const directionsHref = garage
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(garage.fullAddress)}`
@@ -204,6 +211,23 @@ export default function ConfirmationPage({
                       <span className="tabular text-sm font-medium text-foreground">
                         {s.isQuoted ? "On inspection" : rupees(s.basePrice)}
                       </span>
+                    </li>
+                  ))}
+                </ul>
+              </Section>
+              <Divider />
+            </>
+          ) : pickedNames.length > 0 ? (
+            <>
+              <Section title={pickedNames.length === 1 ? "Service" : "Services"}>
+                <ul className="flex flex-col gap-2">
+                  {pickedNames.map((name) => (
+                    <li key={name} className="flex items-start gap-2">
+                      <span
+                        className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
+                        aria-hidden
+                      />
+                      <span className="text-sm text-foreground">{name}</span>
                     </li>
                   ))}
                 </ul>

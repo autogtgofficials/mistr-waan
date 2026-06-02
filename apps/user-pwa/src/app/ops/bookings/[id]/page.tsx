@@ -136,6 +136,27 @@ export default async function OpsBookingDetailPage({
             </div>
           )}
 
+          {(() => {
+            const raw = (booking.symptoms as { services?: unknown } | null)
+              ?.services;
+            const names = Array.isArray(raw)
+              ? raw.filter((x): x is string => typeof x === "string")
+              : [];
+            if (names.length === 0) return null;
+            return (
+              <div className="rounded-md border border-border-subtle bg-card p-4">
+                <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+                  Requested services
+                </h2>
+                <ul className="mt-3 space-y-1.5 text-sm text-foreground">
+                  {names.map((n) => (
+                    <li key={n}>• {n}</li>
+                  ))}
+                </ul>
+              </div>
+            );
+          })()}
+
           {signedPhotos.length > 0 && (
             <div className="rounded-md border border-border-subtle bg-card p-4">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">

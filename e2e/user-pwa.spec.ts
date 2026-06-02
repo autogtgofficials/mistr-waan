@@ -8,11 +8,13 @@ test.describe("user-pwa — home", () => {
     await expect(page).toHaveTitle(/AutoGTG/i);
   });
 
-  test("shows the service selection grid", async ({ page }) => {
+  test("shows the service menu", async ({ page }) => {
     await page.goto(BASE);
-    await expect(page.getByText(/repairs/i)).toBeVisible();
-    await expect(page.getByText(/detailing/i)).toBeVisible();
-    await expect(page.getByText(/denting/i)).toBeVisible();
+    await expect(page.getByText(/roadside assistance/i)).toBeVisible();
+    await expect(page.getByText(/explore all services/i)).toBeVisible();
+    await expect(
+      page.getByRole("link", { name: /AC compressor repair/i }),
+    ).toBeVisible();
   });
 
   test("tab bar is visible", async ({ page }) => {

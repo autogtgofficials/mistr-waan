@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Roboto, Roboto_Mono, Noto_Naskh_Arabic } from "next/font/google";
 import { getLocale } from "@/lib/i18n/server";
+import { FloatingCallButton } from "@/components/layout/FloatingCallButton";
 import "./globals.css";
 
 const roboto = Roboto({
@@ -62,6 +63,7 @@ export default async function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-page text-foreground">
         {children}
+        <FloatingCallButton />
       </body>
     </html>
   );

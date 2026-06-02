@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, Phone } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
@@ -12,8 +12,6 @@ import {
   type BookingBucket,
 } from "@/lib/store/booking-draft";
 import { useAuth } from "@/lib/store/auth";
-import { detailingServices } from "@/lib/mock/services";
-import { rupees } from "@/lib/utils";
 
 /**
  * /booking/request — the single "Confirm booking" step.
@@ -52,20 +50,12 @@ export default function BookingRequestPage() {
       router.replace(`/login?next=${encodeURIComponent("/booking/request")}`);
       return;
     }
-    if (!draft.bucket) router.replace("/book");
+    if (!draft.bucket) router.replace("/services");
   }, [hydrated, authHydrated, isAuthed, draft.bucket, router]);
 
-  const services = useMemo(
-    () =>
-      (draft.serviceIds ?? [])
-        .map((id) => detailingServices.find((s) => s.id === id))
-        .filter((s): s is NonNullable<typeof s> => Boolean(s)),
-    [draft.serviceIds],
-  );
-  const total = useMemo(
-    () => services.reduce((acc, s) => acc + s.price, 0),
-    [services],
-  );
+  // Picked service names carried from /services (catalog is static, so we show
+  // names rather than re-deriving from a DB lookup).
+  const services = draft.serviceNames ?? [];
 
   if (!hydrated || !authHydrated || !isAuthed || !draft.bucket) {
     return <div className="flex min-h-full" />;
@@ -86,7 +76,11 @@ export default function BookingRequestPage() {
             serviceIds: draft.serviceIds ?? [],
             // User's garage pick (if they browsed) is only a hint — ops assigns.
             garageId: draft.garageId ?? null,
-            symptoms: draft.symptoms ?? null,
+            // Carry the picked service names so ops sees them (catalog is static).
+            symptoms:
+              services.length > 0
+                ? { ...(draft.symptoms ?? {}), services }
+                : draft.symptoms ?? null,
             denting: draft.denting ?? null,
           }),
         });
@@ -139,36 +133,23 @@ export default function BookingRequestPage() {
             {BUCKET_BLURB[bucket]}
           </p>
 
-          {/* Selected services (Detailing) — otherwise a one-line summary. */}
+          {/* What they picked — names only; price is set on the call. */}
           {services.length > 0 ? (
             <section className="mt-6">
               <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
-                Services
+                {services.length === 1 ? "Service" : "Services"}
               </h2>
               <ul className="mt-3 flex flex-col gap-2">
-                {services.map((s) => (
-                  <li
-                    key={s.id}
-                    className="flex items-baseline justify-between"
-                  >
-                    <span className="text-base text-foreground">{s.name}</span>
-                    <span className="tabular text-base font-medium text-foreground">
-                      {rupees(s.price)}
-                    </span>
+                {services.map((name) => (
+                  <li key={name} className="flex items-start gap-2">
+                    <span
+                      className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
+                      aria-hidden
+                    />
+                    <span className="text-base text-foreground">{name}</span>
                   </li>
                 ))}
               </ul>
-              <div className="mt-3 flex items-baseline justify-between border-t border-border-subtle pt-3">
-                <span className="text-base font-semibold text-foreground">
-                  Estimated total
-                </span>
-                <span className="tabular text-xl font-bold text-foreground">
-                  {rupees(total)}
-                </span>
-              </div>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Final price confirmed on the call.
-              </p>
             </section>
           ) : null}
 
