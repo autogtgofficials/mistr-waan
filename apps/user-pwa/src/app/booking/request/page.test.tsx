@@ -60,10 +60,10 @@ describe("/booking/request", () => {
     );
   });
 
-  it("redirects to /book when there is no draft bucket", async () => {
+  it("redirects to /services when there is no draft bucket", async () => {
     h.draft = { serviceIds: [] };
     render(<BookingRequestPage />);
-    await waitFor(() => expect(h.replace).toHaveBeenCalledWith("/book"));
+    await waitFor(() => expect(h.replace).toHaveBeenCalledWith("/services"));
   });
 
   it("renders the bucket and the call-back reassurance for a signed-in user", () => {
