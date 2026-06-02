@@ -16,7 +16,7 @@ export const MOCK_GARAGE = {
   rating: 4.8,
   jobsCompleted: 52,
   serviceBuckets: ["detailing", "repairs"] as const,
-  /** Cumulative commission (₹) the garage owes Mister Waan from cash bookings. */
+  /** Cumulative commission (₹) the garage owes AutoGTG from cash bookings. */
   commissionBalance: 1240,
   /** Total earnings in last 30 days (₹). */
   earningsLast30Days: 184500,

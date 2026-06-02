@@ -56,7 +56,7 @@ beforeEach(() => {
 
 const sample = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "denting" as const,
   serviceIds: [],
@@ -81,6 +81,10 @@ const sample = {
   inProgressAt: null,
   completedAt: null,
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 const ctx = { params: Promise.resolve({ id: "b-1" }) };

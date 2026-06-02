@@ -57,8 +57,10 @@ export default function DetailingCatalogPage() {
       bucket: "detailing",
       serviceIds: selected,
       total,
+      // Call-back model: ops picks the garage, so we no longer carry one.
+      garageId: undefined,
     });
-    router.push("/garages?service=detailing");
+    router.push("/booking/request");
   }
 
   return (

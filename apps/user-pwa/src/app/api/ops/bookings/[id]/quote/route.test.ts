@@ -42,7 +42,7 @@ const auditMock = vi.mocked(appendAuditEntry);
 
 const before = {
   id: "b-1",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "detailing" as const,
   serviceIds: [],
@@ -67,6 +67,10 @@ const before = {
   inProgressAt: null,
   completedAt: null,
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 beforeEach(() => {
@@ -131,7 +135,7 @@ describe("PATCH /api/ops/bookings/[id]/quote", () => {
       expect.objectContaining({
         to: "+916006617842",
         template: "booking_quoted",
-        variables: ["MW-AB23CD", "₹3200", "Cash on visit"],
+        variables: ["AG-AB23CD", "₹3200", "Cash on visit"],
       }),
     );
     expect(auditMock).toHaveBeenCalledWith(

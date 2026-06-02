@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Phone,
-  MapPin,
   Wallet,
   AlertCircle,
   CheckCircle2,
@@ -15,17 +14,19 @@ import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
 import { Button } from "@/components/ui/Button";
 import { StatusPill } from "@/components/jobs/StatusPill";
-import { useGarageJobs } from "@/lib/store/jobs";
+import { api } from "@/lib/api/client";
+import { useGarageAuth } from "@/lib/store/auth";
+import { garageActions } from "@/lib/store/jobs";
+import type { GarageJob } from "@/lib/api/types";
 import { rupees } from "@/lib/utils";
 
 /**
- * Garage job detail. Actions depend on status:
- *   pending          → Accept | Reject
- *   quote_requested  → Submit quote (mock)
+ * Real-backend garage job detail. Action set is determined by status:
+ *   awaiting_garage  → Accept | Decline
  *   assigned         → Mark in progress
  *   in_progress      → Mark complete
- *   completed        → (read-only) earnings line, payout note
- *   cancelled        → (read-only)
+ *   completed        → read-only summary
+ *   cancelled / declined_by_garage → read-only
  */
 export default function GarageJobPage({
   params,
@@ -34,18 +35,111 @@ export default function GarageJobPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
-  const { jobs, hydrated, updateStatus } = useGarageJobs();
-  const job = jobs.find((j) => j.id === id);
-  const [quoteAmount, setQuoteAmount] = useState("");
+  const { isAuthed, hydrated: authHydrated } = useGarageAuth();
+  const [job, setJob] = useState<GarageJob | null>(null);
+  const [loadState, setLoadState] = useState<"loading" | "loaded" | "not_found" | "error">(
+    "loading",
+  );
+  const [busy, setBusy] = useState<null | "respond" | "start" | "complete">(null);
+  const [actionError, setActionError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (hydrated && !job) router.replace("/");
-  }, [hydrated, job, router]);
+    if (authHydrated && !isAuthed) router.replace("/login");
+  }, [authHydrated, isAuthed, router]);
 
-  if (!hydrated) return <div className="flex min-h-full" />;
-  if (!job) return null;
+  useEffect(() => {
+    let cancelled = false;
+    void (async () => {
+      try {
+        const data = await api.get<{ job: GarageJob }>(`/api/garage/jobs/${id}`);
+        if (!cancelled) {
+          setJob(data.job);
+          setLoadState("loaded");
+        }
+      } catch (err) {
+        if (cancelled) return;
+        // ApiError shape: status + code
+        const e = err as { status?: number };
+        setLoadState(e.status === 404 ? "not_found" : "error");
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [id]);
 
-  const customerCallHref = `tel:+91XXXXXXXXXX`; // masked DID — Exotel later
+  async function doRespond(outcome: "accept" | "decline") {
+    if (!job) return;
+    setBusy("respond");
+    setActionError(null);
+    try {
+      const { booking } = await garageActions.respond({ bookingId: job.id, outcome });
+      setJob(booking);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : "failed");
+    } finally {
+      setBusy(null);
+    }
+  }
+  async function doStart() {
+    if (!job) return;
+    setBusy("start");
+    setActionError(null);
+    try {
+      const { booking } = await garageActions.start(job.id);
+      setJob(booking);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : "failed");
+    } finally {
+      setBusy(null);
+    }
+  }
+  async function doComplete() {
+    if (!job) return;
+    setBusy("complete");
+    setActionError(null);
+    try {
+      const { booking } = await garageActions.complete(job.id);
+      setJob(booking);
+    } catch (err) {
+      setActionError(err instanceof Error ? err.message : "failed");
+    } finally {
+      setBusy(null);
+    }
+  }
+
+  if (!authHydrated || loadState === "loading")
+    return <div className="flex min-h-full" />;
+  if (loadState === "not_found") {
+    return (
+      <div className="flex min-h-full flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-xl font-bold text-foreground">Job not found</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          This job isn&apos;t assigned to your garage.
+        </p>
+        <button
+          type="button"
+          onClick={() => router.push("/")}
+          className="mt-4 text-sm text-primary underline"
+        >
+          Back to inbox
+        </button>
+      </div>
+    );
+  }
+  if (loadState === "error" || !job) {
+    return (
+      <div className="flex min-h-full flex-col items-center justify-center px-6 text-center">
+        <h1 className="text-xl font-bold text-foreground">Couldn&apos;t load job</h1>
+        <p className="mt-1 text-sm text-muted-foreground">Try refreshing.</p>
+      </div>
+    );
+  }
+
+  const summary =
+    job.services && job.services.length > 0
+      ? job.services.map((s) => s.name).join(", ")
+      : job.bucket;
 
   return (
     <div className="flex min-h-full flex-col">
@@ -59,17 +153,16 @@ export default function GarageJobPage({
             <ArrowLeft className="size-5" strokeWidth={2} />
           </button>
         }
-        title={<span className="truncate">{job.summary}</span>}
+        title={<span className="truncate">{summary}</span>}
       />
 
       <main className="flex-1 pb-32">
         <div className="mx-auto w-full max-w-md px-4 pt-6">
-          {/* Status hero */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-foreground">{job.summary}</h1>
+              <h1 className="text-xl font-bold text-foreground">{summary}</h1>
               <p className="mt-1 text-sm text-muted-foreground capitalize">
-                {job.bucket} · ID {job.id}
+                {job.bucket} · {job.shortId}
               </p>
             </div>
             <StatusPill status={job.status} />
@@ -77,20 +170,17 @@ export default function GarageJobPage({
 
           <Divider />
 
-          {/* Customer info — anonymised pre-acceptance */}
           <Section title="Customer">
             <p className="text-base font-semibold text-foreground">{job.customerLabel}</p>
-            <p className="mt-0.5 text-sm text-muted-foreground">
-              {job.customerArea}
-              {job.status === "pending" || job.status === "quote_requested" ? (
-                <span className="ms-2 text-xs text-muted-foreground">
-                  (full address shown after you accept)
-                </span>
+            <p className="mt-0.5 text-sm text-muted-foreground tabular">
+              {job.customerPhoneMasked}
+              {job.status === "awaiting_garage" ? (
+                <span className="ms-2 text-xs">(unmasked after you accept)</span>
               ) : null}
             </p>
-            {job.status !== "pending" && job.status !== "quote_requested" ? (
+            {job.status !== "awaiting_garage" ? (
               <a
-                href={customerCallHref}
+                href={`tel:${job.customerPhoneMasked.replace(/\D+/g, "")}`}
                 className="mt-3 inline-flex h-10 items-center gap-2 rounded-md border border-border bg-card px-4 text-sm font-medium text-foreground hover:bg-muted"
               >
                 <Phone className="size-4" strokeWidth={2} />
@@ -101,7 +191,6 @@ export default function GarageJobPage({
 
           <Divider />
 
-          {/* Slot + payment */}
           <Section title="Slot">
             <p className="text-base text-foreground">{job.slotLabel || "—"}</p>
           </Section>
@@ -111,7 +200,7 @@ export default function GarageJobPage({
           <Section title="Payment">
             <div className="flex items-center gap-2 text-sm text-foreground">
               <Wallet className="size-4" strokeWidth={2} />
-              {job.total > 0 ? (
+              {job.total != null && job.total > 0 ? (
                 <>
                   <span className="tabular font-semibold">{rupees(job.total)}</span>
                   <span className="text-muted-foreground">
@@ -124,13 +213,13 @@ export default function GarageJobPage({
                 <span className="text-muted-foreground">Quote pending</span>
               )}
             </div>
-            {job.commissionCut > 0 ? (
+            {job.commissionCut != null && job.commissionCut > 0 ? (
               <p className="mt-2 text-xs text-muted-foreground">
-                Mister Waan fee: {rupees(job.commissionCut)} (12%)
+                AutoGTG fee: {rupees(job.commissionCut)}
               </p>
             ) : null}
 
-            {job.status === "completed" && job.paymentMode === "cash" ? (
+            {job.status === "completed" && job.paymentMode === "cash" && job.commissionCut ? (
               <div className="mt-3 flex items-start gap-2 rounded-md bg-orange-50 border border-orange-100 p-3">
                 <AlertCircle className="size-4 shrink-0 text-ignite-700" strokeWidth={2} />
                 <p className="text-xs text-ignite-900">
@@ -140,67 +229,44 @@ export default function GarageJobPage({
             ) : null}
           </Section>
 
-          {/* Demo quote-submit field */}
-          {job.status === "quote_requested" ? (
-            <>
-              <Divider />
-              <Section title="Submit quote">
-                <input
-                  type="number"
-                  inputMode="numeric"
-                  placeholder="e.g. 18500"
-                  value={quoteAmount}
-                  onChange={(e) => setQuoteAmount(e.target.value.replace(/\D/g, ""))}
-                  className="tabular w-full rounded-md border border-input bg-card p-3 text-base text-foreground outline-none placeholder:text-steel-300 focus:ring-2 focus:ring-ring focus:ring-offset-1"
-                />
-                <p className="mt-2 text-xs text-muted-foreground">
-                  Customer sees this alongside up to 2 other quotes.
-                </p>
-              </Section>
-            </>
+          {actionError ? (
+            <p className="mt-4 rounded-md border border-ignite-100 bg-ignite-50 p-3 text-sm text-ignite-900">
+              {actionError}
+            </p>
           ) : null}
         </div>
       </main>
 
-      {/* Sticky bottom action(s) by status */}
       <div className="fixed inset-x-0 bottom-16 z-30 border-t border-border bg-background px-4 py-3">
         <div className="mx-auto w-full max-w-md">
-          {job.status === "pending" ? (
+          {job.status === "awaiting_garage" ? (
             <div className="flex gap-3">
               <Button
                 variant="ghost"
-                onClick={() => updateStatus(job.id, "cancelled")}
+                onClick={() => void doRespond("decline")}
+                loading={busy === "respond"}
                 inline
                 className="flex-1 text-danger hover:bg-danger-soft"
               >
-                <XCircle className="size-4" strokeWidth={2} /> Reject
+                <XCircle className="size-4" strokeWidth={2} /> Decline
               </Button>
               <Button
-                onClick={() => updateStatus(job.id, "assigned")}
+                onClick={() => void doRespond("accept")}
+                loading={busy === "respond"}
                 inline
                 className="flex-1"
               >
                 <CheckCircle2 className="size-4" strokeWidth={2} /> Accept
               </Button>
             </div>
-          ) : job.status === "quote_requested" ? (
-            <Button
-              onClick={() => updateStatus(job.id, "assigned")}
-              disabled={!quoteAmount}
-              className="w-full"
-            >
-              Send quote
-            </Button>
           ) : job.status === "assigned" ? (
-            <Button
-              onClick={() => updateStatus(job.id, "in_progress")}
-              className="w-full"
-            >
+            <Button onClick={() => void doStart()} loading={busy === "start"} className="w-full">
               Mark in progress
             </Button>
           ) : job.status === "in_progress" ? (
             <Button
-              onClick={() => updateStatus(job.id, "completed")}
+              onClick={() => void doComplete()}
+              loading={busy === "complete"}
               className="w-full"
             >
               Mark complete

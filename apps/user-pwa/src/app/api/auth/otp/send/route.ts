@@ -4,6 +4,13 @@ import { sendWhatsAppOtp } from "@/lib/whatsapp/client";
 import { WhatsAppError } from "@/lib/whatsapp/types";
 import { issueOtp } from "@/lib/otp/store";
 import { appendAuditEntry } from "@/lib/audit/log";
+import { rateLimit } from "@/lib/rate-limit/store";
+
+// Daily OTP cap per phone — on top of the existing 60s cooldown inside
+// issueOtp. 10/day is plenty for a real user; an attacker burning through
+// codes hits the wall fast.
+const OTP_PER_DAY = 10;
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 
 export const runtime = "nodejs";
 
@@ -36,6 +43,27 @@ export async function POST(request: Request) {
     return NextResponse.json(
       { error: "channel_not_supported", channel },
       { status: 501 },
+    );
+  }
+
+  // Per-phone daily cap (defence-in-depth on top of issueOtp's 60s cooldown).
+  const rl = await rateLimit(`otp:send:${phone}`, {
+    max: OTP_PER_DAY,
+    windowMs: ONE_DAY_MS,
+  });
+  if (!rl.ok) {
+    await appendAuditEntry({
+      action: "send_otp",
+      entityType: "auth",
+      entityId: phone,
+      actor,
+      payload: { channel, dailyCapHit: true },
+      outcome: "error",
+      error: "rate_limited",
+    });
+    return NextResponse.json(
+      { error: "rate_limited", resetAt: rl.resetAt },
+      { status: 429 },
     );
   }
 

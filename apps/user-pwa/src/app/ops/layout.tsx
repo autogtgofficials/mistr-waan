@@ -1,7 +1,7 @@
 import { ReadOnlyBanner } from "@/components/ops/ReadOnlyBanner";
 
 export const metadata = {
-  title: "Mister Waan — Ops",
+  title: "AutoGTG — Ops",
 };
 
 export default function OpsLayout({ children }: { children: React.ReactNode }) {

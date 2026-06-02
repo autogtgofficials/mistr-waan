@@ -154,7 +154,7 @@ export default function ConfirmationPage({
               <Section title="Talk to your garage">
                 <Button onClick={() => setCallSheetOpen(true)} className="w-full">
                   <Phone className="size-4" strokeWidth={2} />
-                  Call {garage.ownerFirstName} via Mister Waan
+                  Call {garage.ownerFirstName} via AutoGTG
                 </Button>
                 <p className="mt-2 text-xs text-muted-foreground">Your number stays private.</p>
 
@@ -215,9 +215,11 @@ export default function ConfirmationPage({
           <section className="text-sm text-muted-foreground">
             <p className="tabular">Booking ID: {booking.shortId}</p>
             <p className="mt-1">
-              {booking.paymentMode === "upi"
-                ? `Paid: ${rupees(booking.total ?? 0)} via UPI`
-                : `Pay ${rupees(booking.total ?? booking.baseTotal ?? 0)} cash on completion`}
+              {(booking.total ?? booking.baseTotal ?? 0) > 0
+                ? booking.paymentMode === "upi"
+                  ? `Paid: ${rupees(booking.total ?? 0)} via UPI`
+                  : `Pay ${rupees(booking.total ?? booking.baseTotal ?? 0)} cash on completion`
+                : "No payment now — we'll confirm the price on the call."}
             </p>
           </section>
 

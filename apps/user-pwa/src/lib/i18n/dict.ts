@@ -1,5 +1,5 @@
 /**
- * Mister Waan — i18n dictionary (V0).
+ * AutoGTG — i18n dictionary (V0).
  *
  * Lightweight in-house i18n: a flat key/value object per locale, with
  * `{var}` interpolation. EN is the source of truth; UR provides
@@ -17,7 +17,7 @@ export const LOCALES: Locale[] = ["en", "ur"];
 /* ----------- EN ----------- */
 const en = {
   /* TopBar / brand */
-  "brand.name": "Mister Waan",
+  "brand.name": "AutoGTG",
   "lang.toggleAria": "Switch language",
 
   /* TabBar */
@@ -93,7 +93,7 @@ const en = {
   "cta.edit": "Edit",
   "cta.retry": "Retry",
   "cta.getDirections": "Get directions",
-  "cta.callViaMW": "Call {name} via Mister Waan",
+  "cta.callViaMW": "Call {name} via AutoGTG",
 
   /* Pay */
   "pay.howWillYouPay": "How will you pay?",
@@ -136,7 +136,7 @@ const en = {
   "garage.earliest": "Earliest: {slot}",
   "garage.jobsDone": "{n} jobs done",
   "garage.jobsDoneCapped": "100+ jobs done",
-  "garage.new": "New on Mister Waan",
+  "garage.new": "New on AutoGTG",
   "garage.new.badge": "New",
 
   /* Profile */
@@ -269,7 +269,7 @@ type Key = keyof typeof en;
 
 /* ----------- UR (Urdu) ----------- */
 const ur: Partial<Record<Key, string>> = {
-  "brand.name": "مسٹر وان",
+  "brand.name": "AutoGTG",
   "lang.toggleAria": "زبان تبدیل کریں",
 
   "tab.home": "ہوم",
@@ -339,7 +339,7 @@ const ur: Partial<Record<Key, string>> = {
   "cta.edit": "ترمیم",
   "cta.retry": "دوبارہ کوشش",
   "cta.getDirections": "راستہ دیکھیں",
-  "cta.callViaMW": "{name} کو مسٹر وان کے ذریعے کال کریں",
+  "cta.callViaMW": "{name} کو AutoGTG کے ذریعے کال کریں",
 
   "pay.howWillYouPay": "ادائیگی کیسے کریں گے؟",
   "pay.total": "کل",
@@ -374,7 +374,7 @@ const ur: Partial<Record<Key, string>> = {
   "garage.sortByTitle": "گیراجز کو ترتیب دیں",
   "garage.empty.title": "اس وقت کوئی گیراج دستیاب نہیں",
   "garage.empty.body": "کوئی اور وقت آزمائیں، یا مدد کیلئے واٹس ایپ کریں۔",
-  "garage.new": "مسٹر وان پر نیا",
+  "garage.new": "AutoGTG پر نیا",
   "garage.new.badge": "نیا",
 
   "profile.signedOut.title": "اپنا پروفائل دیکھنے کیلئے سائن اِن کریں",

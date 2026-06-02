@@ -36,16 +36,17 @@ export default function EarningsPage() {
     );
   }
 
-  /* Mock totals — sum from completed jobs in current session, plus baseline. */
+  /* Totals derived from real completed jobs — both fields can be null on
+   * still-pending bookings so we default missing values to 0. */
   const sessionEarnings = completed.reduce(
-    (acc, j) => acc + (j.total - j.commissionCut),
+    (acc, j) => acc + ((j.total ?? 0) - (j.commissionCut ?? 0)),
     0,
   );
   const totalEarnings = MOCK_GARAGE.earningsLast30Days + sessionEarnings;
 
   const cashCompleted = completed.filter((j) => j.paymentMode === "cash");
   const sessionUnpaidCommission = cashCompleted.reduce(
-    (acc, j) => acc + j.commissionCut,
+    (acc, j) => acc + (j.commissionCut ?? 0),
     0,
   );
   const totalCommissionDue = MOCK_GARAGE.commissionBalance + sessionUnpaidCommission;
@@ -68,7 +69,7 @@ export default function EarningsPage() {
               {rupees(totalEarnings)}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              After Mister Waan fee. Lifetime: {rupees(MOCK_GARAGE.earningsLifetime + sessionEarnings)}
+              After AutoGTG fee. Lifetime: {rupees(MOCK_GARAGE.earningsLifetime + sessionEarnings)}
             </p>
           </section>
 
@@ -117,7 +118,7 @@ export default function EarningsPage() {
                   >
                     <div className="flex flex-col">
                       <span className="text-sm font-semibold text-foreground">
-                        {j.summary}
+                        {j.services?.[0]?.name ?? j.bucket}
                       </span>
                       <span className="text-xs text-muted-foreground">
                         {j.customerLabel} · {j.slotLabel}
@@ -128,7 +129,7 @@ export default function EarningsPage() {
                     </div>
                     <div className="text-right">
                       <p className="tabular text-sm font-semibold text-foreground">
-                        +{rupees(j.total - j.commissionCut)}
+                        +{rupees((j.total ?? 0) - (j.commissionCut ?? 0))}
                       </p>
                       <p className="text-[11px] text-muted-foreground">
                         {j.paymentMode === "upi" ? "UPI · payout pending" : "Cash"}

@@ -3,13 +3,14 @@ import type { MetadataRoute } from "next";
 /**
  * Web App Manifest — installable PWA for the user app.
  *
- * Brand: Mister Waan, Violet Pulse #5C33FF.
- * Icons are generated dynamically by `app/icon.tsx` and `app/apple-icon.tsx`.
+ * Brand: AutoGTG, Violet Pulse #5C33FF.
+ * Favicon + apple-touch icon are the static `app/icon.png` / `app/apple-icon.png`
+ * (AutoGTG car mark on Violet Pulse); installable icons live in `public/`.
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Mister Waan",
-    short_name: "Mister Waan",
+    name: "AutoGTG",
+    short_name: "AutoGTG",
     description:
       "Book vetted garages in Srinagar for repairs, detailing, and denting & painting. Pay safely, talk privately.",
     start_url: "/",
@@ -23,16 +24,22 @@ export default function manifest(): MetadataRoute.Manifest {
     scope: "/",
     icons: [
       {
-        src: "/icon",
-        sizes: "any",
+        src: "/icon-192.png",
+        sizes: "192x192",
         type: "image/png",
         purpose: "any",
       },
       {
-        src: "/apple-icon",
-        sizes: "180x180",
+        src: "/icon-512.png",
+        sizes: "512x512",
         type: "image/png",
         purpose: "any",
+      },
+      {
+        src: "/icon-maskable-512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
       },
     ],
   };

@@ -12,11 +12,23 @@ import type {
 } from "@/lib/bookings/types";
 import { appendAuditEntry } from "@/lib/audit/log";
 import { sendWhatsAppTemplate } from "@/lib/whatsapp/client";
+import { rateLimit } from "@/lib/rate-limit/store";
 
 export const runtime = "nodejs";
 
 const VALID_BUCKETS: BookingBucket[] = ["detailing", "repairs", "denting"];
 const VALID_PAYMENT_MODES: PaymentMode[] = ["upi", "cash"];
+
+// Call-back booking model: the customer taps "Confirm booking", we create the
+// booking in `queued_for_call`, and ops rings them to lock the slot, price, and
+// payment. So slot/payment are optional here — only `bucket` is truly required.
+const DEFAULT_SLOT_LABEL = "We'll call you to confirm";
+const DEFAULT_PAYMENT_MODE: PaymentMode = "cash";
+
+// Per-profile booking cap — deters spam and accidental double-submits.
+// 5 in an hour is comfortably more than any sane real user.
+const BOOKINGS_PER_HOUR = 5;
+const ONE_HOUR_MS = 60 * 60 * 1000;
 
 interface CreateBody {
   bucket?: string;
@@ -45,17 +57,45 @@ export async function POST(request: Request) {
   if (!body.bucket || !VALID_BUCKETS.includes(body.bucket as BookingBucket)) {
     return NextResponse.json({ error: "invalid_bucket" }, { status: 400 });
   }
-  if (!isStringArray(body.serviceIds)) {
+  // serviceIds is optional (a bare repairs/denting request has none — ops fills
+  // in details on the call). If supplied it must be a string array.
+  if (body.serviceIds !== undefined && !isStringArray(body.serviceIds)) {
     return NextResponse.json({ error: "invalid_service_ids" }, { status: 400 });
   }
-  if (!body.slotLabel || typeof body.slotLabel !== "string") {
-    return NextResponse.json({ error: "invalid_slot_label" }, { status: 400 });
-  }
+  const serviceIds = isStringArray(body.serviceIds) ? body.serviceIds : [];
+  // paymentMode is optional (decided on the call). If supplied it must be valid.
   if (
-    !body.paymentMode ||
+    body.paymentMode !== undefined &&
     !VALID_PAYMENT_MODES.includes(body.paymentMode as PaymentMode)
   ) {
     return NextResponse.json({ error: "invalid_payment_mode" }, { status: 400 });
+  }
+  const paymentMode = (body.paymentMode as PaymentMode | undefined) ?? DEFAULT_PAYMENT_MODE;
+  // slotLabel is optional — default to the call-back copy when the customer
+  // didn't pick a time (which is now the norm).
+  const slotLabel =
+    typeof body.slotLabel === "string" && body.slotLabel.trim()
+      ? body.slotLabel
+      : DEFAULT_SLOT_LABEL;
+
+  // Per-profile rate limit. Above the cap returns 429 + Retry-After hint.
+  const rl = await rateLimit(`booking:create:${session.sub}`, {
+    max: BOOKINGS_PER_HOUR,
+    windowMs: ONE_HOUR_MS,
+  });
+  if (!rl.ok) {
+    await appendAuditEntry({
+      action: "create_booking",
+      entityType: "booking",
+      entityId: "rate_limited",
+      actor: session.sub,
+      outcome: "error",
+      error: "rate_limited",
+    });
+    return NextResponse.json(
+      { error: "rate_limited", resetAt: rl.resetAt },
+      { status: 429 },
+    );
   }
 
   // Customer UI passes either a UUID or a legacy slug like "g-imran-k".
@@ -67,12 +107,12 @@ export async function POST(request: Request) {
   const input: CreateBookingInput = {
     profileId: session.sub,
     bucket: body.bucket as BookingBucket,
-    serviceIds: body.serviceIds,
+    serviceIds,
     garageId: resolvedGarageId,
-    slotLabel: body.slotLabel,
+    slotLabel,
     slotDate: body.slotDate ?? null,
     slotTime: body.slotTime ?? null,
-    paymentMode: body.paymentMode as PaymentMode,
+    paymentMode,
     symptoms: body.symptoms ?? null,
     denting: body.denting ?? null,
   };

@@ -87,7 +87,15 @@ export default async function OpsBookingDetailPage({
               <dt className="text-muted-foreground">Customer</dt>
               <dd className="text-foreground">
                 {profile?.first_name ?? "Unknown"}
-                <span className="ms-2 text-muted-foreground tabular">{profile?.phone}</span>
+                {profile?.phone ? (
+                  <a
+                    href={`tel:${profile.phone}`}
+                    className="ms-2 tabular text-pulse-600 hover:underline"
+                    title="Call customer"
+                  >
+                    {profile.phone}
+                  </a>
+                ) : null}
               </dd>
               <dt className="text-muted-foreground">Slot</dt>
               <dd className="text-foreground">{booking.slotLabel}</dd>

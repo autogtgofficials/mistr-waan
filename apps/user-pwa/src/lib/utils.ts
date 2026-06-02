@@ -66,7 +66,7 @@ export function timeAgo(days: number): string {
  * Cap "jobs done" display at 100+ so newer/lower numbers don't feel inferior.
  */
 export function jobsDoneLabel(n: number): string {
-  if (n === 0) return "New on Mister Waan";
+  if (n === 0) return "New on AutoGTG";
   if (n >= 100) return "100+ jobs done";
   return `${n} jobs done`;
 }

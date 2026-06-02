@@ -5,7 +5,7 @@ const BASE = "http://localhost:3000";
 test.describe("user-pwa — home", () => {
   test("loads the home page", async ({ page }) => {
     await page.goto(BASE);
-    await expect(page).toHaveTitle(/Mister Waan/i);
+    await expect(page).toHaveTitle(/AutoGTG/i);
   });
 
   test("shows the service selection grid", async ({ page }) => {

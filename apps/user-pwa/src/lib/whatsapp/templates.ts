@@ -21,7 +21,13 @@ export type TemplateName =
   | "job_started"
   | "job_complete"
   | "booking_cancelled"
-  | "referral_reward";
+  | "referral_reward"
+  // Phase 5 — blueprint alignment
+  | "mechanic_onboarding_submitted"
+  | "mechanic_activated"
+  | "mechanic_rejected"
+  | "request_photos"
+  | "rsa_acknowledged";
 
 export interface TemplateSpec {
   name: TemplateName;
@@ -93,6 +99,37 @@ export const TEMPLATES: Record<TemplateName, TemplateSpec> = {
     language: "en",
     variableCount: 2,
     category: "marketing",
+  },
+  // ── Phase 5: blueprint alignment ─────────────────────────────────────────
+  mechanic_onboarding_submitted: {
+    name: "mechanic_onboarding_submitted",
+    language: "en",
+    variableCount: 2, // ownerFirstName, shopName
+    category: "utility",
+  },
+  mechanic_activated: {
+    name: "mechanic_activated",
+    language: "en",
+    variableCount: 2, // ownerFirstName, shopName
+    category: "utility",
+  },
+  mechanic_rejected: {
+    name: "mechanic_rejected",
+    language: "en",
+    variableCount: 2, // ownerFirstName, reason
+    category: "utility",
+  },
+  request_photos: {
+    name: "request_photos",
+    language: "en",
+    variableCount: 2, // customerFirstName, shortId
+    category: "utility",
+  },
+  rsa_acknowledged: {
+    name: "rsa_acknowledged",
+    language: "en",
+    variableCount: 2, // customerFirstName, shortId
+    category: "utility",
   },
 };
 

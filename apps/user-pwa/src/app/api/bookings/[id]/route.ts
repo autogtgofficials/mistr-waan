@@ -19,7 +19,7 @@ export async function GET(
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
-  // Accept either a UUID (canonical) or a short_id (MW-XXXXXX) — confirmation
+  // Accept either a UUID (canonical) or a short_id (AG-XXXXXX) — confirmation
   // page uses the short_id, deep links from older systems may pass the UUID.
   let booking;
   if (UUID_RE.test(id)) {

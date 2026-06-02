@@ -123,7 +123,17 @@ export function OpsBookingsTable({
                     <div className="font-medium text-foreground">
                       {b.customerFirstName ?? "User"}
                     </div>
-                    <div className="text-xs text-muted-foreground tabular">{b.customerPhone}</div>
+                    {b.customerPhone ? (
+                      <a
+                        href={`tel:${b.customerPhone}`}
+                        className="text-xs text-pulse-600 tabular hover:underline"
+                        title="Call customer"
+                      >
+                        {b.customerPhone}
+                      </a>
+                    ) : (
+                      <div className="text-xs text-muted-foreground tabular">—</div>
+                    )}
                   </td>
                   <td className="py-3 pe-3 capitalize">{b.bucket}</td>
                   <td className="py-3 pe-3">

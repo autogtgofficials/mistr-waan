@@ -1,21 +1,27 @@
 import { cn } from "@/lib/utils";
-import type { GarageJobStatus } from "@/lib/mock/jobs";
+import type { BookingStatus } from "@/lib/api/types";
 
 const META: Record<
-  GarageJobStatus,
+  BookingStatus,
   { label: string; bg: string; text: string; dot: string }
 > = {
-  pending: {
+  queued_for_call: {
+    label: "Awaiting call",
+    bg: "bg-muted",
+    text: "text-muted-foreground",
+    dot: "bg-steel-300",
+  },
+  quoted: {
+    label: "Quote ready",
+    bg: "bg-aqua-50",
+    text: "text-aqua-700",
+    dot: "bg-aqua-500",
+  },
+  awaiting_garage: {
     label: "New",
     bg: "bg-pulse-50",
     text: "text-pulse-700",
     dot: "bg-pulse-500",
-  },
-  quote_requested: {
-    label: "Quote requested",
-    bg: "bg-aqua-50",
-    text: "text-aqua-700",
-    dot: "bg-aqua-500",
   },
   assigned: {
     label: "Scheduled",
@@ -41,13 +47,19 @@ const META: Record<
     text: "text-muted-foreground",
     dot: "bg-steel-300",
   },
+  declined_by_garage: {
+    label: "Declined",
+    bg: "bg-orange-50",
+    text: "text-ignite-700",
+    dot: "bg-ignite-500",
+  },
 };
 
 export function StatusPill({
   status,
   className,
 }: {
-  status: GarageJobStatus;
+  status: BookingStatus;
   className?: string;
 }) {
   const m = META[status];

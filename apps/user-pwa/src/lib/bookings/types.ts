@@ -3,6 +3,7 @@ import type { Database } from "@/lib/supabase/types";
 export type BookingBucket = Database["public"]["Enums"]["booking_bucket"];
 export type BookingStatus = Database["public"]["Enums"]["booking_status"];
 export type PaymentMode = Database["public"]["Enums"]["payment_mode"];
+export type VehicleType = Database["public"]["Enums"]["vehicle_type"];
 
 export interface CreateBookingInput {
   profileId: string;
@@ -15,6 +16,11 @@ export interface CreateBookingInput {
   paymentMode: PaymentMode;
   symptoms?: Record<string, unknown> | null;
   denting?: Record<string, unknown> | null;
+  // Phase 5 — blueprint vehicle context
+  vehicleType?: VehicleType | null;
+  vehicleBrand?: string | null;
+  vehicleModel?: string | null;
+  vehicleRegistration?: string | null;
 }
 
 export interface BookingGarage {
@@ -57,6 +63,11 @@ export interface Booking {
   status: BookingStatus;
   symptoms: Record<string, unknown> | null;
   denting: Record<string, unknown> | null;
+  // Phase 5 — blueprint vehicle context (nullable for legacy bookings).
+  vehicleType: VehicleType | null;
+  vehicleBrand: string | null;
+  vehicleModel: string | null;
+  vehicleRegistration: string | null;
   cancellationReason: string | null;
   ratingValue: number | null;
   ratingComment: string | null;

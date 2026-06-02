@@ -68,6 +68,9 @@ export async function sendWhatsAppText(opts: {
 /**
  * Parse a Meta webhook payload into our internal InboundMessage shape.
  * Returns [] if the payload is a status callback or otherwise has no inbound messages.
+ *
+ * Surfaces image/document/audio media so the photo-upload flow (ops
+ * "Request photos" → customer sends pictures in WhatsApp) can route them.
  */
 export function parseInboundMessages(payload: unknown): InboundMessage[] {
   const result: InboundMessage[] = [];
@@ -88,11 +91,23 @@ export function parseInboundMessages(payload: unknown): InboundMessage[] {
             button_reply?: { id?: string };
             list_reply?: { id?: string };
           };
+          image?: { id?: string; mime_type?: string; caption?: string; sha256?: string };
+          document?: { id?: string; mime_type?: string; caption?: string; sha256?: string };
+          audio?: { id?: string; mime_type?: string; sha256?: string };
         };
         if (!msg.from || !msg.id) continue;
         const type = (msg.type ?? "other") as InboundMessage["type"];
         const interactiveId =
           msg.interactive?.button_reply?.id ?? msg.interactive?.list_reply?.id;
+        const mediaBlob = msg.image ?? msg.document ?? msg.audio;
+        const media = mediaBlob?.id
+          ? {
+              id: mediaBlob.id,
+              mimeType: mediaBlob.mime_type ?? "application/octet-stream",
+              caption: (mediaBlob as { caption?: string }).caption,
+              sha256: mediaBlob.sha256,
+            }
+          : undefined;
         result.push({
           from: msg.from,
           messageId: msg.id,
@@ -100,10 +115,48 @@ export function parseInboundMessages(payload: unknown): InboundMessage[] {
           type,
           text: msg.text?.body,
           interactiveId,
+          media,
           raw: msg,
         });
       }
     }
   }
   return result;
+}
+
+/**
+ * Download the bytes of a Meta media object by id.
+ *
+ * Two-step dance:
+ *   1. GET /{media_id}              → { url: "https://lookaside.facebook.com/..." }
+ *   2. GET that url (with auth)     → bytes
+ *
+ * The intermediate URL is temporary (~5 min) and requires the same access
+ * token on the second call. Throws on any non-2xx so callers can catch + audit.
+ */
+export async function downloadMediaBytes(mediaId: string): Promise<{
+  bytes: Uint8Array;
+  mimeType: string;
+}> {
+  const token = process.env.WHATSAPP_ACCESS_TOKEN;
+  if (!token) throw new Error("WHATSAPP_ACCESS_TOKEN not set");
+
+  const metaRes = await fetch(
+    `https://graph.facebook.com/v23.0/${encodeURIComponent(mediaId)}`,
+    { headers: { Authorization: `Bearer ${token}` } },
+  );
+  if (!metaRes.ok) {
+    throw new Error(`media metadata fetch failed: ${metaRes.status}`);
+  }
+  const meta = (await metaRes.json()) as { url?: string; mime_type?: string };
+  if (!meta.url) throw new Error("media metadata had no url");
+
+  const bytesRes = await fetch(meta.url, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  if (!bytesRes.ok) {
+    throw new Error(`media download failed: ${bytesRes.status}`);
+  }
+  const buf = new Uint8Array(await bytesRes.arrayBuffer());
+  return { bytes: buf, mimeType: meta.mime_type ?? "application/octet-stream" };
 }

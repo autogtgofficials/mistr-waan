@@ -45,6 +45,11 @@ export function OpsBookingActions(props: {
   const [noteBusy, setNoteBusy] = useState(false);
   const [noteError, setNoteError] = useState<string | null>(null);
 
+  // Request photos via WhatsApp
+  const [photoReqBusy, setPhotoReqBusy] = useState(false);
+  const [photoReqMsg, setPhotoReqMsg] = useState<string | null>(null);
+  const [photoReqError, setPhotoReqError] = useState<string | null>(null);
+
   const canQuote =
     props.currentStatus === "queued_for_call" ||
     props.currentStatus === "quoted" ||
@@ -97,6 +102,35 @@ export function OpsBookingActions(props: {
       setAssignError(err instanceof Error ? err.message : "failed");
     } finally {
       setAssignBusy(false);
+    }
+  }
+
+  async function requestPhotos() {
+    setPhotoReqBusy(true);
+    setPhotoReqMsg(null);
+    setPhotoReqError(null);
+    try {
+      const res = await fetch(
+        `/api/ops/bookings/${props.bookingId}/request-photos`,
+        { method: "POST" },
+      );
+      const data = (await res.json()) as {
+        sent?: boolean;
+        notificationOutcome?: string;
+        error?: string;
+      };
+      if (!res.ok || !data.sent) {
+        throw new Error(data.error ?? `HTTP ${res.status}`);
+      }
+      setPhotoReqMsg(
+        data.notificationOutcome === "sent"
+          ? "✓ Sent. Customer can now send photos in this WhatsApp thread (next 24h)."
+          : "✓ Saved, but WhatsApp send failed — check the outbox.",
+      );
+    } catch (err) {
+      setPhotoReqError(err instanceof Error ? err.message : "failed");
+    } finally {
+      setPhotoReqBusy(false);
     }
   }
 
@@ -198,6 +232,28 @@ export function OpsBookingActions(props: {
             {assignBusy ? "Assigning…" : "Assign + notify"}
           </button>
         </form>
+      </section>
+
+      <section className="rounded-md border border-border-subtle bg-card p-4">
+        <h3 className="text-sm font-semibold text-foreground">Request photos via WhatsApp</h3>
+        <p className="mt-1 text-xs text-muted-foreground">
+          Sends the customer a WA prompt. Any photos they reply with (next 24h, up to 8)
+          attach to this booking automatically.
+        </p>
+        <button
+          type="button"
+          onClick={() => void requestPhotos()}
+          disabled={photoReqBusy}
+          className="mt-3 h-9 w-full rounded-md border border-border-subtle bg-card text-sm font-medium hover:bg-muted disabled:opacity-50"
+        >
+          {photoReqBusy ? "Sending…" : "Request photos"}
+        </button>
+        {photoReqMsg && (
+          <p className="mt-2 text-xs text-aqua-700">{photoReqMsg}</p>
+        )}
+        {photoReqError && (
+          <p className="mt-2 text-xs text-ignite-700">{photoReqError}</p>
+        )}
       </section>
 
       <section className="rounded-md border border-border-subtle bg-card p-4">

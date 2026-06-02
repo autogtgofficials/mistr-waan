@@ -4,7 +4,7 @@
 // regex patterns for "motors / garage / service" so we don't rely on OSM
 // having a perfect amenity= tag.
 
-const UA = "mister-waan-scraper/0.1 (contact: farhansyedain@gmail.com)";
+const UA = "autogtg-scraper/0.1 (contact: farhansyedain@gmail.com)";
 const ENDPOINTS = [
   "https://overpass-api.de/api/interpreter",
   "https://overpass.kumi.systems/api/interpreter",

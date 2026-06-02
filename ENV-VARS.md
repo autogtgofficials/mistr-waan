@@ -1,4 +1,4 @@
-# Mistr Waan — Env vars checklist (Week 1)
+# AutoGTG — Env vars checklist (Week 1)
 
 Set these in **two places** for every variable:
 
@@ -68,6 +68,17 @@ NEXT_PUBLIC_APP_ORIGIN=https://autogtg.com
 ```
 
 For local dev, set to `http://localhost:3000` in `.env.local`.
+
+### Support phone (the call-first "Call to confirm" button)
+
+```
+NEXT_PUBLIC_SUPPORT_PHONE=+917889686682
+```
+
+The customer-facing booking pages (`/book`, `/maintenance`, `/rsa`) show a
+"Call to confirm" button that dials this number. Set it to the human line ops
+answers. Customers browse with no login; ops creates the booking from the
+call via `/ops/bookings/new`.
 
 ---
 

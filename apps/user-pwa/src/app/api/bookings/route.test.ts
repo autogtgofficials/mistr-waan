@@ -14,6 +14,9 @@ vi.mock("@/lib/audit/log", () => ({
 vi.mock("@/lib/whatsapp/client", () => ({
   sendWhatsAppTemplate: vi.fn(async () => ({ messageId: "wamid.MOCK", provider: "meta" })),
 }));
+vi.mock("@/lib/rate-limit/store", () => ({
+  rateLimit: vi.fn(async () => ({ ok: true, remaining: 99, resetAt: Date.now() + 60_000 })),
+}));
 
 import { POST, GET } from "./route";
 import { getCustomerSession } from "@/lib/auth/session";
@@ -30,7 +33,7 @@ const sendMock = vi.mocked(sendWhatsAppTemplate);
 
 const sampleBooking = {
   id: "b-uuid",
-  shortId: "MW-AB23CD",
+  shortId: "AG-AB23CD",
   profileId: "p-1",
   bucket: "detailing" as const,
   serviceIds: ["foam-wash"],
@@ -55,6 +58,10 @@ const sampleBooking = {
   inProgressAt: null,
   completedAt: null,
   cancelledAt: null,
+  vehicleType: null,
+  vehicleBrand: null,
+  vehicleModel: null,
+  vehicleRegistration: null,
 };
 
 beforeEach(() => {
@@ -98,11 +105,25 @@ describe("POST /api/bookings", () => {
     expect((await res.json()).error).toBe("invalid_service_ids");
   });
 
-  it("400s on missing slot label", async () => {
-    sessionMock.mockResolvedValueOnce({ sub: "p-1", role: "customer", phone: "+91..." });
-    const res = await POST(postReq({ bucket: "detailing", serviceIds: [], paymentMode: "cash" }));
-    expect(res.status).toBe(400);
-    expect((await res.json()).error).toBe("invalid_slot_label");
+  it("creates a slot-less, payment-less booking with defaults (call-back flow)", async () => {
+    sessionMock.mockResolvedValueOnce({
+      sub: "p-1",
+      role: "customer",
+      phone: "+916006617842",
+    });
+    createMock.mockResolvedValueOnce(sampleBooking);
+
+    // The customer just taps "Confirm booking" — no slot, no payment, no services.
+    const res = await POST(postReq({ bucket: "repairs" }));
+    expect(res.status).toBe(201);
+    expect(createMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        bucket: "repairs",
+        serviceIds: [],
+        slotLabel: "We'll call you to confirm",
+        paymentMode: "cash",
+      }),
+    );
   });
 
   it("400s on invalid payment mode", async () => {

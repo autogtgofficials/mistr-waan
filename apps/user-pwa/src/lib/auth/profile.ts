@@ -56,6 +56,30 @@ export async function upsertProfileByPhone(phone: string): Promise<Profile> {
   };
 }
 
+/** Lookup by phone — used by the WhatsApp bot to identify the caller without
+ * mutating anything. Returns null if the phone hasn't booked before. */
+export async function findProfileByPhone(phone: string): Promise<Profile | null> {
+  const supabase = getSupabaseAdmin();
+  const { data: row, error } = await supabase
+    .from("profiles")
+    .select("*")
+    .eq("phone", phone)
+    .maybeSingle();
+  if (error) throw new Error(`profile lookup failed: ${error.message}`);
+  if (!row) return null;
+  return {
+    id: row.id,
+    phone: row.phone,
+    firstName: row.first_name,
+    language: row.language,
+    referralCode: row.referral_code,
+    referredBy: row.referred_by,
+    loyaltyPoints: row.loyalty_points,
+    createdAt: row.created_at,
+    lastSeenAt: row.last_seen_at,
+  };
+}
+
 /** Lookup by id (used by /api/auth/me). */
 export async function getProfileById(id: string): Promise<Profile | null> {
   const supabase = getSupabaseAdmin();

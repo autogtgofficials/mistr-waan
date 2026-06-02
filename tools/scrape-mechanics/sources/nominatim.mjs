@@ -2,7 +2,7 @@
 // viewbox around Srinagar. Returns up to 50 results per query, rate-limited
 // to 1 req/sec.
 
-const UA = "mister-waan-scraper/0.1 (contact: farhansyedain@gmail.com)";
+const UA = "autogtg-scraper/0.1 (contact: farhansyedain@gmail.com)";
 
 // viewbox: lon_min, lat_max, lon_max, lat_min  (Nominatim's order)
 const VIEWBOX = "74.55,34.30,75.10,33.92";

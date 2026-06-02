@@ -3,7 +3,7 @@ import { ReadOnlyBanner } from "@/components/ReadOnlyBanner";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Mister Waan — Ops",
+  title: "AutoGTG — Ops",
   description: "Internal supply-side dashboard",
 };
 
