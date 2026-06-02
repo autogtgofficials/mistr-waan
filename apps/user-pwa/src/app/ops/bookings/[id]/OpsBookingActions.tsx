@@ -20,7 +20,10 @@ export function OpsBookingActions(props: {
   currentStatus: BookingStatus;
   currentTotal: number | null;
   currentGarageId: string | null;
+  /** Garages matching the booking's service bucket (the smart default). */
   garageOptions: { id: string; label: string }[];
+  /** Every active garage — for manual override beyond the service match. */
+  allGarageOptions: { id: string; label: string }[];
   initialNotes: BookingNote[];
 }) {
   const router = useRouter();
@@ -38,6 +41,9 @@ export function OpsBookingActions(props: {
   const [garageId, setGarageId] = useState(props.currentGarageId ?? "");
   const [assignBusy, setAssignBusy] = useState(false);
   const [assignError, setAssignError] = useState<string | null>(null);
+  // Override: show every active garage, not just the by-bucket matches.
+  const [showAllGarages, setShowAllGarages] = useState(false);
+  const garageList = showAllGarages ? props.allGarageOptions : props.garageOptions;
 
   // Notes
   const [noteBody, setNoteBody] = useState("");
@@ -216,12 +222,24 @@ export function OpsBookingActions(props: {
               className="mt-1 block w-full h-9 rounded-md border border-input bg-background px-3 text-sm disabled:opacity-50"
             >
               <option value="">Choose a garage…</option>
-              {props.garageOptions.map((g) => (
+              {garageList.map((g) => (
                 <option key={g.id} value={g.id}>
                   {g.label}
                 </option>
               ))}
             </select>
+          </label>
+          <label className="flex items-center gap-2 text-xs text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={showAllGarages}
+              onChange={(e) => {
+                setShowAllGarages(e.target.checked);
+                setGarageId("");
+              }}
+              disabled={!canAssign}
+            />
+            Show all garages (override service match)
           </label>
           {assignError && <p className="text-xs text-ignite-700">{assignError}</p>}
           <button

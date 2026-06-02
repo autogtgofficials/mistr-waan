@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ArrowDownNarrowWide, MapPinned } from "lucide-react";
-import type { Garage } from "@/lib/mock/garages";
+import type { GarageSummary } from "@/lib/garage/summary";
 import { GarageCard } from "./GarageCard";
 import { Sheet } from "@/components/ui/Sheet";
 import { EmptyState } from "@/components/ui/EmptyState";
@@ -11,30 +11,26 @@ import { cn } from "@/lib/utils";
 /**
  * Garage list — the screen body for `/garages`.
  *
- * Sort options (per spec 3.5):
- *   - Soonest available  (default per Q4 = a)
- *   - Closest to me
- *   - Highest rated
- *
- * Default sort is "soonest". User changes sort via a chip → bottom sheet.
+ * Sorts are backed by real garage data: highest rated (default) or most jobs
+ * done. (Distance / availability sorts are deferred until we have geolocation
+ * and a real slot calendar.)
  */
 
-type SortKey = "soonest" | "nearest" | "rating";
+type SortKey = "rating" | "jobs";
 
 const SORT_LABELS: Record<SortKey, string> = {
-  soonest: "Soonest available",
-  nearest: "Closest to me",
   rating: "Highest rated",
+  jobs: "Most jobs done",
 };
 
 interface GarageListProps {
-  garages: Garage[];
+  garages: GarageSummary[];
   /** ?service= passed through to detail links so we keep context. */
   service?: string;
 }
 
 export function GarageList({ garages, service }: GarageListProps) {
-  const [sort, setSort] = useState<SortKey>("soonest");
+  const [sort, setSort] = useState<SortKey>("rating");
   const [sortOpen, setSortOpen] = useState(false);
 
   const sorted = useMemo(() => sortGarages(garages, sort), [garages, sort]);
@@ -44,7 +40,7 @@ export function GarageList({ garages, service }: GarageListProps) {
       <EmptyState
         icon={MapPinned}
         title="No garages available right now"
-        body="Try a different time, or WhatsApp us for help."
+        body="Tap Book anyway and we'll match you with one — or call us for help."
       />
     );
   }
@@ -53,7 +49,7 @@ export function GarageList({ garages, service }: GarageListProps) {
     <div>
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm text-muted-foreground">
-          Showing {garages.length} garage{garages.length === 1 ? "" : "s"} near you
+          Showing {garages.length} garage{garages.length === 1 ? "" : "s"}
         </p>
       </div>
 
@@ -123,17 +119,13 @@ export function GarageList({ garages, service }: GarageListProps) {
   );
 }
 
-function sortGarages(list: Garage[], sort: SortKey): Garage[] {
+function sortGarages(list: GarageSummary[], sort: SortKey): GarageSummary[] {
   const copy = [...list];
   switch (sort) {
-    case "nearest":
-      return copy.sort((a, b) => a.distanceKm - b.distanceKm);
+    case "jobs":
+      return copy.sort((a, b) => b.jobsCompleted - a.jobsCompleted);
     case "rating":
-      return copy.sort((a, b) => b.rating - a.rating);
-    case "soonest":
     default:
-      // Mock: order matches the seed array (which encodes earliest slot).
-      // When real availability lands, sort by next-slot timestamp.
-      return copy;
+      return copy.sort((a, b) => b.rating - a.rating);
   }
 }

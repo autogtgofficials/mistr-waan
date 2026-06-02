@@ -21,6 +21,9 @@ export interface ListOpsBookingsOpts {
   status?: BookingStatus | "all";
   bucket?: BookingBucket | "all";
   limit?: number;
+  /** created_at order. Default "desc" (newest first); "asc" = oldest-waiting
+   *  first, used by the calls-to-make queue. */
+  order?: "asc" | "desc";
 }
 
 function fromGarage(row: GarageRow) {
@@ -84,7 +87,7 @@ export async function listOpsBookings(
   let q = supabase
     .from("bookings")
     .select("*, garage:garages(*), profile:profiles!inner(*)")
-    .order("created_at", { ascending: false })
+    .order("created_at", { ascending: opts.order === "asc" })
     .limit(opts.limit ?? 100);
   if (opts.status && opts.status !== "all") q = q.eq("status", opts.status);
   if (opts.bucket && opts.bucket !== "all") q = q.eq("bucket", opts.bucket);
@@ -93,4 +96,17 @@ export async function listOpsBookings(
   >();
   if (error) throw new Error(`ops bookings list failed: ${error.message}`);
   return (data ?? []).map(fromRow);
+}
+
+/** Count bookings in a given status — cheap head query for nav badges. */
+export async function countBookingsByStatus(
+  status: BookingStatus,
+): Promise<number> {
+  const supabase = getSupabaseAdmin();
+  const { count, error } = await supabase
+    .from("bookings")
+    .select("id", { count: "exact", head: true })
+    .eq("status", status);
+  if (error) throw new Error(`ops bookings count failed: ${error.message}`);
+  return count ?? 0;
 }

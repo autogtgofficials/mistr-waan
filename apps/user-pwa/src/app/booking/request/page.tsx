@@ -65,6 +65,15 @@ export default function BookingRequestPage() {
 
   function handleConfirm() {
     setError(null);
+    // The garage pick is a PREFERENCE, not an assignment: we don't set garage_id
+    // (that would reveal the shop pre-confirmation and fake a notification). Ops
+    // sees the preference and makes the real assignment on the call.
+    const extra: Record<string, unknown> = { ...(draft.symptoms ?? {}) };
+    if (services.length > 0) extra.services = services;
+    if (draft.garageLabel) extra.preferredGarage = draft.garageLabel;
+    if (draft.garageId) extra.preferredGarageId = draft.garageId;
+    const symptomsPayload = Object.keys(extra).length > 0 ? extra : null;
+
     startTransition(async () => {
       try {
         const res = await fetch("/api/bookings", {
@@ -74,13 +83,9 @@ export default function BookingRequestPage() {
           body: JSON.stringify({
             bucket,
             serviceIds: draft.serviceIds ?? [],
-            // User's garage pick (if they browsed) is only a hint — ops assigns.
-            garageId: draft.garageId ?? null,
-            // Carry the picked service names so ops sees them (catalog is static).
-            symptoms:
-              services.length > 0
-                ? { ...(draft.symptoms ?? {}), services }
-                : draft.symptoms ?? null,
+            // No garage_id — ops assigns (honoring or overriding the preference).
+            garageId: null,
+            symptoms: symptomsPayload,
             denting: draft.denting ?? null,
           }),
         });
@@ -152,6 +157,27 @@ export default function BookingRequestPage() {
               </ul>
             </section>
           ) : null}
+
+          {/* Preferred garage (optional pick — ops can override) */}
+          <section className="mt-6">
+            <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground">
+              Garage
+            </h2>
+            <div className="mt-3 flex items-center justify-between gap-3 rounded-md border border-border bg-card p-3">
+              <span className="text-base text-foreground">
+                {draft.garageLabel ?? "We'll match you with the best garage"}
+              </span>
+              <button
+                type="button"
+                onClick={() =>
+                  router.push(`/garages?service=${bucket}&book=1`)
+                }
+                className="shrink-0 text-sm font-medium text-primary underline-offset-2 hover:underline"
+              >
+                {draft.garageLabel ? "Change" : "Choose"}
+              </button>
+            </div>
+          </section>
 
           {/* What happens next */}
           <div className="mt-6 flex items-start gap-3 rounded-md bg-pulse-50 border border-pulse-100 p-4">

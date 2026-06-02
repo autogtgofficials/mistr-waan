@@ -1,30 +1,50 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { TrendingUp, Wallet, AlertCircle } from "lucide-react";
 import { TopBar } from "@/components/layout/TopBar";
 import { TabBar } from "@/components/layout/TabBar";
 import { useGarageAuth } from "@/lib/store/auth";
 import { useGarageJobs } from "@/lib/store/jobs";
-import { MOCK_GARAGE } from "@/lib/mock/garage";
+import { api } from "@/lib/api/client";
+import type { GarageEarnings } from "@/lib/api/types";
 import { rupees } from "@/lib/utils";
 import { StatusPill } from "@/components/jobs/StatusPill";
 
 /**
- * /earnings — totals + commission balance.
+ * /earnings — real net earnings + commission owed, from /api/garage/earnings.
  *
- * Per V0 design: garages settle commission on cash bookings WEEKLY via UPI.
- * Q8 = b: enforcement is manual in V0; we surface the balance loud + clear.
+ * Garages settle commission on cash bookings weekly via UPI; we surface the
+ * balance loud + clear. The recent-payouts list comes from the live jobs feed.
  */
 export default function EarningsPage() {
   const router = useRouter();
   const { isAuthed, hydrated: authHydrated } = useGarageAuth();
-  const { jobs, hydrated, completed } = useGarageJobs();
+  const { hydrated, completed } = useGarageJobs();
+  const [earnings, setEarnings] = useState<GarageEarnings | null>(null);
 
   useEffect(() => {
     if (authHydrated && !isAuthed) router.replace("/login");
   }, [authHydrated, isAuthed, router]);
+
+  useEffect(() => {
+    if (!isAuthed) return;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const data = await api.get<{ earnings: GarageEarnings }>(
+          "/api/garage/earnings",
+        );
+        if (!cancelled) setEarnings(data.earnings);
+      } catch {
+        // Leave nulls — totals render as ₹0 until the next refresh.
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [isAuthed]);
 
   if (!authHydrated || !isAuthed || !hydrated) {
     return (
@@ -36,20 +56,9 @@ export default function EarningsPage() {
     );
   }
 
-  /* Totals derived from real completed jobs — both fields can be null on
-   * still-pending bookings so we default missing values to 0. */
-  const sessionEarnings = completed.reduce(
-    (acc, j) => acc + ((j.total ?? 0) - (j.commissionCut ?? 0)),
-    0,
-  );
-  const totalEarnings = MOCK_GARAGE.earningsLast30Days + sessionEarnings;
-
-  const cashCompleted = completed.filter((j) => j.paymentMode === "cash");
-  const sessionUnpaidCommission = cashCompleted.reduce(
-    (acc, j) => acc + (j.commissionCut ?? 0),
-    0,
-  );
-  const totalCommissionDue = MOCK_GARAGE.commissionBalance + sessionUnpaidCommission;
+  const last30 = earnings?.last30Net ?? 0;
+  const lifetime = earnings?.lifetimeNet ?? 0;
+  const commissionDue = earnings?.commissionDue ?? 0;
 
   return (
     <div className="flex min-h-full flex-col">
@@ -66,17 +75,17 @@ export default function EarningsPage() {
               Last 30 days
             </div>
             <p className="mt-2 tabular text-4xl font-bold text-foreground">
-              {rupees(totalEarnings)}
+              {rupees(last30)}
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
-              After AutoGTG fee. Lifetime: {rupees(MOCK_GARAGE.earningsLifetime + sessionEarnings)}
+              After AutoGTG fee. Lifetime: {rupees(lifetime)}
             </p>
           </section>
 
           {/* Commission balance */}
           <section
             className={`mt-4 rounded-lg border p-5 shadow-sm ${
-              totalCommissionDue > 2000
+              commissionDue > 2000
                 ? "border-ignite-200 bg-ignite-50"
                 : "border-border bg-card"
             }`}
@@ -86,9 +95,9 @@ export default function EarningsPage() {
               Commission you owe
             </div>
             <p className="mt-2 tabular text-2xl font-bold text-foreground">
-              {rupees(totalCommissionDue)}
+              {rupees(commissionDue)}
             </p>
-            {totalCommissionDue > 2000 ? (
+            {commissionDue > 2000 ? (
               <div className="mt-3 flex items-start gap-2 rounded-md bg-card p-3">
                 <AlertCircle className="size-4 shrink-0 text-ignite-700" strokeWidth={2} />
                 <p className="text-xs text-ignite-900">
@@ -107,7 +116,7 @@ export default function EarningsPage() {
             <h2 className="text-base font-semibold text-foreground">Recent payouts</h2>
             {completed.length === 0 ? (
               <p className="mt-3 text-sm text-muted-foreground">
-                No completed jobs yet this session.
+                No completed jobs yet.
               </p>
             ) : (
               <ul className="mt-3 flex flex-col gap-3">
@@ -140,12 +149,6 @@ export default function EarningsPage() {
               </ul>
             )}
           </section>
-
-          <p className="mt-8 rounded-md bg-muted/50 p-3 text-xs text-muted-foreground">
-            <span className="font-semibold">Mock V0:</span> session-only totals. Live data
-            arrives once backend wires up. Reset jobs from Profile → Reset demo data.
-          </p>
-          <span className="sr-only">{jobs.length}</span>
         </div>
       </main>
 

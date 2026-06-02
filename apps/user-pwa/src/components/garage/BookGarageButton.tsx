@@ -15,9 +15,11 @@ import { Button } from "@/components/ui/Button";
  */
 export function BookGarageButton({
   garageId,
+  garageLabel,
   bucket,
 }: {
   garageId: string;
+  garageLabel?: string;
   bucket?: BookingBucket;
 }) {
   const router = useRouter();
@@ -28,6 +30,7 @@ export function BookGarageButton({
     writeDraft({
       bucket: resolvedBucket,
       garageId,
+      garageLabel,
     });
     router.push("/booking/request");
   }

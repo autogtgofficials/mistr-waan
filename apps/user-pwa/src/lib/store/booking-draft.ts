@@ -21,8 +21,11 @@ export interface BookingDraft {
   /** Human-readable names for serviceIds — carried to ops since catalog is static. */
   serviceNames?: string[];
 
-  /** Picked garage id. */
+  /** Picked garage id (customer's preference — ops can override). */
   garageId?: string;
+
+  /** Display label for the picked garage (e.g. "Imran K."), for the summary. */
+  garageLabel?: string;
 
   /** Selected slot. ISO date + 24h time + display label. */
   slot?: { date: string; time: string; label: string };

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Star, Clock } from "lucide-react";
-import type { Garage } from "@/lib/mock/garages";
-import { ownerLabel, approxKm, jobsDoneLabel, cn } from "@/lib/utils";
+import type { GarageSummary } from "@/lib/garage/summary";
+import { ownerLabel, jobsDoneLabel, cn } from "@/lib/utils";
 
 /**
  * GarageCard — the single most-rendered component in the user PWA.
@@ -9,18 +9,15 @@ import { ownerLabel, approxKm, jobsDoneLabel, cn } from "@/lib/utils";
  * Pre-booking surface (locked rules):
  *   ✓ Owner first name + last initial    ("Imran K.")
  *   ✓ Area / locality                    ("Hyderpora area")
- *   ✓ Approximate distance               ("~3 km")
  *   ✓ Rating + jobs done
- *   ✓ Earliest available slot
+ *   ✓ Working hours (when known)
  *
  * NEVER shown pre-booking:
- *   ✗ Shop name
- *   ✗ Street address / map / pin
- *   ✗ Phone number
+ *   ✗ Shop name   ✗ Street address / map / pin   ✗ Phone number
  */
 
 export interface GarageCardProps {
-  garage: Garage;
+  garage: GarageSummary;
   /** Optional href — when provided, the card becomes a link. */
   href?: string;
   /** Hides the avatar for tight contexts (e.g. review screen). */
@@ -58,9 +55,7 @@ export function GarageCard({ garage, href, compact = false, className }: GarageC
             ) : null}
           </div>
 
-          <div className="mt-0.5 text-sm text-muted-foreground">
-            {garage.area} · {approxKm(garage.distanceKm)}
-          </div>
+          <div className="mt-0.5 text-sm text-muted-foreground">{garage.area}</div>
 
           <div className="mt-2 flex items-center gap-2 text-sm text-foreground">
             {isNewGarage ? (
@@ -77,10 +72,12 @@ export function GarageCard({ garage, href, compact = false, className }: GarageC
             )}
           </div>
 
-          <div className="mt-2 flex items-center gap-1.5 text-sm text-pulse-700">
-            <Clock className="size-4" strokeWidth={2} />
-            <span className="font-medium">Earliest: {garage.earliestSlot}</span>
-          </div>
+          {garage.workingHours ? (
+            <div className="mt-2 flex items-center gap-1.5 text-sm text-pulse-700">
+              <Clock className="size-4" strokeWidth={2} />
+              <span className="font-medium">{garage.workingHours}</span>
+            </div>
+          ) : null}
         </div>
       </div>
     </Wrapper>

@@ -90,6 +90,11 @@ export default function ConfirmationPage({
   const pickedNames = Array.isArray(symptomServices)
     ? symptomServices.filter((x): x is string => typeof x === "string")
     : [];
+  // Customer's optional garage preference (we confirm/override on the call).
+  const preferredRaw = (booking.symptoms as { preferredGarage?: unknown } | null)
+    ?.preferredGarage;
+  const preferredGarageLabel =
+    typeof preferredRaw === "string" ? preferredRaw : null;
 
   const directionsHref = garage
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(garage.fullAddress)}`
@@ -178,11 +183,18 @@ export default function ConfirmationPage({
             </>
           ) : (
             <>
-              <Section title="Next step">
-                <p className="text-sm text-foreground">
-                  Our team will pick the best-fit garage after speaking with you and assign it
-                  to your booking shortly.
-                </p>
+              <Section title={preferredGarageLabel ? "Your preferred garage" : "Next step"}>
+                {preferredGarageLabel ? (
+                  <p className="text-sm text-foreground">
+                    {preferredGarageLabel} — we&apos;ll confirm them on the call, or
+                    suggest a better-fit garage if they&apos;re unavailable.
+                  </p>
+                ) : (
+                  <p className="text-sm text-foreground">
+                    Our team will pick the best-fit garage after speaking with you and assign it
+                    to your booking shortly.
+                  </p>
+                )}
               </Section>
               <Divider />
             </>

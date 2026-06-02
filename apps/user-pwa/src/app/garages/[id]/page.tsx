@@ -6,32 +6,26 @@ import { TabBar } from "@/components/layout/TabBar";
 import { ActiveJobBar } from "@/components/layout/ActiveJobBar";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { BookGarageButton } from "@/components/garage/BookGarageButton";
-import { getGarageById } from "@/lib/mock/garages";
-import {
-  detailingServices,
-  type ServiceBucket,
-  type ServiceItem,
-} from "@/lib/mock/services";
-import { getReviewsForGarage } from "@/lib/mock/reviews";
-import {
-  ownerLabel,
-  approxKm,
-  jobsDoneLabel,
-  rupees,
-  timeAgo,
-} from "@/lib/utils";
+import { getGarageById } from "@/lib/garage/data";
+import { getReviewsByGarage } from "@/lib/bookings/ratings";
+import type { BookingBucket } from "@/lib/store/booking-draft";
+import { ownerLabel, jobsDoneLabel, timeAgo } from "@/lib/utils";
 
 /**
- * /garages/[id] — garage detail (per design 3.6).
- *
- * Reveals more about the garage than the list card (joined date, services
- * offered, recent reviews). Still no shop name, address, or phone — those
- * unlock only after a booking is confirmed.
- *
- * Sticky bottom CTA: "Book this garage".
+ * /garages/[id] — public garage detail. Real garage row + real reviews from the
+ * ratings table. Still no shop name, address, or phone — those unlock only after
+ * a booking is confirmed. Sticky CTA: "Book this garage" (sets the pick).
  */
 
-const VALID_BUCKETS: ServiceBucket[] = ["repairs", "detailing", "denting"];
+export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
+
+const VALID_BUCKETS: BookingBucket[] = ["repairs", "detailing", "denting"];
+const BUCKET_LABEL: Record<string, string> = {
+  repairs: "Repairs",
+  detailing: "Detailing",
+  denting: "Denting & painting",
+};
 
 export default async function GarageDetailPage({
   params,
@@ -43,15 +37,11 @@ export default async function GarageDetailPage({
   const { id } = await params;
   const sp = await searchParams;
   const bucket = VALID_BUCKETS.find((b) => b === sp.service);
-  const garage = getGarageById(id);
 
-  if (!garage) notFound();
+  const garage = await getGarageById(id);
+  if (!garage || !garage.active) notFound();
 
-  const reviews = getReviewsForGarage(garage.id);
-  const offered = servicesOfferedByGarage(garage.serviceBuckets, bucket);
-
-  // "Joined" date is mocked — V1 uses Garage.joined_at.
-  const joinedLabel = "Apr 2026";
+  const reviews = await getReviewsByGarage(garage.id, 5);
 
   return (
     <div className="flex min-h-full flex-col">
@@ -84,7 +74,9 @@ export default async function GarageDetailPage({
                 {ownerLabel(garage.ownerFirstName, garage.ownerLastName)}
               </h1>
               <p className="mt-0.5 text-sm text-muted-foreground">{garage.area}</p>
-              <p className="text-sm text-muted-foreground">{approxKm(garage.distanceKm)} from you</p>
+              {garage.workingHours ? (
+                <p className="text-sm text-muted-foreground">{garage.workingHours}</p>
+              ) : null}
             </div>
           </section>
 
@@ -98,42 +90,28 @@ export default async function GarageDetailPage({
                 </span>
               </div>
             ) : null}
-            <span className="text-sm text-muted-foreground">{jobsDoneLabel(garage.jobsCompleted)}</span>
-            <span className="text-sm text-muted-foreground">Joined · {joinedLabel}</span>
+            <span className="text-sm text-muted-foreground">
+              {jobsDoneLabel(garage.jobsCompleted)}
+            </span>
           </section>
 
-          {/* Services offered */}
+          {/* What they do */}
           <Divider />
           <section>
-            <h2 className="text-base font-semibold text-foreground">Services offered</h2>
-            <ul className="mt-3 flex flex-col">
-              {offered.map((s) => (
-                <li
-                  key={s.id}
-                  className="flex items-baseline justify-between border-b border-border-subtle py-3 last:border-b-0"
+            <h2 className="text-base font-semibold text-foreground">What they do</h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {garage.serviceBuckets.map((b) => (
+                <span
+                  key={b}
+                  className="rounded-full bg-pulse-50 px-3 py-1 text-sm font-medium text-pulse-700"
                 >
-                  <div className="flex flex-col">
-                    <span className="text-base text-foreground">{s.name}</span>
-                    {s.blurb ? (
-                      <span className="text-xs text-muted-foreground">{s.blurb}</span>
-                    ) : null}
-                  </div>
-                  <span className="tabular text-sm font-medium text-foreground">
-                    {rupees(s.price)}
-                  </span>
-                </li>
+                  {BUCKET_LABEL[b] ?? b}
+                </span>
               ))}
-            </ul>
-            {garage.serviceBuckets.includes("repairs") ? (
-              <p className="mt-3 text-sm text-muted-foreground">
-                Also does repairs — price after inspection.
-              </p>
-            ) : null}
-            {garage.serviceBuckets.includes("denting") ? (
-              <p className="mt-1 text-sm text-muted-foreground">
-                Also does denting & painting — quote after photos.
-              </p>
-            ) : null}
+            </div>
+            <p className="mt-3 text-sm text-muted-foreground">
+              Final price is confirmed on the call after you book.
+            </p>
           </section>
 
           {/* Reviews */}
@@ -148,24 +126,27 @@ export default async function GarageDetailPage({
               />
             ) : (
               <ul className="mt-3 flex flex-col gap-4">
-                {reviews.slice(0, 3).map((r) => (
-                  <li key={r.id} className="rounded-md bg-muted/40 p-3">
-                    <Stars rating={r.rating} />
-                    <p className="mt-1.5 text-sm text-foreground">{r.comment}</p>
-                    <p className="mt-1.5 text-xs text-muted-foreground">
-                      — {ownerLabel(r.reviewerFirstName, r.reviewerLastName)} ·{" "}
-                      {timeAgo(r.ageDays)}
-                    </p>
-                  </li>
-                ))}
+                {reviews.map((r) => {
+                  const days = Math.max(
+                    0,
+                    Math.floor(
+                      (Date.now() - new Date(r.createdAt).getTime()) / 86_400_000,
+                    ),
+                  );
+                  return (
+                    <li key={r.id} className="rounded-md bg-muted/40 p-3">
+                      <Stars rating={r.score} />
+                      {r.comment ? (
+                        <p className="mt-1.5 text-sm text-foreground">{r.comment}</p>
+                      ) : null}
+                      <p className="mt-1.5 text-xs text-muted-foreground">
+                        — {r.reviewerFirstName ?? "Verified customer"} · {timeAgo(days)}
+                      </p>
+                    </li>
+                  );
+                })}
               </ul>
             )}
-            {reviews.length > 3 ? (
-              <p className="mt-3 text-sm text-muted-foreground">
-                {reviews.length - 3} more review{reviews.length - 3 === 1 ? "" : "s"} —
-                full listing arrives in V1.
-              </p>
-            ) : null}
           </section>
         </div>
       </main>
@@ -173,7 +154,11 @@ export default async function GarageDetailPage({
       {/* Sticky bottom CTA */}
       <div className="fixed inset-x-0 bottom-16 z-30 border-t border-border bg-background px-4 py-3">
         <div className="mx-auto w-full max-w-md">
-          <BookGarageButton garageId={garage.id} bucket={bucket} />
+          <BookGarageButton
+            garageId={garage.id}
+            garageLabel={ownerLabel(garage.ownerFirstName, garage.ownerLastName)}
+            bucket={bucket}
+          />
         </div>
       </div>
 
@@ -184,17 +169,6 @@ export default async function GarageDetailPage({
 
 function Divider() {
   return <hr className="my-6 border-t border-border-subtle" />;
-}
-
-function servicesOfferedByGarage(
-  buckets: ServiceBucket[],
-  filter?: ServiceBucket,
-): ServiceItem[] {
-  // V0: only detailing items have explicit prices in mock; we surface those.
-  // (Repairs/denting prices are deferred — call-out under the list explains.)
-  if (filter && filter !== "detailing") return [];
-  if (!buckets.includes("detailing")) return [];
-  return detailingServices;
 }
 
 function Stars({ rating }: { rating: number }) {

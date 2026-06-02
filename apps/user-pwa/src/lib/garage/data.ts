@@ -171,6 +171,25 @@ export async function listGaragesByAreaAndBucket(opts: {
   return (data ?? []).map(fromRow);
 }
 
+/**
+ * Active garages for the customer browse screen, optionally filtered to a
+ * service bucket. Ordered by rating desc (best first). No area filter — the
+ * browse surface shows everyone we can dispatch.
+ */
+export async function listActiveGaragesByBucket(
+  bucket?: string,
+  limit = 50,
+): Promise<Garage[]> {
+  const supabase = getSupabaseAdmin();
+  let query = supabase.from("garages").select("*").eq("active", true);
+  if (bucket) query = query.contains("service_buckets", [bucket]);
+  const { data, error } = await query
+    .order("rating", { ascending: false })
+    .limit(limit);
+  if (error) throw new Error(`garages browse failed: ${error.message}`);
+  return (data ?? []).map(fromRow);
+}
+
 /** Lightweight list of active garages for the ops create-booking dropdown. */
 export async function listActiveGarages(): Promise<Garage[]> {
   const supabase = getSupabaseAdmin();

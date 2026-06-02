@@ -48,14 +48,18 @@ function ServicesInner() {
 
   function handleBook() {
     if (count === 0) return;
+    const bucket = bucketForServices(selected);
     update({
-      bucket: bucketForServices(selected),
+      bucket,
       serviceIds: selected,
       serviceNames: names,
+      // Reset any prior garage pick — they choose (or skip) on the next screen.
       garageId: undefined,
+      garageLabel: undefined,
       total: undefined,
     });
-    router.push("/booking/request");
+    // Optional "choose your garage (or let us pick)" step.
+    router.push(`/garages?service=${bucket}&book=1`);
   }
 
   const dial = SUPPORT_PHONE.replace(/\s+/g, "");
