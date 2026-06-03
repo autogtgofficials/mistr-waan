@@ -1,4 +1,5 @@
 import "server-only";
+import { useBlobs } from "@/lib/runtime";
 import { createHash, randomInt } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
@@ -35,7 +36,7 @@ export interface OtpRecord {
 }
 
 function isNetlify(): boolean {
-  return process.env.NETLIFY === "true";
+  return useBlobs();
 }
 
 function hashCode(code: string): string {

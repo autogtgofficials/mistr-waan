@@ -1,4 +1,5 @@
 import "server-only";
+import { useBlobs } from "@/lib/runtime";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -50,7 +51,7 @@ async function blobsRead(limit: number): Promise<AuditEntry[]> {
     .slice(0, limit);
 }
 
-const isNetlify = process.env.NETLIFY === "true";
+const isNetlify = useBlobs();
 
 export async function appendAuditEntry(
   fields: Omit<AuditEntry, "id" | "at">,

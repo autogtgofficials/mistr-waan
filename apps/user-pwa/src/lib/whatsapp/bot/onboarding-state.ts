@@ -1,4 +1,5 @@
 import "server-only";
+import { useBlobs } from "@/lib/runtime";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -60,7 +61,7 @@ export interface OnboardingState {
 type Table = Record<string, OnboardingState>;
 
 function isNetlify(): boolean {
-  return process.env.NETLIFY === "true";
+  return useBlobs();
 }
 
 async function fsRead(): Promise<Table> {
